@@ -2,35 +2,34 @@
 name: User Story
 about: Issue to describe user stories
 title: ''
-labels: User Story
+labels: user story
 assignees: ''
 
 ---
 
-# User story
+## User story
 **As a * [visitor, user, site admin, developer]
 I want to...
 so...**
 
-# Info / Notes / Clarification
+## Info / Notes / Clarification
 **wichtige Infos die helfen können**
 
-# Is this ready? (to code)
-** [] is there enough information to get started?**
-.
+## Requirements (from previous issues)
+- [ ] 
 .
 .
 
-# To do
+## To do
 - [] ...
 - [] ...
 
-# Acceptance criteria
+## Check
 - [] check before merge (storybook, api, documentation)
 - [] design criteria
 
-#  Resources / Images
+##  Resources / Images
 **nötige Resources/Images die helfen können**
 
-# Criteria
+## Criteria
 **was muss es haben damit Issue resolved ist**
