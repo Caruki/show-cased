@@ -4,12 +4,11 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "scripts": {
-    "client": "cd client && npm start",
+    "dev-client": "cd client && npm start",
     "build": "cd client && npm run build && npm run build-storybook",
     "storybook": "cd client && npm run storybook",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\" \"npm run storybook\"",
-    "dev:server": "npm run build && cd .. && npm start",
-    "server": "nodemon index.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run dev-client\" \"npm run storybook\"",
+    "dev-server": "nodemon index.js",
     "start": "node index.js"
   },
   "repository": {
