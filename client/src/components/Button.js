@@ -9,6 +9,11 @@ const Button = styled.button`
   font-size: 17px;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+
+  & :hover {
+    box-shadow: 1px 1px 6px #d05888;
+    text-shadow: 0px 0px 3px #d05888;
+  }
 `;
 
 export default Button;
