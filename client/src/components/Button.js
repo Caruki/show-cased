@@ -7,6 +7,8 @@ const Button = styled.button`
   background-image: linear-gradient(#504481, #1e194f);
   color: #d05888;
   font-size: 17px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 `;
 
 export default Button;
