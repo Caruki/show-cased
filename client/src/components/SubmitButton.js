@@ -9,6 +9,7 @@ const SubmitButton = styled.button`
   font-size: 17px;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  outline: none;
 
   & :hover {
     box-shadow: 1px 1px 6px #d05888;
