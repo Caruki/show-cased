@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Button = styled.button`
+const SubmitButton = styled.button`
   width: 136px;
   height: 46px;
   border-radius: 20px;
@@ -16,4 +16,4 @@ const Button = styled.button`
   }
 `;
 
-export default Button;
+export default SubmitButton;
