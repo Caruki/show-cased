@@ -22,7 +22,7 @@ const InputIconContainer = styled.div`
   padding-top: ${(props) => (props.variation === 'email' ? '5px' : '0px')};
 `;
 
-function FormInput({ variation, type }) {
+function SignInUpInput({ variation, type }) {
   return (
     <Container>
       {variation && variation === 'E-Mail' && (
@@ -41,9 +41,9 @@ function FormInput({ variation, type }) {
   );
 }
 
-FormInput.propTypes = {
+SignInUpInput.propTypes = {
   variation: PropTypes.string,
   type: PropTypes.string,
 };
 
-export default FormInput;
+export default SignInUpInput;

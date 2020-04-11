@@ -1,5 +1,5 @@
 import React from 'react';
-import FormInput from '../components/FormInput';
+import SignInUpInput from '../components/SignInUpInput';
 import SearchInput from '../components/SearchInput';
 
 export default {
@@ -7,11 +7,11 @@ export default {
 };
 
 export const Email = () => {
-  return <FormInput variation="E-Mail" type="email" />;
+  return <SignInUpInput variation="E-Mail" type="email" />;
 };
 
 export const Password = () => {
-  return <FormInput variation="Password" type="password" />;
+  return <SignInUpInput variation="Password" type="password" />;
 };
 
 export const Search = () => <SearchInput />;
