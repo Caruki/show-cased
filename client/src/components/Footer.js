@@ -43,7 +43,7 @@ function Footer({ site }) {
         </Button>
         <Button site={site}>
           {site === 'recs' ? (
-            <img src={RecsIconClicked} alt="popular-icon" />
+            <img src={RecsIconClicked} alt="recs-icon" />
           ) : (
             <img src={RecsIcon} alt="recs-icon" />
           )}
@@ -51,9 +51,9 @@ function Footer({ site }) {
         </Button>
         <Button site={site}>
           {site === 'lists' ? (
-            <img src={ListsIconClicked} alt="popular-icon" />
+            <img src={ListsIconClicked} alt="lists-icon" />
           ) : (
-            <img src={ListsIcon} alt="listsicon" />
+            <img src={ListsIcon} alt="lists-icon" />
           )}
           Your Lists
         </Button>
