@@ -23,17 +23,25 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
   background: transparent;
   border: none;
   outline: hidden;
-  color: ${(props) => (props.site ? '#F79DC1' : '#AEB2F5')};
+  color: ${({ variation, site }) => {
+    if (variation === site) {
+      return '#F79DC1';
+    }
+    return '#AEB2F5';
+  }};
 `;
 
 function Footer({ site }) {
   return (
     <FooterContainer>
       <ButtonContainer>
-        <Button site={site}>
+        <Button site={site} variation="popular">
           {site === 'popular' ? (
             <img src={PopularIconClicked} alt="popular-icon" />
           ) : (
@@ -41,7 +49,7 @@ function Footer({ site }) {
           )}
           Popular
         </Button>
-        <Button site={site}>
+        <Button site={site} variation="recs">
           {site === 'recs' ? (
             <img src={RecsIconClicked} alt="recs-icon" />
           ) : (
@@ -49,7 +57,7 @@ function Footer({ site }) {
           )}
           Recs
         </Button>
-        <Button site={site}>
+        <Button site={site} variation="lists">
           {site === 'lists' ? (
             <img src={ListsIconClicked} alt="lists-icon" />
           ) : (
