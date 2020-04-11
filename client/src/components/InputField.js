@@ -5,12 +5,10 @@ const InputField = styled.input`
   margin: 0;
   border: none;
   background: transparent;
-  outline: none;
+  outline: hidden;
   text-align: center;
   color: #e7eaff;
-  font-size: 1.2rem;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
+  font: 100 1.2rem 'Roboto', sans-serif;
 
   ::placeholder {
     color: #aeb2f5;
