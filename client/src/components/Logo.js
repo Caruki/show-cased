@@ -15,7 +15,7 @@ const AnimatedLogo = styled.svg`
   width: 196px;
   height: 178px;
   & #Group_31 {
-    animation: ${wiggle} 0.4s infinite;
+    animation: ${wiggle} 0.7s infinite;
     transform-origin: center;
     transform-box: fill-box;
   }
