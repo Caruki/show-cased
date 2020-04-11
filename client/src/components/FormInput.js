@@ -12,12 +12,8 @@ const Container = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   background-color: transparent;
-  border-width: 1px;
-  border-color: #961f56;
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: solid;
+  border: 1px #961f56;
+  border-style: hidden hidden solid hidden;
 `;
 
 const InputIconContainer = styled.div`
