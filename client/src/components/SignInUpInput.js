@@ -3,6 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import EmailIcon from '../assets/email.svg';
 import PasswordIcon from '../assets/password.svg';
+import UsernameIcon from '../assets/username.svg';
 import InputField from './InputField';
 
 const Container = styled.div`
@@ -33,6 +34,11 @@ function SignInUpInput({ variation, type }) {
       {variation && variation === 'Password' && (
         <InputIconContainer variation="password">
           <img src={PasswordIcon} alt="password" />
+        </InputIconContainer>
+      )}
+      {variation && variation === 'Username' && (
+        <InputIconContainer variation="username">
+          <img src={UsernameIcon} alt="password" />
         </InputIconContainer>
       )}
 
