@@ -10,14 +10,18 @@ import RecsIconClicked from '../assets/recs-clicked-icon.svg';
 
 const FooterContainer = styled.div`
   display: flex;
+  justify-content: center;
   width: 100%;
-  height: 55px;
+  height: 15%;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 100%;
   border-radius: 25px 25px 0px 0px;
   background-color: rgba(14, 5, 46, 0.6);
 `;
@@ -26,6 +30,8 @@ const Button = styled.button`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  margin: 0px 25px 0px 25px;
+  padding: 15px 0px 15px 0px;
   background: transparent;
   border: none;
   outline: hidden;
@@ -43,25 +49,40 @@ function Footer({ site }) {
       <ButtonContainer>
         <Button site={site} variation="popular">
           {site === 'popular' ? (
-            <img src={PopularIconClicked} alt="popular-icon" />
+            <img
+              src={PopularIconClicked}
+              alt="icon with three stars in pink color"
+            />
           ) : (
-            <img src={PopularIcon} alt="popular-icon" />
+            <img src={PopularIcon} alt="icon with three stars in blue color" />
           )}
           Popular
         </Button>
         <Button site={site} variation="recs">
           {site === 'recs' ? (
-            <img src={RecsIconClicked} alt="recs-icon" />
+            <img
+              src={RecsIconClicked}
+              alt="icon with a clapperboard and the play symbol in pink color"
+            />
           ) : (
-            <img src={RecsIcon} alt="recs-icon" />
+            <img
+              src={RecsIcon}
+              alt="icon with a clapperboard and the play symbol in blue color"
+            />
           )}
           Recs
         </Button>
         <Button site={site} variation="lists">
           {site === 'lists' ? (
-            <img src={ListsIconClicked} alt="lists-icon" />
+            <img
+              src={ListsIconClicked}
+              alt="icon with a list and a star inside in pink color"
+            />
           ) : (
-            <img src={ListsIcon} alt="lists-icon" />
+            <img
+              src={ListsIcon}
+              alt="icon with a list and a star inside in pink color"
+            />
           )}
           Your Lists
         </Button>
