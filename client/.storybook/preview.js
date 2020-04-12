@@ -1,9 +1,9 @@
 import { addParameters } from '@storybook/react';
-import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 addParameters({
   viewport: {
-    viewports: MINIMAL_VIEWPORTS,
+    viewports: INITIAL_VIEWPORTS,
     defaultViewport: 'iphone6',
   },
 });
