@@ -16,12 +16,8 @@ const Container = styled.div`
 const Input = styled(InputField)`
   width: 80%;
   font-size: 0.9rem;
-  border-width: 1px;
-  border-color: #d05888;
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: solid;
+  border: 1px #961f56;
+  border-style: hidden hidden solid hidden;
 `;
 
 function SearchInput() {
