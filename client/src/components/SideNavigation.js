@@ -24,7 +24,7 @@ const ButtonContainer = styled.div`
 const TextContainer = styled.div`
   height: fit-content;
   color: ${(props) => (props.clicked ? '#1E194F' : '#AEB2F5')};
-  font: 300 0.8rem 'Roboto', sans-serif;
+  font: 300 0.9rem 'Roboto', sans-serif;
   transform: rotate(-90deg);
   transform-origin: bottom right;
 `;
@@ -35,7 +35,10 @@ const Button = styled.button`
   background-color: ${(props) => (props.clicked ? '#AEB2F5' : '#504481')};
   border-radius: 0px 20px 20px 0px;
   border: hidden;
-  padding: 20px 5px 5px 5px;
+  padding: 30px 5px 5px 25px;
+  box-shadow: 1px 3px 6px #504481;
+  margin-bottom: -35px;
+  z-index: ${(props) => (props.clicked ? 1 : 0)};
 
   &:focus {
     outline-width: 0;
@@ -46,8 +49,8 @@ function SideNavigation({ clicked, site }) {
   return (
     <Container>
       <ButtonContainer>
-        <Button clicked={clicked}>
-          <TextContainer clicked={clicked}>
+        <Button>
+          <TextContainer>
             {site === 'popular' ? 'Newest' : 'ToWatch'}
           </TextContainer>
         </Button>

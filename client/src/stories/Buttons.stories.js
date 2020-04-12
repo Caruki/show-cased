@@ -13,8 +13,6 @@ const AppContainer = styled.div`
   background-color: rgba(14, 5, 46, 1);
   width: 100vw;
   height: 100vh;
-  box-sizing: border-box;
-  position: relative;
 `;
 
 const MainContainer = styled.div`
@@ -24,8 +22,6 @@ const MainContainer = styled.div`
   overflow: auto;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
-  position: relative;
 `;
 
 export const SignUpButton = () => {
@@ -51,7 +47,7 @@ export const LogInButton = () => {
 export const SideNavButtonPopular = () => {
   return (
     <AppContainer>
-      <SideNavigation site="popular" />
+      <SideNavigation site="popular" clicked={true} />
       <MainContainer />
     </AppContainer>
   );
