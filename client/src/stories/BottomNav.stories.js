@@ -1,9 +1,9 @@
 import React from 'react';
-import Footer from '../components/Footer';
+import BottomNav from '../components/BottomNav';
 import styled from '@emotion/styled';
 
 export default {
-  title: 'Footer',
+  title: 'BottomNav',
 };
 
 const AppContainer = styled.div`
@@ -23,29 +23,29 @@ const MainContainer = styled.div`
   height: 100%;
 `;
 
-export const FooterPopular = () => {
+export const BottomNavPopular = () => {
   return (
     <AppContainer>
       <MainContainer />
-      <Footer site="popular" />
+      <BottomNav site="popular" />
     </AppContainer>
   );
 };
 
-export const FooterRecs = () => {
+export const BottomNavRecs = () => {
   return (
     <AppContainer>
       <MainContainer />
-      <Footer site="recs" />
+      <BottomNav site="recs" />
     </AppContainer>
   );
 };
 
-export const FooterLists = () => {
+export const BottomNavLists = () => {
   return (
     <AppContainer>
       <MainContainer />
-      <Footer site="lists" />
+      <BottomNav site="lists" />
     </AppContainer>
   );
 };

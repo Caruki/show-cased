@@ -8,7 +8,7 @@ import PopularIconClicked from '../assets/popular-clicked-icon.svg';
 import RecsIcon from '../assets/recs-icon.svg';
 import RecsIconClicked from '../assets/recs-clicked-icon.svg';
 
-const FooterContainer = styled.div`
+const NavContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -43,9 +43,9 @@ const Button = styled.button`
   }};
 `;
 
-function Footer({ site }) {
+function BottomNav({ site }) {
   return (
-    <FooterContainer>
+    <NavContainer>
       <ButtonContainer>
         <Button site={site} variation="popular">
           {site === 'popular' ? (
@@ -87,12 +87,12 @@ function Footer({ site }) {
           Your Lists
         </Button>
       </ButtonContainer>
-    </FooterContainer>
+    </NavContainer>
   );
 }
 
-Footer.propTypes = {
+BottomNav.propTypes = {
   site: PropTypes.string,
 };
 
-export default Footer;
+export default BottomNav;
