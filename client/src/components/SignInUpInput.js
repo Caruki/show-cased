@@ -28,17 +28,17 @@ function SignInUpInput({ variation, type }) {
     <Container>
       {variation && variation === 'E-Mail' && (
         <InputIconContainer variation="email">
-          <img src={EmailIcon} alt="email" />
+          <img src={EmailIcon} alt="email icon showing an email symbol" />
         </InputIconContainer>
       )}
       {variation && variation === 'Password' && (
         <InputIconContainer variation="password">
-          <img src={PasswordIcon} alt="password" />
+          <img src={PasswordIcon} alt="password icon showing a lock symbol" />
         </InputIconContainer>
       )}
       {variation && variation === 'Username' && (
         <InputIconContainer variation="username">
-          <img src={UsernameIcon} alt="password" />
+          <img src={UsernameIcon} alt="username icon showing a person symbol" />
         </InputIconContainer>
       )}
 
