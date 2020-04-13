@@ -140,6 +140,7 @@ const ActorContainer = styled.div`
   justify-content: space-between;
   font: 300 0.6rem 'Roboto', sans-serif;
   color: #aeb2f5;
+  flex: 1 0;
 `;
 
 const ActorImageWrapper = styled.div`
@@ -147,7 +148,7 @@ const ActorImageWrapper = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 6px #1e194f;
   overflow: hidden;
-  flex: 0 0 60px;
+  flex: 1 0 60px;
   margin: 5px;
 
   & > img {
