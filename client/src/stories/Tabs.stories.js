@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import SubmitButton from '../components/SubmitButton';
+import Tabs from '../components/Tabs';
 
 export default {
   title: 'Buttons',
@@ -23,22 +23,34 @@ const MainContainer = styled.div`
   height: 100%;
 `;
 
-export const SignUpButton = () => {
+export const SideNavButtonPopular = () => {
   return (
     <AppContainer>
-      <MainContainer>
-        <SubmitButton>Sign Up</SubmitButton>
-      </MainContainer>
+      <Tabs>
+        <div label="Trending">
+          <div></div>
+        </div>
+        <div label="Newest">
+          <div></div>
+        </div>
+      </Tabs>
+      <MainContainer />
     </AppContainer>
   );
 };
 
-export const LogInButton = () => {
+export const SideNavButtonRecs = () => {
   return (
     <AppContainer>
-      <MainContainer>
-        <SubmitButton>Log In</SubmitButton>
-      </MainContainer>
+      <Tabs>
+        <div label="Watched">
+          <p>Your watched shows</p>
+        </div>
+        <div label="ToWatch">
+          <p>Your to watch shows</p>
+        </div>
+      </Tabs>
+      <MainContainer />
     </AppContainer>
   );
 };
