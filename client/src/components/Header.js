@@ -7,7 +7,6 @@ const Container = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  padding-left: 10px;
   width: 100%;
   height: 10%;
 `;
