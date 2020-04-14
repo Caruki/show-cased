@@ -174,33 +174,41 @@ const ActorImageWrapper = styled.div`
   }
 `;
 
-const WatchlistButtonContainer = styled.div`
+const WatchlistCheckContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
   margin: 0px 10px;
 `;
-
-const WatchListButton = styled.button`
+const WatchListCheckLabel = styled.label`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  font-style: ${(props) => (props.clicked ? 'italic' : 'normal')};
+  margin: 10px;
+  cursor: pointer;
+
+  & > * {
+    margin: 2.5px 0px;
+  }
+`;
+
+const WatchListCheck = styled.input`
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  user-select: none;
+`;
+
+const WatchListCheckText = styled.div`
+  display: block;
+  font-style: ${(props) => (props.checked ? 'italic' : 'normal')};
   font-size: 0.6rem;
   font-weight: 100;
   font-family: 'Roboto', sans-serif;
   color: #e7eaff;
   background: transparent;
-  border: none;
-  margin: 10px;
-
-  & :focus {
-    outline-width: 0;
-  }
-
-  & > * {
-    margin: 2.5px 0px;
-  }
 `;
 
 function DetailView({
@@ -212,7 +220,7 @@ function DetailView({
   showOverview,
   showGenres,
   showActors,
-  clicked,
+  checked,
 }) {
   const showHideClassName = showModal
     ? 'modal display-block'
@@ -282,9 +290,16 @@ function DetailView({
           {showActors[3].name}
         </ActorContainer>
       </AllActorsContainer>
-      <WatchlistButtonContainer>
-        <WatchListButton clicked={clicked}>
-          {clicked ? (
+      <WatchlistCheckContainer>
+        <WatchListCheckLabel>
+          <WatchListCheck
+            type="radio"
+            id="towatch"
+            name="watchlist"
+            value="towatch"
+            data-storedValue="true"
+          />
+          {checked ? (
             <img
               src={WatchlistIconClicked}
               alt="star icon to symbolize watchlist"
@@ -292,10 +307,22 @@ function DetailView({
           ) : (
             <img src={WatchlistIcon} alt="star icon to symbolize watchlist" />
           )}
-          {clicked ? 'Added to watchlist' : 'Add to watchlist'}
-        </WatchListButton>
-        <WatchListButton clicked={false}>
-          {clicked ? (
+          {checked ? (
+            <WatchListCheckText>Added to watchlist</WatchListCheckText>
+          ) : (
+            <WatchListCheckText>Add to watchlist</WatchListCheckText>
+          )}
+        </WatchListCheckLabel>
+
+        <WatchListCheckLabel>
+          <WatchListCheck
+            type="radio"
+            id="watched"
+            name="watchlist"
+            value="watched"
+            data-storedValue="true"
+          />
+          {checked ? (
             <img
               src={WatchedIconClicked}
               alt="check mark icon to symbolize already watched list"
@@ -306,9 +333,9 @@ function DetailView({
               alt="check mark icon to symbolize already watched list"
             />
           )}
-          Already watched
-        </WatchListButton>
-      </WatchlistButtonContainer>
+          <WatchListCheckText>Already watched</WatchListCheckText>
+        </WatchListCheckLabel>
+      </WatchlistCheckContainer>
     </Container>
   );
 }
@@ -322,7 +349,7 @@ DetailView.propTypes = {
   showOverview: PropTypes.string,
   showGenres: PropTypes.array,
   showActors: PropTypes.array,
-  clicked: PropTypes.bool,
+  checked: PropTypes.bool,
 };
 
 export default DetailView;

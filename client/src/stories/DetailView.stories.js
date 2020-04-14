@@ -28,7 +28,7 @@ export const DetailViewofShow = () => {
     <AppContainer>
       <MainContainer>
         <DetailView
-          clicked={true}
+          checked={true}
           showPoster="https://image.tmdb.org/t/p/original/yGNnjoIGOdQy3douq60tULY8teK.jpg"
           showModal={true}
           showTitle="Westworld"
