@@ -6,7 +6,7 @@ import Logo from './Logo';
 const Container = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: left;
+  justify-content: center;
   padding-left: 10px;
   width: 100%;
   height: 10%;
@@ -15,8 +15,9 @@ const Container = styled.div`
 const Title = styled.h1`
   font: 300 1.2rem 'Roboto', sans-serif;
   color: #aeb2f5;
-  padding-top: 10px;
   margin-left: 20px;
+  display: flex;
+  align-items: center;
 `;
 
 const LogOut = styled.button`
