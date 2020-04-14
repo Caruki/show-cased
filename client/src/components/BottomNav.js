@@ -12,16 +12,16 @@ const NavContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 15%;
+  flex: 1 0 10%;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   width: 100%;
-  height: 100%;
+  flex: 1 0;
   border-radius: 25px 25px 0px 0px;
   background-color: rgba(14, 5, 46, 0.6);
 `;
@@ -30,17 +30,21 @@ const Button = styled.button`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  margin: 0px 25px 0px 25px;
+  margin: -20px -20px;
   padding: 15px 0px 15px 0px;
   background: transparent;
   border: none;
-  outline: hidden;
   color: ${({ variation, site }) => {
     if (variation === site) {
       return '#F79DC1';
     }
     return '#AEB2F5';
   }};
+
+  & :focus,
+  :active {
+    outline-width: 0;
+  }
 `;
 
 function BottomNav({ site }) {
