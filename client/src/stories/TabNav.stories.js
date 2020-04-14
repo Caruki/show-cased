@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Tabs from '../components/Tabs';
+import TabSideNavigation from '../components/TabSideNavigation';
 
 export default {
-  title: 'Buttons',
+  title: 'Side Navigation',
 };
 
 const AppContainer = styled.div`
@@ -23,33 +23,33 @@ const MainContainer = styled.div`
   height: 100%;
 `;
 
-export const SideNavButtonPopular = () => {
+export const SideNavPopular = () => {
   return (
     <AppContainer>
-      <Tabs>
+      <TabSideNavigation>
         <div label="Trending">
           <div></div>
         </div>
         <div label="Newest">
           <div></div>
         </div>
-      </Tabs>
+      </TabSideNavigation>
       <MainContainer />
     </AppContainer>
   );
 };
 
-export const SideNavButtonRecs = () => {
+export const SideNavRecs = () => {
   return (
     <AppContainer>
-      <Tabs>
+      <TabSideNavigation>
         <div label="Watched">
-          <p>Your watched shows</p>
+          <div></div>
         </div>
         <div label="ToWatch">
-          <p>Your to watch shows</p>
+          <div></div>
         </div>
-      </Tabs>
+      </TabSideNavigation>
       <MainContainer />
     </AppContainer>
   );

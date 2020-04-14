@@ -12,7 +12,7 @@ const TabsContainer = styled.div`
 
 const TabContent = styled.div``;
 
-function Tabs({ children }) {
+function TabSideNavigation({ children }) {
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 
   function handleClickTabItem(tab) {
@@ -43,8 +43,8 @@ function Tabs({ children }) {
   );
 }
 
-Tabs.propTypes = {
+TabSideNavigation.propTypes = {
   children: PropTypes.array,
 };
 
-export default Tabs;
+export default TabSideNavigation;
