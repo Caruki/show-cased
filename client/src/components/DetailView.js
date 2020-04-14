@@ -331,9 +331,13 @@ function DetailView({
             <img src={WatchlistIcon} alt="star icon to symbolize watchlist" />
           )}
           {checkedRadioButton === 'towatch' ? (
-            <WatchListCheckText>Added to watchlist</WatchListCheckText>
+            <WatchListCheckText checked={checkedRadioButton === 'towatch'}>
+              Added to watchlist
+            </WatchListCheckText>
           ) : (
-            <WatchListCheckText>Add to watchlist</WatchListCheckText>
+            <WatchListCheckText checked={checkedRadioButton === 'towatch'}>
+              Add to watchlist
+            </WatchListCheckText>
           )}
         </WatchListCheckLabel>
 
@@ -360,7 +364,9 @@ function DetailView({
               alt="check mark icon to symbolize already watched list"
             />
           )}
-          <WatchListCheckText>Already watched</WatchListCheckText>
+          <WatchListCheckText checked={checkedRadioButton === 'watched'}>
+            Already watched
+          </WatchListCheckText>
         </WatchListCheckLabel>
       </WatchlistCheckContainer>
     </Container>
