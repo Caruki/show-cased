@@ -1,14 +1,14 @@
 import React from 'react';
+import Header from '../components/Header';
 import styled from '@emotion/styled';
-import SubmitButton from '../components/SubmitButton';
 
 export default {
-  title: 'Buttons',
+  title: 'Header',
 };
 
 const AppContainer = styled.div`
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   background-color: rgba(14, 5, 46, 1);
   width: 100vw;
   height: 100vh;
@@ -23,21 +23,12 @@ const MainContainer = styled.div`
   height: 100%;
 `;
 
-export const SignUpButton = () => {
+export const HeaderEverySite = () => {
   return (
     <AppContainer>
       <MainContainer>
-        <SubmitButton>Sign Up</SubmitButton>
+        <Header username={'Everyone'} />
       </MainContainer>
     </AppContainer>
   );
 };
-
-export const LogInButton = () => {
-  return (
-    <AppContainer>
-      <MainContainer>
-        <SubmitButton>Log In</SubmitButton>
-      </MainContainer>
-    </AppContainer>
-  );

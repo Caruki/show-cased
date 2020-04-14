@@ -1,14 +1,14 @@
 import React from 'react';
+import BottomNav from '../components/BottomNav';
 import styled from '@emotion/styled';
-import SubmitButton from '../components/SubmitButton';
 
 export default {
-  title: 'Buttons',
+  title: 'BottomNav',
 };
 
 const AppContainer = styled.div`
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   background-color: rgba(14, 5, 46, 1);
   width: 100vw;
   height: 100vh;
@@ -23,21 +23,29 @@ const MainContainer = styled.div`
   height: 100%;
 `;
 
-export const SignUpButton = () => {
+export const BottomNavPopular = () => {
   return (
     <AppContainer>
-      <MainContainer>
-        <SubmitButton>Sign Up</SubmitButton>
-      </MainContainer>
+      <MainContainer />
+      <BottomNav site="popular" />
     </AppContainer>
   );
 };
 
-export const LogInButton = () => {
+export const BottomNavRecs = () => {
   return (
     <AppContainer>
-      <MainContainer>
-        <SubmitButton>Log In</SubmitButton>
-      </MainContainer>
+      <MainContainer />
+      <BottomNav site="recs" />
     </AppContainer>
   );
+};
+
+export const BottomNavLists = () => {
+  return (
+    <AppContainer>
+      <MainContainer />
+      <BottomNav site="lists" />
+    </AppContainer>
+  );
+};
