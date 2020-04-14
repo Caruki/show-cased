@@ -30,7 +30,6 @@ const Button = styled.button`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  margin: -20px -20px;
   padding: 15px 0px 15px 0px;
   background: transparent;
   border: none;
