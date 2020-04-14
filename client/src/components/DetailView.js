@@ -12,6 +12,8 @@ import WatchedIconClicked from '../assets/watched-icon-clicked.svg';
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
+  max-height: 600px;
+  flex: 1 1;
   margin: 60px 25px 60px 25px;
   background-color: #504481;
   border: 4px solid #1e194f;
@@ -33,7 +35,7 @@ const CloseButton = styled.button`
 `;
 
 const PosterContainer = styled.div`
-  max-height: 150px;
+  flex: 0 0 150px;
   border: hidden;
   border-radius: 0px 0px 80px 80px;
   background-color: red;
@@ -43,7 +45,7 @@ const PosterContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 0%;
+    object-position: 50% 50%;
     border: hidden;
     border-radius: 0px 0px 80px 80px;
   }
@@ -52,9 +54,10 @@ const PosterContainer = styled.div`
 const TitleContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
+  flex: 0 0;
   align-items: center;
   justify-content: space-around;
-  margin: 10px 10px 5px 10px;
+  margin: 10px 10px;
 `;
 
 const Rating = styled.div`
@@ -101,46 +104,56 @@ const TrailerButton = styled.button`
   }
 `;
 
-const OverviewTextarea = styled.p`
-  font: 300 0.6rem 'Roboto', sans-serif;
+const OverviewTextarea = styled.div`
+  font: 300 0.7rem 'Roboto', sans-serif;
   color: #e7eaff;
   text-align: center;
-  line-height: 12px;
-  margin: 5px 10px;
-  flex-grow: 0 1 80px;
+  line-height: 14px;
+  margin: 10px 10px;
+  flex-grow: 0 1 90px;
 `;
+
 const GenreContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-  margin: 10px;
+  flex: 0 1 30px;
+  margin: 15px 10px;
 `;
 
 const GenreField = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
   border: hidden;
+  text-align: center;
   border-radius: 30px;
   background-color: #504481;
   box-shadow: 0px 3px 6px #1e194f;
-  font: 100 italic 0.6rem 'Roboto', sans-serif;
+  font: 100 italic 0.7rem 'Roboto', sans-serif;
   color: #e7eaff;
-  text-align: center;
-  flex-basis: 20%;
+  flex: 1 1;
+  margin: 0px 5px;
+  cursor: default;
 `;
 
 const AllActorsContainer = styled.div`
   display: flex;
+  flex-flow: column wrap;
   align-items: center;
   justify-content: space-around;
-  margin: 10px;
+  margin: 20px 10px;
+  max-height: 20%;
 `;
+
 const ActorContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-between;
-  font: 300 0.6rem 'Roboto', sans-serif;
+  font: 300 0.7rem 'Roboto', sans-serif;
   color: #aeb2f5;
-  flex: 1 0;
+  flex: 1 1 25%;
 `;
 
 const ActorImageWrapper = styled.div`
@@ -148,13 +161,13 @@ const ActorImageWrapper = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 6px #1e194f;
   overflow: hidden;
-  flex: 1 0 60px;
   margin: 5px;
+  flex: 1 1 60px;
 
   & > img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: 0px -12px;
     border: hidden;
     border-radius: 10px;
@@ -165,6 +178,7 @@ const WatchlistButtonContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
+  margin: 0px 10px;
 `;
 
 const WatchListButton = styled.button`
