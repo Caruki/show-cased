@@ -228,7 +228,6 @@ const WatchListCheckText = styled.div`
 
 function DetailView({
   handleClose,
-  showModal,
   showPoster,
   showTitle,
   showRating,
@@ -236,10 +235,6 @@ function DetailView({
   showGenres,
   showActors,
 }) {
-  const showHideClassName = showModal
-    ? 'modal display-block'
-    : 'modal display-none';
-
   const [watchlistAction, setWatchlistAction] = useState(null);
 
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
@@ -255,7 +250,7 @@ function DetailView({
     }
   }
   return (
-    <Container className={showHideClassName}>
+    <Container>
       <CloseButton onClick={handleClose}>
         <img src={CloseIcon} alt="small icon with an x symbol" />
       </CloseButton>
