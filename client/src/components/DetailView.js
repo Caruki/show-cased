@@ -17,12 +17,18 @@ const Container = styled.div`
   margin: 60px 25px 60px 25px;
   background-color: #504481;
   border: 4px solid #1e194f;
+  position: relative;
+  & > * {
+    box-sizing: border-box;
+  }
 `;
 
 const CloseButton = styled.button`
   width: fit-content;
   height: fit-content;
-  align-self: flex-end;
+  right: 0px;
+  top: 0px;
+  position: absolute;
   background: transparent;
   border: none;
   margin: -14px -20px -25px 0px;
@@ -139,21 +145,27 @@ const GenreField = styled.div`
 
 const AllActorsContainer = styled.div`
   display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: space-around;
-  margin: 20px 10px;
-  max-height: 20%;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  justify-content: center;
+  margin: 10px 10px;
+  flex: 1 1;
+  width: auto;
 `;
 
 const ActorContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: space-between;
+  text-align: center;
+  padding-top: 10px;
   font: 300 0.7rem 'Roboto', sans-serif;
   color: #aeb2f5;
-  flex: 1 1 25%;
+  flex: 0 0 25%;
+  height: auto;
+  word-break: break-word;
+  margin: 0px 2.5px;
 `;
 
 const ActorImageWrapper = styled.div`
@@ -161,16 +173,19 @@ const ActorImageWrapper = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 6px #1e194f;
   overflow: hidden;
+  min-width: 30px;
+  min-height: 80px;
+  flex: 1 1;
   margin: 5px;
-  flex: 1 1 60px;
 
   & > img {
-    width: 100%;
     height: 100%;
+    width: 100%;
     object-fit: cover;
-    object-position: 0px -12px;
+    object-position: 50% 50%;
     border: hidden;
     border-radius: 10px;
+    margin-bottom: -3px;
   }
 `;
 

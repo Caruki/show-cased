@@ -49,7 +49,7 @@ export const DetailViewofShow = () => {
             {
               image:
                 'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
-              name: 'Clint Eastwood',
+              name: 'Clint Eastwood Blahblub sdhjhdkj',
             },
             {
               image:
