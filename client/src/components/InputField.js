@@ -5,10 +5,16 @@ const InputField = styled.input`
   margin: 0;
   border: none;
   background: transparent;
-  outline: hidden;
   text-align: center;
   color: #e7eaff;
   font: 100 1.2rem 'Roboto', sans-serif;
+
+  & :focus {
+    outline-width: 0;
+    ::placeholder {
+      color: transparent;
+    }
+  }
 
   ::placeholder {
     color: #aeb2f5;
