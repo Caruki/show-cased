@@ -225,26 +225,31 @@ function DetailView({
     ? 'modal display-block'
     : 'modal display-none';
 
-  const [checkedRadioButton, setCheckedRadioButton] = useState(null);
-  const [activeRadioButtons, setActiveRadioButtons] = useState([false, false]);
+  const [toWatchActive, setToWatchActive] = useState(false);
+  const [watchedActive, setWatchedActive] = useState(false);
 
   function handleClick(event) {
     const clickedRadioButton = event.target.value;
     const previouslyChecked = event.target.dataset.wasChecked;
     if (previouslyChecked === 'false') {
       if (clickedRadioButton === 'towatch') {
-        setActiveRadioButtons([true, false]);
+        setToWatchActive(true);
+        setWatchedActive(false);
       } else {
-        setActiveRadioButtons([false, true]);
+        setWatchedActive(true);
+        setToWatchActive(false);
       }
       event.target.dataset.wasChecked = 'true';
-      setCheckedRadioButton(event.target.value);
-      console.log('waschecked is false: ', checkedRadioButton);
+      console.log(
+        `Current button ${event.target.value} was checked? ${previouslyChecked}. Is now checked? ${event.target.dataset.wasChecked}`
+      );
     } else if (previouslyChecked === 'true') {
-      setCheckedRadioButton(null);
-      setActiveRadioButtons([false, false]);
+      setToWatchActive(false);
+      setWatchedActive(false);
       event.target.dataset.wasChecked = 'false';
-      console.log('waschecked is true: ', checkedRadioButton);
+      console.log(
+        `Current button ${event.target.value} was checked? ${previouslyChecked}. Is now checked? ${event.target.dataset.wasChecked}`
+      );
     }
   }
 
@@ -319,13 +324,13 @@ function DetailView({
             id="towatch"
             name="watchlist"
             value="towatch"
-            checked={activeRadioButtons[0]}
+            checked={toWatchActive}
             data-was-checked="false"
             onClick={function (event) {
               handleClick(event);
             }}
           />
-          {activeRadioButtons[0] ? (
+          {toWatchActive ? (
             <img
               src={WatchlistIconClicked}
               alt="star icon to symbolize watchlist"
@@ -333,12 +338,12 @@ function DetailView({
           ) : (
             <img src={WatchlistIcon} alt="star icon to symbolize watchlist" />
           )}
-          {activeRadioButtons[0] ? (
-            <WatchListCheckText checked={checkedRadioButton === 'towatch'}>
+          {toWatchActive ? (
+            <WatchListCheckText checked={toWatchActive}>
               Added to watchlist
             </WatchListCheckText>
           ) : (
-            <WatchListCheckText checked={checkedRadioButton === 'towatch'}>
+            <WatchListCheckText checked={toWatchActive}>
               Add to watchlist
             </WatchListCheckText>
           )}
@@ -348,7 +353,7 @@ function DetailView({
           <WatchListCheck
             type="radio"
             id="watched"
-            checked={activeRadioButtons[1]}
+            checked={watchedActive}
             name="watchlist"
             value="watched"
             data-was-checked="false"
@@ -356,7 +361,7 @@ function DetailView({
               handleClick(event);
             }}
           />
-          {activeRadioButtons[1] ? (
+          {watchedActive ? (
             <img
               src={WatchedIconClicked}
               alt="check mark icon to symbolize already watched list"
@@ -367,7 +372,7 @@ function DetailView({
               alt="check mark icon to symbolize already watched list"
             />
           )}
-          <WatchListCheckText checked={checkedRadioButton === 'watched'}>
+          <WatchListCheckText checked={watchedActive}>
             Already watched
           </WatchListCheckText>
         </WatchListCheckLabel>
