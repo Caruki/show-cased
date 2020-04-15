@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
 const InputField = styled.input`
-  height: 25px;
-  margin: 0;
+  width: 100%;
+  margin: 0px 0px 5px 0px;
   border: none;
   background: transparent;
   text-align: center;

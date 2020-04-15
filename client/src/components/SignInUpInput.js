@@ -7,19 +7,18 @@ import UsernameIcon from '../assets/username.svg';
 import InputField from './InputField';
 
 const Container = styled.div`
-  height: 50px;
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
+  align-items: baseline;
   background-color: transparent;
+  margin: 10px 0px;
   border: 1px #961f56;
   border-style: hidden hidden solid hidden;
 `;
 
 const InputIconContainer = styled.div`
-  width: 25px;
   margin: 0px 10px 0px 13px;
-  padding-top: ${(props) => (props.variation === 'email' ? '20px' : '15px')};
+  padding-top: ${(props) => (props.variation === 'email' ? '25px' : '20px')};
 `;
 
 function SignInUpInput({ variation, type, placeholder }) {
