@@ -240,34 +240,20 @@ function DetailView({
     ? 'modal display-block'
     : 'modal display-none';
 
-  const [toWatchActive, setToWatchActive] = useState(false);
-  const [watchedActive, setWatchedActive] = useState(false);
+  const [watchlistAction, setWatchlistAction] = useState(null);
 
-  function handleClick(event) {
-    const clickedRadioButton = event.target.value;
-    const previouslyChecked = event.target.dataset.wasChecked;
-    if (previouslyChecked === 'false') {
-      if (clickedRadioButton === 'towatch') {
-        setToWatchActive(true);
-        setWatchedActive(false);
-      } else {
-        setWatchedActive(true);
-        setToWatchActive(false);
-      }
-      event.target.dataset.wasChecked = 'true';
-      console.log(
-        `Current button ${event.target.value} was checked? ${previouslyChecked}. Is now checked? ${event.target.dataset.wasChecked}`
-      );
-    } else if (previouslyChecked === 'true') {
-      setToWatchActive(false);
-      setWatchedActive(false);
-      event.target.dataset.wasChecked = 'false';
-      console.log(
-        `Current button ${event.target.value} was checked? ${previouslyChecked}. Is now checked? ${event.target.dataset.wasChecked}`
-      );
+  const addedToWatchlist = watchlistAction === 'addToWatchlist';
+  const addedToWatched = watchlistAction === 'addToWatched';
+
+  function handleWatchlistActionClick(event) {
+    const targetWatchlistAction = event.target.value;
+
+    if (watchlistAction === targetWatchlistAction) {
+      setWatchlistAction(null);
+    } else {
+      setWatchlistAction(targetWatchlistAction);
     }
   }
-
   return (
     <Container className={showHideClassName}>
       <CloseButton onClick={handleClose}>
@@ -336,16 +322,11 @@ function DetailView({
         <WatchListCheckLabel>
           <WatchListCheck
             type="radio"
-            id="towatch"
-            name="watchlist"
-            value="towatch"
-            checked={toWatchActive}
-            data-was-checked="false"
-            onClick={function (event) {
-              handleClick(event);
-            }}
+            value="addToWatchlist"
+            checked={addedToWatchlist}
+            onClick={handleWatchlistActionClick}
           />
-          {toWatchActive ? (
+          {addedToWatchlist ? (
             <img
               src={WatchlistIconClicked}
               alt="star icon to symbolize watchlist"
@@ -353,12 +334,12 @@ function DetailView({
           ) : (
             <img src={WatchlistIcon} alt="star icon to symbolize watchlist" />
           )}
-          {toWatchActive ? (
-            <WatchListCheckText checked={toWatchActive}>
+          {addedToWatchlist ? (
+            <WatchListCheckText checked={addedToWatchlist}>
               Added to watchlist
             </WatchListCheckText>
           ) : (
-            <WatchListCheckText checked={toWatchActive}>
+            <WatchListCheckText checked={addedToWatchlist}>
               Add to watchlist
             </WatchListCheckText>
           )}
@@ -367,16 +348,11 @@ function DetailView({
         <WatchListCheckLabel>
           <WatchListCheck
             type="radio"
-            id="watched"
-            checked={watchedActive}
-            name="watchlist"
-            value="watched"
-            data-was-checked="false"
-            onClick={function (event) {
-              handleClick(event);
-            }}
+            value="addToWatched"
+            checked={addedToWatched}
+            onClick={handleWatchlistActionClick}
           />
-          {watchedActive ? (
+          {addedToWatched ? (
             <img
               src={WatchedIconClicked}
               alt="check mark icon to symbolize already watched list"
@@ -387,7 +363,7 @@ function DetailView({
               alt="check mark icon to symbolize already watched list"
             />
           )}
-          <WatchListCheckText checked={watchedActive}>
+          <WatchListCheckText checked={addedToWatched}>
             Already watched
           </WatchListCheckText>
         </WatchListCheckLabel>
