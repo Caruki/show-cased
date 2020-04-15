@@ -12,7 +12,7 @@ import WatchedIconClicked from '../assets/watched-icon-clicked.svg';
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  max-height: 600px;
+  max-height: 660px;
   flex: 1 1;
   margin: 60px 25px 60px 25px;
   background-color: #504481;
@@ -184,7 +184,7 @@ const ActorImageWrapper = styled.div`
     object-fit: cover;
     object-position: 50% 50%;
     border: hidden;
-    border-radius: 10px;
+    border-radius: 15px;
     margin-bottom: -3px;
   }
 `;
@@ -192,9 +192,11 @@ const ActorImageWrapper = styled.div`
 const WatchlistCheckContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-around;
-  margin: 0px 10px;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
+  margin: 5px 10px;
 `;
+
 const WatchListCheckLabel = styled.label`
   display: flex;
   flex-flow: column nowrap;
@@ -219,8 +221,8 @@ const WatchListCheck = styled.input`
 const WatchListCheckText = styled.div`
   display: block;
   font-style: ${(props) => (props.checked ? 'italic' : 'normal')};
-  font-size: 0.6rem;
-  font-weight: 100;
+  font-size: 0.7rem;
+  font-weight: 200;
   font-family: 'Roboto', sans-serif;
   color: #e7eaff;
   background: transparent;
