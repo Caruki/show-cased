@@ -229,7 +229,6 @@ const WatchListCheckText = styled.div`
 `;
 
 function DetailView({
-  handleClose,
   showPoster,
   showTitle,
   showRating,
@@ -253,7 +252,7 @@ function DetailView({
   }
   return (
     <Container>
-      <CloseButton onClick={handleClose}>
+      <CloseButton>
         <img src={CloseIcon} alt="small icon with an x symbol" />
       </CloseButton>
       <PosterContainer>
