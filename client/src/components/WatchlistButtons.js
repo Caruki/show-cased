@@ -18,7 +18,14 @@ const WatchListCheckLabel = styled.label`
   flex-flow: column nowrap;
   align-items: center;
   margin: 10px;
+  padding: 5px;
   cursor: pointer;
+
+  & :focus-within {
+    outline-width: 0;
+    border: 1px solid #aeb2f5;
+    border-radius: 8px;
+  }
 
   & > * {
     margin: 2.5px 0px;
