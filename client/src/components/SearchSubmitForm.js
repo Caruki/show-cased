@@ -9,18 +9,20 @@ const Container = styled.div`
   flex-flow: row wrap;
   justify-content: space-around;
   width: auto;
-  margin: 10px 20px;
+  height: 60%;
+  margin: 50px 20px;
 
   & > * {
     flex-basis: 100%;
+    margin: 0px 20px;
   }
 `;
 
 const IntroductionText = styled.div`
   text-align: center;
-  font: 300 0.8rem 'Roboto', sans-serif;
+  font: 300 0.9rem 'Roboto', sans-serif;
   color: #aeb2f5;
-  line-height: 14px;
+  line-height: 17px;
 `;
 
 const InputContainer = styled.div`
@@ -31,12 +33,16 @@ const InputContainer = styled.div`
   & > * {
     margin: 10px;
     width: 80%;
+    border: 1px solid rgba(150, 31, 86, 0.8);
   }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+  & > * {
+    height: fit-content;
+  }
 `;
 
 function SearchSubmitForm({ textvariation }) {
