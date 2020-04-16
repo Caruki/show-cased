@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import ActorList from './ActorList';
 import CloseIcon from '../assets/close-icon.svg';
 import TrailerIcon from '../assets/trailer-icon.svg';
 import RatingIcon from '../assets/rating-icon.svg';
@@ -143,52 +144,6 @@ const GenreField = styled.div`
   cursor: default;
 `;
 
-const AllActorsContainer = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: baseline;
-  justify-content: center;
-  margin: 10px 10px;
-  flex: 1 1;
-  width: auto;
-`;
-
-const ActorContainer = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  padding-top: 10px;
-  font: 300 0.7rem 'Roboto', sans-serif;
-  color: #aeb2f5;
-  flex: 0 0 25%;
-  height: auto;
-  word-break: break-word;
-  margin: 0px 2.5px;
-`;
-
-const ActorImageWrapper = styled.div`
-  border: hidden;
-  border-radius: 10px;
-  box-shadow: 0px 0px 6px #1e194f;
-  overflow: hidden;
-  min-width: 30px;
-  min-height: 80px;
-  flex: 1 1;
-  margin: 5px;
-
-  & > img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-    border: hidden;
-    border-radius: 15px;
-    margin-bottom: -3px;
-  }
-`;
-
 const WatchlistCheckContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -276,44 +231,7 @@ function DetailView({
         <GenreField>{showGenres[2]}</GenreField>
         <GenreField>{showGenres[3]}</GenreField>
       </GenreContainer>
-      <AllActorsContainer>
-        <ActorContainer>
-          <ActorImageWrapper>
-            <img
-              src={showActors[0].image}
-              alt={`picture of ${showActors[0].name}`}
-            />
-          </ActorImageWrapper>
-          {showActors[0].name}
-        </ActorContainer>
-        <ActorContainer>
-          <ActorImageWrapper>
-            <img
-              src={showActors[1].image}
-              alt={`picture of ${showActors[1].name}`}
-            />
-          </ActorImageWrapper>
-          {showActors[1].name}
-        </ActorContainer>
-        <ActorContainer>
-          <ActorImageWrapper>
-            <img
-              src={showActors[2].image}
-              alt={`picture of ${showActors[2].name}`}
-            />
-          </ActorImageWrapper>
-          {showActors[2].name}
-        </ActorContainer>
-        <ActorContainer>
-          <ActorImageWrapper>
-            <img
-              src={showActors[3].image}
-              alt={`picture of ${showActors[3].name}`}
-            />
-          </ActorImageWrapper>
-          {showActors[3].name}
-        </ActorContainer>
-      </AllActorsContainer>
+      <ActorList actors={showActors} />
       <WatchlistCheckContainer>
         <WatchListCheckLabel>
           <WatchListCheck
