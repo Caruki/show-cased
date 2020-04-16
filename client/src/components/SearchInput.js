@@ -7,15 +7,20 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 60%;
-  padding: 10px;
-  border: 2px solid #961f56;
+  padding: 18px 10px 10px 10px;
+  border: 2px solid rgba(150, 31, 86, 0.8);
   border-radius: 11px;
   background-color: rgba(30, 25, 79, 0.8);
+
+  & :focus-within {
+    background-color: rgba(80, 68, 129, 0.5);
+    border: 2px solid rgba(150, 31, 86, 1);
+  }
 `;
 
 const Input = styled(InputField)`
   font-size: 0.9rem;
-  border: 1px #961f56;
+  border: 1px solid rgba(208, 88, 136, 0.8);
   border-style: hidden hidden solid hidden;
 `;
 
