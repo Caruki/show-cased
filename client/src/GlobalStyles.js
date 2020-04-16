@@ -15,7 +15,6 @@ function GlobalStyle() {
           font-family: 'Roboto', sans-serif;
           font-size: 17px;
           margin: 0px;
-          background-color: #0e052e;
         }
       `}
     />

@@ -1,5 +1,8 @@
-import { addParameters } from '@storybook/react';
+import { addParameters, addDecorator } from '@storybook/react';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import AppEnvironmentDecorator from './environmentDecorator';
+
+addDecorator(AppEnvironmentDecorator);
 
 addParameters({
   viewport: {
