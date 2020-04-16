@@ -7,15 +7,23 @@ export default {
 };
 
 export const Email = () => {
-  return <SignInUpInput variation="E-Mail" type="email" />;
+  return <SignInUpInput placeholder="Email" variation="email" type="email" />;
 };
 
 export const Password = () => {
-  return <SignInUpInput variation="Password" type="password" />;
+  return (
+    <SignInUpInput
+      placeholder="Password"
+      variation="password"
+      type="password"
+    />
+  );
 };
 
 export const Username = () => {
-  return <SignInUpInput variation="Username" type="text" />;
+  return (
+    <SignInUpInput placeholder="Username" variation="username" type="text" />
+  );
 };
 
 export const Search = () => <SearchInput />;
