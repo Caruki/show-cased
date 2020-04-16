@@ -7,42 +7,40 @@ import UsernameIcon from '../assets/username.svg';
 import InputField from './InputField';
 
 const Container = styled.div`
-  width: 22%;
-  height: 50px;
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
+  align-items: baseline;
   background-color: transparent;
+  margin: 10px 0px;
   border: 1px #961f56;
   border-style: hidden hidden solid hidden;
 `;
 
 const InputIconContainer = styled.div`
-  width: 25px;
   margin: 0px 10px 0px 13px;
-  padding-top: ${(props) => (props.variation === 'email' ? '5px' : '0px')};
+  padding-top: ${(props) => (props.variation === 'email' ? '25px' : '20px')};
 `;
 
-function SignInUpInput({ variation, type }) {
+function SignInUpInput({ variation, type, placeholder }) {
   return (
     <Container>
-      {variation && variation === 'E-Mail' && (
+      {variation && variation === 'email' && (
         <InputIconContainer variation="email">
           <img src={EmailIcon} alt="email icon showing an email symbol" />
         </InputIconContainer>
       )}
-      {variation && variation === 'Password' && (
+      {variation && variation === 'password' && (
         <InputIconContainer variation="password">
           <img src={PasswordIcon} alt="password icon showing a lock symbol" />
         </InputIconContainer>
       )}
-      {variation && variation === 'Username' && (
+      {variation && variation === 'username' && (
         <InputIconContainer variation="username">
           <img src={UsernameIcon} alt="username icon showing a person symbol" />
         </InputIconContainer>
       )}
 
-      <InputField placeholder={variation} type={type} />
+      <InputField placeholder={placeholder} type={type} />
     </Container>
   );
 }
@@ -50,6 +48,7 @@ function SignInUpInput({ variation, type }) {
 SignInUpInput.propTypes = {
   variation: PropTypes.string,
   type: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 export default SignInUpInput;

@@ -1,14 +1,20 @@
 import styled from '@emotion/styled';
 
 const InputField = styled.input`
-  height: 25px;
-  margin: 0;
+  width: 100%;
+  margin: 0px 0px 5px 0px;
   border: none;
   background: transparent;
-  outline: hidden;
   text-align: center;
   color: #e7eaff;
   font: 100 1.2rem 'Roboto', sans-serif;
+
+  & :focus {
+    outline-width: 0;
+    ::placeholder {
+      color: transparent;
+    }
+  }
 
   ::placeholder {
     color: #aeb2f5;
