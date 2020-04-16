@@ -27,8 +27,10 @@ const InputContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+
   & > * {
     margin: 10px;
+    width: 80%;
   }
 `;
 
