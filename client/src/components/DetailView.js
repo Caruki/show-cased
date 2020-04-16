@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import OverviewTextarea from './OverviewTextarea';
 import CloseIcon from '../assets/close-icon.svg';
 import TrailerIcon from '../assets/trailer-icon.svg';
 import RatingIcon from '../assets/rating-icon.svg';
@@ -108,15 +109,6 @@ const TrailerButton = styled.button`
   &:focus {
     outline-width: 0;
   }
-`;
-
-const OverviewTextarea = styled.div`
-  font: 300 0.7rem 'Roboto', sans-serif;
-  color: #e7eaff;
-  text-align: center;
-  line-height: 14px;
-  margin: 10px 10px;
-  flex-grow: 0 1 90px;
 `;
 
 const GenreContainer = styled.div`
@@ -269,7 +261,7 @@ function DetailView({
           Watch the Trailer
         </TrailerButton>
       </TitleContainer>
-      <OverviewTextarea>{showOverview}</OverviewTextarea>
+      <OverviewTextarea showOverview={showOverview} />
       <GenreContainer>
         <GenreField>{showGenres[0]}</GenreField>
         <GenreField>{showGenres[1]}</GenreField>
