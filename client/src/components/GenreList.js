@@ -7,7 +7,7 @@ const Container = styled.div`
   flex-flow: row nowrap;
   justify-content: space-around;
   flex: 0 1 30px;
-  margin: 15px 10px;
+  margin: 10px 10px;
 `;
 
 const GenreField = styled.div`
@@ -16,10 +16,11 @@ const GenreField = styled.div`
   justify-content: center;
   border: hidden;
   text-align: center;
-  border-radius: 30px;
+  border-radius: 11px;
   background-color: #504481;
   box-shadow: 0px 3px 6px #1e194f;
-  font: 100 italic 0.7rem 'Roboto', sans-serif;
+  font: 300 italic 0.7rem 'Roboto', sans-serif;
+  letter-spacing: 2px;
   color: #e7eaff;
   flex: 1 1;
   margin: 0px 5px;
