@@ -7,14 +7,13 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 60%;
-  height: 65px;
+  padding: 10px;
   border: 2px solid #961f56;
   border-radius: 11px;
   background-color: rgba(30, 25, 79, 0.8);
 `;
 
 const Input = styled(InputField)`
-  width: 80%;
   font-size: 0.9rem;
   border: 1px #961f56;
   border-style: hidden hidden solid hidden;
