@@ -50,15 +50,18 @@ const TrailerButton = styled.button`
   cursor: pointer;
 
   & > * {
+    margin-top: 5px;
     margin-bottom: 5px;
   }
 
-  & :active {
-    font-weight: 500;
+  & :focus {
+    outline-width: 0;
+    border: 1px solid #aeb2f5;
+    border-radius: 8px;
   }
 
-  &:focus {
-    outline-width: 0;
+  & :active {
+    font-style: italic;
   }
 `;
 
