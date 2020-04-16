@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import CloseIcon from '../assets/close-icon.svg';
+import CloseButton from './CloseButton';
+
 import TrailerIcon from '../assets/trailer-icon.svg';
 import RatingIcon from '../assets/rating-icon.svg';
 import WatchlistIcon from '../assets/watchlist-icon.svg';
@@ -20,23 +21,6 @@ const Container = styled.div`
   position: relative;
   & > * {
     box-sizing: border-box;
-  }
-`;
-
-const CloseButton = styled.button`
-  width: fit-content;
-  height: fit-content;
-  right: 0px;
-  top: 0px;
-  position: absolute;
-  background: transparent;
-  border: none;
-  margin: -14px -20px -25px 0px;
-  padding-top: -20px;
-  z-index: 10;
-
-  &:focus {
-    outline-width: 0;
   }
 `;
 
@@ -252,9 +236,7 @@ function DetailView({
   }
   return (
     <Container>
-      <CloseButton>
-        <img src={CloseIcon} alt="small icon with an x symbol" />
-      </CloseButton>
+      <CloseButton />
       <PosterContainer>
         <img src={showPoster} alt="poster of the tv show" />
       </PosterContainer>
