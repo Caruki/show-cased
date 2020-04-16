@@ -53,22 +53,22 @@ export const DetailViewofShow = () => {
             {
               image:
                 'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
-              name: 'Mark Wahlberg',
+              name: 'Julia Roberts',
             },
             {
               image:
                 'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
-              name: 'Mark Wahlberg',
+              name: 'Hans Wahlberg',
             },
             {
               image:
                 'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
-              name: 'Mark Wahlberg',
+              name: 'Mark Wahlber',
             },
             {
               image:
                 'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
-              name: 'Mark Wahlberg',
+              name: 'Mark Walberg',
             },
           ]}
         />

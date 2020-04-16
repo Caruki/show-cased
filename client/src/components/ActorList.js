@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import ArrowIcon from '../assets/arrow-icon.svg';
 
 const AllActorsContainer = styled.div`
   display: flex;
@@ -9,6 +10,7 @@ const AllActorsContainer = styled.div`
   justify-content: flex-start;
   margin: 10px 10px;
   word-break: break-word;
+  position: relative;
   flex: 1 1;
   width: auto;
   overflow-x: scroll;
@@ -51,18 +53,60 @@ const ActorImageWrapper = styled.div`
   }
 `;
 
+const GoOn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: fit-content;
+  bottom: 30%;
+  right: -10px;
+  z-index: 2;
+  opacity: ${(props) => (props.scrolled ? 0 : 0.8)};
+`;
+
 function ActorList({ actors }) {
+  const targetRef = useRef();
+
+  const [scrolled, setScrolled] = useState(false);
+  const [maxWidth, setMaxWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    setMaxWidth(targetRef.current.scrollWidth);
+    const target = targetRef.current;
+    function handleScroll() {
+      console.log(target);
+      console.log('Scroll Position:', target.scrollX);
+      if (target.scrollX > maxWidth) {
+        setScrolled(true);
+      }
+    }
+
+    target.addEventListener('scroll', handleScroll);
+
+    return () => {
+      target.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <AllActorsContainer>
-      {actors.map((actor) => (
-        <ActorContainer key={actor.name}>
-          <ActorImageWrapper>
-            <img src={actor.image} alt={`picture of ${actor.name}`} />
-          </ActorImageWrapper>
-          {actor.name}
-        </ActorContainer>
-      ))}
-    </AllActorsContainer>
+    <>
+      <AllActorsContainer ref={targetRef}>
+        {actors.map((actor) => (
+          <ActorContainer key={actor.name}>
+            <ActorImageWrapper>
+              <img src={actor.image} alt={`picture of ${actor.name}`} />
+            </ActorImageWrapper>
+            {actor.name}
+          </ActorContainer>
+        ))}
+      </AllActorsContainer>
+      {actors[4] && (
+        <GoOn scrolled={scrolled}>
+          <img src={ArrowIcon} alt="arrow icon pointing right" />
+        </GoOn>
+      )}
+    </>
   );
 }
 
