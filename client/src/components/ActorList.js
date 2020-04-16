@@ -6,10 +6,13 @@ const AllActorsContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: baseline;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 10px 10px;
+  word-break: break-word;
   flex: 1 1;
   width: auto;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 `;
 
 const ActorContainer = styled.div`
@@ -21,7 +24,7 @@ const ActorContainer = styled.div`
   padding-top: 10px;
   font: 300 0.7rem 'Roboto', sans-serif;
   color: #aeb2f5;
-  flex: 0 0 25%;
+  flex: 0 0 24%;
   height: auto;
   word-break: break-word;
   margin: 0px 2.5px;
@@ -29,7 +32,7 @@ const ActorContainer = styled.div`
 
 const ActorImageWrapper = styled.div`
   border: hidden;
-  border-radius: 10px;
+  border-radius: 13px;
   box-shadow: 0px 0px 6px #1e194f;
   overflow: hidden;
   min-width: 30px;
@@ -43,7 +46,7 @@ const ActorImageWrapper = styled.div`
     object-fit: cover;
     object-position: 50% 50%;
     border: hidden;
-    border-radius: 15px;
+    border-radius: 13px;
     margin-bottom: -3px;
   }
 `;

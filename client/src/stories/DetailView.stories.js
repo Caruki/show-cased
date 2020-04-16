@@ -48,7 +48,22 @@ export const DetailViewofShow = () => {
             {
               image:
                 'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
-              name: 'Clint Eastwood Blahblub sdhjhdkj',
+              name: 'Clint Eastwood Long long name',
+            },
+            {
+              image:
+                'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
+              name: 'Mark Wahlberg',
+            },
+            {
+              image:
+                'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
+              name: 'Mark Wahlberg',
+            },
+            {
+              image:
+                'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
+              name: 'Mark Wahlberg',
             },
             {
               image:
