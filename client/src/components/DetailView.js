@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import GenreList from './GenreList';
 import CloseIcon from '../assets/close-icon.svg';
 import TrailerIcon from '../assets/trailer-icon.svg';
 import RatingIcon from '../assets/rating-icon.svg';
@@ -117,30 +118,6 @@ const OverviewTextarea = styled.div`
   line-height: 14px;
   margin: 10px 10px;
   flex-grow: 0 1 90px;
-`;
-
-const GenreContainer = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  flex: 0 1 30px;
-  margin: 15px 10px;
-`;
-
-const GenreField = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  border: hidden;
-  text-align: center;
-  border-radius: 30px;
-  background-color: #504481;
-  box-shadow: 0px 3px 6px #1e194f;
-  font: 100 italic 0.7rem 'Roboto', sans-serif;
-  color: #e7eaff;
-  flex: 1 1;
-  margin: 0px 5px;
-  cursor: default;
 `;
 
 const AllActorsContainer = styled.div`
@@ -270,12 +247,7 @@ function DetailView({
         </TrailerButton>
       </TitleContainer>
       <OverviewTextarea>{showOverview}</OverviewTextarea>
-      <GenreContainer>
-        <GenreField>{showGenres[0]}</GenreField>
-        <GenreField>{showGenres[1]}</GenreField>
-        <GenreField>{showGenres[2]}</GenreField>
-        <GenreField>{showGenres[3]}</GenreField>
-      </GenreContainer>
+      <GenreList genres={showGenres} />
       <AllActorsContainer>
         <ActorContainer>
           <ActorImageWrapper>
