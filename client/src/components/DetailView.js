@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import CloseButton from './CloseButton';
 import Poster from './Poster';
 import TitleSection from './TitleSection';
+import OverviewTextarea from './OverviewTextarea';
 import WatchlistIcon from '../assets/watchlist-icon.svg';
 import WatchlistIconClicked from '../assets/watchlist-icon-clicked.svg';
 import WatchedIcon from '../assets/watched-icon.svg';
@@ -21,15 +22,6 @@ const Container = styled.div`
   & > * {
     box-sizing: border-box;
   }
-`;
-
-const OverviewTextarea = styled.div`
-  font: 300 0.7rem 'Roboto', sans-serif;
-  color: #e7eaff;
-  text-align: center;
-  line-height: 14px;
-  margin: 10px 10px;
-  flex-grow: 0 1 90px;
 `;
 
 const GenreContainer = styled.div`
@@ -168,7 +160,7 @@ function DetailView({
     <CloseButton />
     <Poster showPoster={showPoster} />
     <TitleSection showRating={showRating} showTitle={showTitle} />
-      <OverviewTextarea>{showOverview}</OverviewTextarea>
+    <OverviewTextarea showOverview={showOverview} />
       <GenreContainer>
         <GenreField>{showGenres[0]}</GenreField>
         <GenreField>{showGenres[1]}</GenreField>
