@@ -5,6 +5,7 @@ import CloseButton from './CloseButton';
 import Poster from './Poster';
 import TitleSection from './TitleSection';
 import OverviewTextarea from './OverviewTextarea';
+import GenreList from './GenreList';
 import WatchlistIcon from '../assets/watchlist-icon.svg';
 import WatchlistIconClicked from '../assets/watchlist-icon-clicked.svg';
 import WatchedIcon from '../assets/watched-icon.svg';
@@ -22,30 +23,6 @@ const Container = styled.div`
   & > * {
     box-sizing: border-box;
   }
-`;
-
-const GenreContainer = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  flex: 0 1 30px;
-  margin: 15px 10px;
-`;
-
-const GenreField = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  border: hidden;
-  text-align: center;
-  border-radius: 30px;
-  background-color: #504481;
-  box-shadow: 0px 3px 6px #1e194f;
-  font: 100 italic 0.7rem 'Roboto', sans-serif;
-  color: #e7eaff;
-  flex: 1 1;
-  margin: 0px 5px;
-  cursor: default;
 `;
 
 const AllActorsContainer = styled.div`
@@ -161,12 +138,7 @@ function DetailView({
     <Poster showPoster={showPoster} />
     <TitleSection showRating={showRating} showTitle={showTitle} />
     <OverviewTextarea showOverview={showOverview} />
-      <GenreContainer>
-        <GenreField>{showGenres[0]}</GenreField>
-        <GenreField>{showGenres[1]}</GenreField>
-        <GenreField>{showGenres[2]}</GenreField>
-        <GenreField>{showGenres[3]}</GenreField>
-      </GenreContainer>
+    <GenreList genres={showGenres} />
       <AllActorsContainer>
         <ActorContainer>
           <ActorImageWrapper>
