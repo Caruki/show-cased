@@ -62,6 +62,7 @@ const GoOn = styled.div`
   bottom: 30%;
   right: -10px;
   z-index: 2;
+  transition: opacity 0.2s ease-in-out;
   opacity: ${(props) => (props.scrolled ? 0 : 0.8)};
 `;
 
