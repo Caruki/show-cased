@@ -3,8 +3,6 @@ import styled from '@emotion/styled';
 import CloseIcon from '../assets/close-icon.svg';
 
 const Button = styled.button`
-  width: fit-content;
-  height: fit-content;
   right: 0px;
   top: 0px;
   position: absolute;
