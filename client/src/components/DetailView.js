@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import CloseButton from './CloseButton';
+import Poster from './Poster';
 import TitleSection from './TitleSection';
-import CloseIcon from '../assets/close-icon.svg';
 import WatchlistIcon from '../assets/watchlist-icon.svg';
 import WatchlistIconClicked from '../assets/watchlist-icon-clicked.svg';
 import WatchedIcon from '../assets/watched-icon.svg';
@@ -19,40 +20,6 @@ const Container = styled.div`
   position: relative;
   & > * {
     box-sizing: border-box;
-  }
-`;
-
-const CloseButton = styled.button`
-  width: fit-content;
-  height: fit-content;
-  right: 0px;
-  top: 0px;
-  position: absolute;
-  background: transparent;
-  border: none;
-  margin: -14px -20px -25px 0px;
-  padding-top: -20px;
-  z-index: 10;
-
-  &:focus {
-    outline-width: 0;
-  }
-`;
-
-const PosterContainer = styled.div`
-  flex: 0 0 150px;
-  border: hidden;
-  border-radius: 0px 0px 80px 80px;
-  background-color: red;
-  overflow: hidden;
-
-  & > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-    border: hidden;
-    border-radius: 0px 0px 80px 80px;
   }
 `;
 
@@ -198,13 +165,9 @@ function DetailView({
   }
   return (
     <Container>
-      <CloseButton>
-        <img src={CloseIcon} alt="small icon with an x symbol" />
-      </CloseButton>
-      <PosterContainer>
-        <img src={showPoster} alt="poster of the tv show" />
-      </PosterContainer>
-      <TitleSection showRating={showRating} showTitle={showTitle} />
+    <CloseButton />
+    <Poster showPoster={showPoster} />
+    <TitleSection showRating={showRating} showTitle={showTitle} />
       <OverviewTextarea>{showOverview}</OverviewTextarea>
       <GenreContainer>
         <GenreField>{showGenres[0]}</GenreField>
