@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import Poster from './Poster';
 import CloseButton from './CloseButton';
-
 import TrailerIcon from '../assets/trailer-icon.svg';
 import RatingIcon from '../assets/rating-icon.svg';
 import WatchlistIcon from '../assets/watchlist-icon.svg';
@@ -21,23 +21,6 @@ const Container = styled.div`
   position: relative;
   & > * {
     box-sizing: border-box;
-  }
-`;
-
-const PosterContainer = styled.div`
-  flex: 0 0 150px;
-  border: hidden;
-  border-radius: 0px 0px 80px 80px;
-  background-color: red;
-  overflow: hidden;
-
-  & > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-    border: hidden;
-    border-radius: 0px 0px 80px 80px;
   }
 `;
 
@@ -236,10 +219,8 @@ function DetailView({
   }
   return (
     <Container>
-      <CloseButton />
-      <PosterContainer>
-        <img src={showPoster} alt="poster of the tv show" />
-      </PosterContainer>
+    <Poster showPoster={showPoster} />
+    <CloseButton />
       <TitleContainer>
         <Rating>
           <img src={RatingIcon} alt="star icon to represent rating" />
