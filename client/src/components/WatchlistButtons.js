@@ -57,9 +57,22 @@ function WatchlistButtons() {
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
   const addedToWatched = watchlistAction === 'addToWatched';
 
-  function handleWatchlistActionClick(event) {
+  function handleWatchlistClick(event) {
     const targetWatchlistAction = event.target.value;
+    console.log('this will do a fetch and move show to towatchlist');
 
+    if (watchlistAction === targetWatchlistAction) {
+      setWatchlistAction(null);
+    } else {
+      setWatchlistAction(targetWatchlistAction);
+    }
+  }
+
+  function handleWatchedClick(event) {
+    const targetWatchlistAction = event.target.value;
+    console.log(
+      'this will do a fetch, move show to watchedlist and if needed remove show from towatchlist'
+    );
     if (watchlistAction === targetWatchlistAction) {
       setWatchlistAction(null);
     } else {
@@ -74,7 +87,7 @@ function WatchlistButtons() {
           type="radio"
           value="addToWatchlist"
           checked={addedToWatchlist}
-          onClick={handleWatchlistActionClick}
+          onClick={handleWatchlistClick}
         />
         {addedToWatchlist ? (
           <img
@@ -100,7 +113,7 @@ function WatchlistButtons() {
           type="radio"
           value="addToWatched"
           checked={addedToWatched}
-          onClick={handleWatchlistActionClick}
+          onClick={handleWatchedClick}
         />
         {addedToWatched ? (
           <img
