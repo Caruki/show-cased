@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import CloseButton from './CloseButton';
+import Poster from './Poster';
+import TitleSection from './TitleSection';
 import OverviewTextarea from './OverviewTextarea';
-import CloseIcon from '../assets/close-icon.svg';
-import TrailerIcon from '../assets/trailer-icon.svg';
-import RatingIcon from '../assets/rating-icon.svg';
 import WatchlistIcon from '../assets/watchlist-icon.svg';
 import WatchlistIconClicked from '../assets/watchlist-icon-clicked.svg';
 import WatchedIcon from '../assets/watched-icon.svg';
@@ -21,93 +21,6 @@ const Container = styled.div`
   position: relative;
   & > * {
     box-sizing: border-box;
-  }
-`;
-
-const CloseButton = styled.button`
-  width: fit-content;
-  height: fit-content;
-  right: 0px;
-  top: 0px;
-  position: absolute;
-  background: transparent;
-  border: none;
-  margin: -14px -20px -25px 0px;
-  padding-top: -20px;
-  z-index: 10;
-
-  &:focus {
-    outline-width: 0;
-  }
-`;
-
-const PosterContainer = styled.div`
-  flex: 0 0 150px;
-  border: hidden;
-  border-radius: 0px 0px 80px 80px;
-  background-color: red;
-  overflow: hidden;
-
-  & > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-    border: hidden;
-    border-radius: 0px 0px 80px 80px;
-  }
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  flex: 0 0;
-  align-items: center;
-  justify-content: space-around;
-  margin: 10px 10px;
-`;
-
-const Rating = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: center;
-  font: 500 0.7rem 'Roboto', sans-serif;
-  color: #e7eaff;
-  flex: 0 0 75px;
-
-  & > * {
-    margin: 0px 5px 0px 0px;
-  }
-`;
-
-const ShowTitle = styled.h2`
-  font: 500 1.5rem 'Roboto', sans-serif;
-  color: #c5c8f8;
-  text-shadow: 2px 2px 7px #d05888d1;
-  flex: 1 0 50%;
-  text-align: center;
-  margin: 0;
-`;
-
-const TrailerButton = styled.button`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  height: fit-content;
-  width: fit-content;
-  flex: 0 0 75px;
-  background: transparent;
-  border: none;
-  font: 300 0.5rem 'Roboto', sans-serif;
-  color: #e7eaff;
-
-  & > * {
-    margin-bottom: 5px;
-  }
-
-  &:focus {
-    outline-width: 0;
   }
 `;
 
@@ -244,24 +157,10 @@ function DetailView({
   }
   return (
     <Container>
-      <CloseButton>
-        <img src={CloseIcon} alt="small icon with an x symbol" />
-      </CloseButton>
-      <PosterContainer>
-        <img src={showPoster} alt="poster of the tv show" />
-      </PosterContainer>
-      <TitleContainer>
-        <Rating>
-          <img src={RatingIcon} alt="star icon to represent rating" />
-          {`${showRating} %`}
-        </Rating>
-        <ShowTitle>{showTitle}</ShowTitle>
-        <TrailerButton>
-          <img src={TrailerIcon} alt="a play icon to represent a video" />
-          Watch the Trailer
-        </TrailerButton>
-      </TitleContainer>
-      <OverviewTextarea showOverview={showOverview} />
+    <CloseButton />
+    <Poster showPoster={showPoster} />
+    <TitleSection showRating={showRating} showTitle={showTitle} />
+    <OverviewTextarea showOverview={showOverview} />
       <GenreContainer>
         <GenreField>{showGenres[0]}</GenreField>
         <GenreField>{showGenres[1]}</GenreField>
