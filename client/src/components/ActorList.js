@@ -69,15 +69,13 @@ function ActorList({ actors }) {
   const targetRef = useRef();
 
   const [scrolled, setScrolled] = useState(false);
-  const [maxWidth, setMaxWidth] = useState(0);
 
   useLayoutEffect(() => {
-    setMaxWidth(targetRef.current.scrollWidth);
     const target = targetRef.current;
+    const maxWidth =
+      target.getBoundingClientRect().right - target.offsetLeft - 100;
     function handleScroll() {
-      console.log(target);
-      console.log('Scroll Position:', target.scrollX);
-      if (target.scrollX > maxWidth) {
+      if (target.scrollLeft >= maxWidth) {
         setScrolled(true);
       }
     }
