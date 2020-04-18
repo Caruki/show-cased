@@ -7,6 +7,8 @@ const authRoute = require('./lib/routes/auth');
 const port = process.env.PORT || 8080;
 const app = express();
 
+app.use(express.json());
+
 app.use('/api/user', authRoute);
 
 app.use(express.static(path.join(__dirname, 'client/build')));
