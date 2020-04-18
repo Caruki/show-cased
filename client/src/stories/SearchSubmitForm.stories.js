@@ -1,14 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import SubmitButton from '../components/SubmitButton';
-
-export default {
-  title: 'Buttons',
-};
+import SearchSubmitForm from '../components/SearchSubmitForm';
 
 const AppContainer = styled.div`
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   background-color: rgba(14, 5, 46, 1);
   width: 100vw;
   height: 100vh;
@@ -23,21 +19,25 @@ const MainContainer = styled.div`
   height: 100%;
 `;
 
-export const SignUpButton = () => {
+export default {
+  title: 'Search for Shows Form',
+};
+
+export const ToWatchShows = () => {
   return (
     <AppContainer>
       <MainContainer>
-        <SubmitButton>Sign Up</SubmitButton>
+        <SearchSubmitForm textvariation="want to watch" />
       </MainContainer>
     </AppContainer>
   );
 };
 
-export const LogInButton = () => {
+export const WatchedShows = () => {
   return (
     <AppContainer>
       <MainContainer>
-        <SubmitButton>Log In</SubmitButton>
+        <SearchSubmitForm textvariation="have watched" />
       </MainContainer>
     </AppContainer>
   );
