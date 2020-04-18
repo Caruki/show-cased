@@ -23,8 +23,7 @@ const Container = styled.div`
   }
 `;
 
-
-function DetailView({
+function ShowDetailViewModal({
   showPoster,
   showTitle,
   showRating,
@@ -34,18 +33,18 @@ function DetailView({
 }) {
   return (
     <Container>
-<CloseButton />
-    <Poster showPoster={showPoster} />
-    <TitleSection showRating={showRating} showTitle={showTitle} />
-    <OverviewTextarea showOverview={showOverview} />
-    <GenreList genres={showGenres} />
+      <CloseButton />
+      <Poster showPoster={showPoster} />
+      <TitleSection showRating={showRating} showTitle={showTitle} />
+      <OverviewTextarea showOverview={showOverview} />
+      <GenreList genres={showGenres} />
       <ActorList actors={showActors} />
       <WatchlistButtons />
     </Container>
   );
 }
 
-DetailView.propTypes = {
+ShowDetailViewModal.propTypes = {
   handleClose: PropTypes.func,
   showModal: PropTypes.bool,
   showPoster: PropTypes.string,
@@ -57,4 +56,4 @@ DetailView.propTypes = {
   checked: PropTypes.bool,
 };
 
-export default DetailView;
+export default ShowDetailViewModal;
