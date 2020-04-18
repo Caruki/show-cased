@@ -2,9 +2,12 @@ const express = require('express');
 const path = require('path');
 require('dotenv').config();
 const { connectDB } = require('./lib/database');
+const authRoute = require('./lib/routes/auth');
 
 const port = process.env.PORT || 8080;
 const app = express();
+
+app.use('/api/user', authRoute);
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
