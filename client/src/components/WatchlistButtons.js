@@ -9,7 +9,6 @@ const Container = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
-  padding-bottom: 10px;
   margin: 5px 10px;
 `;
 
@@ -17,7 +16,7 @@ const WatchListCheckLabel = styled.label`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  margin: 10px;
+  margin: 5px;
   padding: 5px;
   cursor: pointer;
 

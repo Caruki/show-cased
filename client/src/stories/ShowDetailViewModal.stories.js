@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import DetailView from '../components/DetailView';
+import ShowDetailViewModal from '../components/ShowDetailViewModal';
 
 export default {
   title: 'Detail View of a Show',
@@ -27,7 +27,7 @@ export const DetailViewofShow = () => {
   return (
     <AppContainer>
       <MainContainer>
-        <DetailView
+        <ShowDetailViewModal
           showPoster="https://image.tmdb.org/t/p/original/yGNnjoIGOdQy3douq60tULY8teK.jpg"
           showModal={true}
           showTitle="Westworld"
@@ -48,7 +48,7 @@ export const DetailViewofShow = () => {
             {
               image:
                 'https://image.tmdb.org/t/p/w92/dWmzryckjVXOVoIVa3in1Cg6v4r.jpg',
-              name: 'Clint Eastwood Long long name',
+              name: 'Clint Eastwood Long name',
             },
             {
               image:

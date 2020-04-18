@@ -8,7 +8,7 @@ const AllActorsContainer = styled.div`
   flex-flow: row nowrap;
   align-items: baseline;
   justify-content: flex-start;
-  margin: 10px 10px;
+  margin: 10px;
   word-break: break-word;
   position: relative;
   flex: 1 1;
@@ -23,7 +23,6 @@ const ActorContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  padding-top: 10px;
   font: 300 0.7rem 'Roboto', sans-serif;
   color: #aeb2f5;
   flex: 0 0 24%;
