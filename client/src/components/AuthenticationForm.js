@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
 
-const Container = styled.div`
+const FormContainer = styled.form`
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -60,12 +60,43 @@ const AccountQuestion = styled.div`
 `;
 
 function SignInUpform({ buttonText, accountQuestion, anchor, accountAnswer }) {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const user = {
+      username,
+      email,
+      password,
+    };
+
+    return user;
+  }
+
   return (
-    <Container>
+    <FormContainer onSubmit={handleSubmit}>
       <InputContainer>
-        <SignInUpInput variation="username" placeholder="Username" />
-        <SignInUpInput variation="email" placeholder="Email" />
-        <SignInUpInput variation="password" placeholder="Password" />
+        <SignInUpInput
+          variation="username"
+          placeholder="Username"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
+        <SignInUpInput
+          variation="email"
+          placeholder="Email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <SignInUpInput
+          variation="password"
+          placeholder="Password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
       </InputContainer>
       <ButtonContainer>
         <SubmitButton>{buttonText}</SubmitButton>
@@ -74,7 +105,7 @@ function SignInUpform({ buttonText, accountQuestion, anchor, accountAnswer }) {
         {accountQuestion}
         <a href={anchor}>{accountAnswer}</a>
       </AccountQuestion>
-    </Container>
+    </FormContainer>
   );
 }
 
