@@ -9,8 +9,8 @@ const Container = styled.div`
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-around;
-  width: 70%;
-  height: 70%;
+  width: 50%;
+  height: 80%;
 
   & > * {
     & :focus {

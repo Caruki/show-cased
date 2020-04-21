@@ -21,6 +21,7 @@ const AppContainer = styled.div`
 const MainContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
   flex-grow: 1;
   overflow: auto;
   width: 100%;
