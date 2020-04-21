@@ -2,11 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import styled from '@emotion/styled';
-import Login from './pages/Login';
-import Register from './pages/Register';
 import Popular from './pages/Popular';
 import Recs from './pages/Recs';
 import Lists from './pages/Lists';
+import Authentication from './pages/Authentication';
 // import Header from './components/Header';
 // import BottomNav from './components/BottomNav';
 
@@ -36,10 +35,10 @@ function App() {
           <MainContainer>
             <Switch>
               <Route exact path="/login">
-                <Login />
+                <Authentication />
               </Route>
               <Route exact path="/register">
-                <Register />
+                <Authentication />
               </Route>
               <Route exact path="/popular">
                 <Popular />

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
+import { createUser } from '../api/users';
 
 const FormContainer = styled.form`
   display: flex;
@@ -59,7 +60,24 @@ const AccountQuestion = styled.div`
   }
 `;
 
-function SignInUpform({ buttonText, accountQuestion, anchor, accountAnswer }) {
+const authForm = {
+  login: {
+    buttonText: 'Login',
+    accountQuestion: 'Dont have an account?',
+    anchor: '/register',
+    linkTo: 'SignUp',
+    accountPrompt: 'Sign up!',
+  },
+  register: {
+    buttonText: 'Sign up',
+    accountQuestion: 'Already have an account?',
+    anchor: '/login',
+    linkTo: 'Login',
+    accountPrompt: 'Login!',
+  },
+};
+
+function SignInUpform({ authType }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -72,8 +90,16 @@ function SignInUpform({ buttonText, accountQuestion, anchor, accountAnswer }) {
       email,
       password,
     };
-
-    return user;
+    if (authType === 'register') {
+      try {
+        const response = await createUser(user);
+        if (response) {
+          alert('User created!');
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    }
   }
 
   return (
@@ -99,11 +125,13 @@ function SignInUpform({ buttonText, accountQuestion, anchor, accountAnswer }) {
         />
       </InputContainer>
       <ButtonContainer>
-        <SubmitButton>{buttonText}</SubmitButton>
+        <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
       </ButtonContainer>
       <AccountQuestion>
-        {accountQuestion}
-        <a href={anchor}>{accountAnswer}</a>
+        {authForm[authType].accountQuestion}
+        <a href={authForm[authType].anchor}>
+          {authForm[authType].accountPrompt}
+        </a>
       </AccountQuestion>
     </FormContainer>
   );
@@ -115,6 +143,7 @@ SignInUpform.propTypes = {
   anchor: PropTypes.string,
   linkTo: PropTypes.string,
   accountAnswer: PropTypes.string,
+  authType: PropTypes.string,
 };
 
 export default SignInUpform;
