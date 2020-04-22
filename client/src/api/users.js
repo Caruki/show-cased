@@ -7,7 +7,7 @@ export async function createUser(userInformation) {
     body: JSON.stringify(userInformation),
   });
   if (!response.ok) {
-    throw new Error(response.statusText);
+    throw new Error(response.status, response.body);
   }
   const createdUser = await response.json();
   return createdUser;
@@ -22,7 +22,7 @@ export async function authUser(userInformation) {
     body: JSON.stringify(userInformation),
   });
   if (!response.ok) {
-    throw new Error(response.statusText);
+    throw new Error(response.status, response.body);
   }
   const userToken = await response.text();
   return userToken;
