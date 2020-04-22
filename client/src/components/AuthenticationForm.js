@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
-import { createUser, authUser } from '../api/users';
-import { Redirect } from 'react-router-dom';
+import { createUser } from '../api/users';
 
 const FormContainer = styled.form`
   display: flex;
@@ -86,30 +85,18 @@ function SignInUpform({ authType }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const userInput = {
+    const user = {
       username,
       email,
       password,
     };
     if (authType === 'register') {
       try {
-        const response = await createUser(userInput);
+        const response = await createUser(user);
         if (response) {
-          event.preventDefault();
           alert('User created!');
         }
       } catch (error) {
-        event.preventDefault();
-        alert(error.message);
-      }
-    } else if (authType === 'login') {
-      try {
-        const response = await authUser(userInput);
-        if (response) {
-          return <Redirect to="/lists" />;
-        }
-      } catch (error) {
-        event.preventDefault();
         alert(error.message);
       }
     }
@@ -118,14 +105,12 @@ function SignInUpform({ authType }) {
   return (
     <FormContainer onSubmit={handleSubmit}>
       <InputContainer>
-        {authType === 'register' && (
-          <SignInUpInput
-            variation="username"
-            placeholder="Username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        )}
+        <SignInUpInput
+          variation="username"
+          placeholder="Username"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
         <SignInUpInput
           variation="email"
           placeholder="Email"

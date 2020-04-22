@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Lists() {
-  return <div>MyLists</div>;
+  return <input placeholder="Lists here" />;
 }
 
 export default Lists;
