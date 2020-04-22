@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createUser, authUser } from '../api/users';
+import { signupUser, loginUser } from '../api/users';
 
 export default function useAuthUser() {
   const [loading, setLoading] = useState(false);
@@ -7,36 +7,39 @@ export default function useAuthUser() {
   const [success, setSuccess] = useState(null);
 
   async function register({ userInput }) {
-    console.log(userInput);
     try {
       setLoading(true);
-      setError(false);
-      const response = await createUser(userInput);
+      const response = await signupUser(userInput);
       if (response) {
         setSuccess(true);
+        return response;
+      } else if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
       }
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
-    return;
   }
 
   async function login({ userInput }) {
     try {
       setLoading(true);
-      setError(false);
-      const response = await authUser(userInput);
+      const response = await loginUser(userInput);
       if (response) {
         setSuccess(true);
+        return response;
+      } else if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
       }
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
-    return;
   }
 
   return [{ success, error, loading }, register, login];

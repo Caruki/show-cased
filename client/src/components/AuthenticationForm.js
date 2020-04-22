@@ -122,8 +122,8 @@ function SignInUpform({ authType }) {
       {authType === 'register' && success && <Redirect to="/login" />}
       {authType === 'login' && success && history.push('/lists')}
       {loading && <Loading>Loading...</Loading>}
+
       <FormContainer onSubmit={handleSubmit}>
-        {console.log(error)}
         <InputContainer>
           {authType === 'register' && (
             <SignInUpInput
@@ -150,7 +150,7 @@ function SignInUpform({ authType }) {
             onChange={(event) => setPassword(event.target.value)}
           />
         </InputContainer>
-        {error && <ErrorMessage>{error.message}</ErrorMessage>}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <ButtonContainer>
           <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
         </ButtonContainer>

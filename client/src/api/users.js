@@ -1,4 +1,4 @@
-export async function createUser(userInformation) {
+export async function signupUser(userInformation) {
   const response = await fetch('/api/users/register', {
     method: 'POST',
     headers: {
@@ -7,13 +7,14 @@ export async function createUser(userInformation) {
     body: JSON.stringify(userInformation),
   });
   if (!response.ok) {
-    throw new Error(response.status, response.body);
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
   }
   const createdUser = await response.json();
   return createdUser;
 }
 
-export async function authUser(userInformation) {
+export async function loginUser(userInformation) {
   const response = await fetch('/api/users/login', {
     method: 'POST',
     headers: {
@@ -22,7 +23,8 @@ export async function authUser(userInformation) {
     body: JSON.stringify(userInformation),
   });
   if (!response.ok) {
-    throw new Error(response.status, response.body);
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
   }
   const userToken = await response.text();
   return userToken;
