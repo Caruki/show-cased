@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
@@ -96,7 +96,7 @@ function SignInUpform({ authType }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [{ success, error, loading }, register, login] = useAuthUser();
+  const [{ error, loading }, register, login] = useAuthUser();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -108,21 +108,32 @@ function SignInUpform({ authType }) {
     };
 
     if (authType === 'register') {
-      const userId = await register({ userInput });
-      return userId;
+      try {
+        const userId = await register({ userInput });
+        if (userId) {
+          alert('Account created 🎉 Please log in now!');
+          history.push('/login');
+        }
+      } catch (error) {
+        alert(error.message);
+      }
     }
     if (authType === 'login') {
-      const userToken = await login({ userInput });
-      return userToken;
+      try {
+        const userToken = await login({ userInput });
+        if (userToken) {
+          alert('Logged in 🎉 ');
+          history.push('/lists');
+        }
+      } catch (error) {
+        alert(error.message);
+      }
     }
   }
 
   return (
     <>
-      {authType === 'register' && success && <Redirect to="/login" />}
-      {authType === 'login' && success && history.push('/lists')}
       {loading && <Loading>Loading...</Loading>}
-
       <FormContainer onSubmit={handleSubmit}>
         <InputContainer>
           {authType === 'register' && (
