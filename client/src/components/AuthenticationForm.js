@@ -71,7 +71,7 @@ const ErrorMessage = styled.div`
 
 const Loading = styled.div`
   color: #d05888;
-  font: 500 1.8rem 'Roboto', sans-serif;
+  font: 300 1.8rem 'Roboto', sans-serif;
 `;
 
 const authForm = {
@@ -133,45 +133,48 @@ function SignInUpform({ authType }) {
 
   return (
     <>
-      {loading && <Loading>Loading...</Loading>}
-      <FormContainer onSubmit={handleSubmit}>
-        <InputContainer>
-          {authType === 'register' && (
+      {loading ? (
+        <Loading>Loading...</Loading>
+      ) : (
+        <FormContainer onSubmit={handleSubmit}>
+          <InputContainer>
+            {authType === 'register' && (
+              <SignInUpInput
+                variation="username"
+                placeholder="Username"
+                type="text"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+              />
+            )}
             <SignInUpInput
-              variation="username"
-              placeholder="Username"
-              type="text"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              variation="email"
+              placeholder="Email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
-          )}
-          <SignInUpInput
-            variation="email"
-            placeholder="Email"
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
 
-          <SignInUpInput
-            variation="password"
-            placeholder="Password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </InputContainer>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        <ButtonContainer>
-          <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
-        </ButtonContainer>
-        <AccountQuestion>
-          {authForm[authType].accountQuestion}
-          <a href={authForm[authType].anchor}>
-            {authForm[authType].accountPrompt}
-          </a>
-        </AccountQuestion>
-      </FormContainer>
+            <SignInUpInput
+              variation="password"
+              placeholder="Password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </InputContainer>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+          <ButtonContainer>
+            <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
+          </ButtonContainer>
+          <AccountQuestion>
+            {authForm[authType].accountQuestion}
+            <a href={authForm[authType].anchor}>
+              {authForm[authType].accountPrompt}
+            </a>
+          </AccountQuestion>
+        </FormContainer>
+      )}
     </>
   );
 }
