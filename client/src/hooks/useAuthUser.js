@@ -3,7 +3,7 @@ import { createUser, authUser } from '../api/users';
 
 export default function useAuthUser() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
   const [success, setSuccess] = useState(null);
 
   async function register({ userInput }) {
@@ -16,7 +16,7 @@ export default function useAuthUser() {
         setSuccess(true);
       }
     } catch (error) {
-      setError(true);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -32,7 +32,7 @@ export default function useAuthUser() {
         setSuccess(true);
       }
     } catch (error) {
-      setError(true);
+      setError(error.message);
     } finally {
       setLoading(false);
     }

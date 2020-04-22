@@ -17,6 +17,9 @@ const FormContainer = styled.form`
   & > * {
     & :focus {
       outline-width: 0;
+      ::placeholder {
+        color: transparent;
+      }
     }
   }
 `;
@@ -63,7 +66,7 @@ const AccountQuestion = styled.div`
 
 const ErrorMessage = styled.div`
   color: #d05888;
-  font: 300 0.9rem 'Roboto', sans-serif;
+  font: 300 1rem 'Roboto', sans-serif;
 `;
 
 const Loading = styled.div`
@@ -120,11 +123,13 @@ function SignInUpform({ authType }) {
       {authType === 'login' && success && history.push('/lists')}
       {loading && <Loading>Loading...</Loading>}
       <FormContainer onSubmit={handleSubmit}>
+        {console.log(error)}
         <InputContainer>
           {authType === 'register' && (
             <SignInUpInput
               variation="username"
               placeholder="Username"
+              type="text"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
@@ -132,6 +137,7 @@ function SignInUpform({ authType }) {
           <SignInUpInput
             variation="email"
             placeholder="Email"
+            type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
@@ -139,11 +145,12 @@ function SignInUpform({ authType }) {
           <SignInUpInput
             variation="password"
             placeholder="Password"
+            type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
         </InputContainer>
-        {error && <ErrorMessage>Error</ErrorMessage>}
+        {error && <ErrorMessage>{error.message}</ErrorMessage>}
         <ButtonContainer>
           <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
         </ButtonContainer>

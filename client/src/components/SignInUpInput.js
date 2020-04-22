@@ -19,6 +19,12 @@ const Container = styled.div`
 const InputIconContainer = styled.div`
   margin: 0px 10px 0px 13px;
   padding-top: ${(props) => (props.variation === 'email' ? '25px' : '20px')};
+  & :focus {
+    outline-width: 0;
+    ::placeholder {
+      color: transparent;
+    }
+  }
 `;
 
 function SignInUpInput({ variation, type, placeholder, onChange }) {
