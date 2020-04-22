@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
@@ -89,48 +89,53 @@ const authForm = {
 };
 
 function SignInUpform({ authType }) {
+  const history = useHistory();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userInput, setUserInput] = useState();
-  const [{ success, error, loading }, checkUser] = useAuthUser(
-    authType,
-    userInput
-  );
+  const [{ success, error, loading }, register, login] = useAuthUser();
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    setUserInput({
+    const userInput = {
       username,
       email,
       password,
-    });
+    };
 
-    const userStatus = await checkUser(authType, userInput);
-    return userStatus;
+    if (authType === 'register') {
+      const userId = await register({ userInput });
+      return userId;
+    }
+    if (authType === 'login') {
+      const userToken = await login({ userInput });
+      return userToken;
+    }
   }
 
   return (
     <>
-      {success && <Redirect to="/login" />}
+      {authType === 'register' && success && <Redirect to="/login" />}
+      {authType === 'login' && success && history.push('/lists')}
       {loading && <Loading>Loading...</Loading>}
       <FormContainer onSubmit={handleSubmit}>
         <InputContainer>
-          <SignInUpInput
-            variation="username"
-            placeholder="Username"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
           {authType === 'register' && (
             <SignInUpInput
-              variation="email"
-              placeholder="Email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              variation="username"
+              placeholder="Username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
             />
           )}
+          <SignInUpInput
+            variation="email"
+            placeholder="Email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+
           <SignInUpInput
             variation="password"
             placeholder="Password"
