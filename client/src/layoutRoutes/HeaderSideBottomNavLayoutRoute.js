@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import TabSideNavigation from '../components/TabSideNavigation';
-import BasicLayout from './BasicLayout';
+import BasicLayoutRoute from './BasicLayoutRoute';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 
@@ -22,9 +22,13 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const HeaderSideBottomNavLayout = ({ site, component: Component, ...rest }) => {
+const HeaderSideBottomNavLayoutRoute = ({
+  site,
+  component: Component,
+  ...rest
+}) => {
   return (
-    <BasicLayout
+    <BasicLayoutRoute
       {...rest}
       component={(matchProps) => (
         <>
@@ -49,9 +53,9 @@ const HeaderSideBottomNavLayout = ({ site, component: Component, ...rest }) => {
   );
 };
 
-HeaderSideBottomNavLayout.propTypes = {
+HeaderSideBottomNavLayoutRoute.propTypes = {
   component: PropTypes.elementType,
   site: PropTypes.string,
 };
 
-export default HeaderSideBottomNavLayout;
+export default HeaderSideBottomNavLayoutRoute;

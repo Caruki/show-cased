@@ -11,7 +11,7 @@ const AppContainer = styled.div`
   height: 100vh;
 `;
 
-const BasicLayout = ({ component: Component, ...rest }) => {
+const BasicLayoutRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -24,8 +24,8 @@ const BasicLayout = ({ component: Component, ...rest }) => {
   );
 };
 
-BasicLayout.propTypes = {
+BasicLayoutRoute.propTypes = {
   component: PropTypes.elementType,
 };
 
-export default BasicLayout;
+export default BasicLayoutRoute;

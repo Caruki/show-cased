@@ -5,9 +5,9 @@ import Popular from './pages/Popular';
 import Recs from './pages/Recs';
 import Lists from './pages/Lists';
 import Authentication from './pages/Authentication';
-import BasicLayout from './layouts/BasicLayout';
-import HeaderBottomNavLayout from './layouts/HeaderBottomNavLayout';
-import HeaderSideBottomNavLayout from './layouts/HeaderSideBottomNavLayout';
+import BasicLayoutRoute from './layoutRoutes/BasicLayoutRoute';
+import HeaderBottomNavLayoutRoute from './layoutRoutes/HeaderBottomNavLayoutRoute';
+import HeaderSideBottomNavLayoutRoute from './layoutRoutes/HeaderSideBottomNavLayoutRoute';
 
 function App() {
   return (
@@ -15,21 +15,22 @@ function App() {
       <Router>
         <GlobalStyles />
         <Switch>
-          <BasicLayout exact path="/login" component={Authentication} />
-          <BasicLayout exact path="/register" component={Authentication} />
-          <HeaderSideBottomNavLayout
+          <BasicLayoutRoute exact path="/login" component={Authentication} />
+          <BasicLayoutRoute exact path="/register" component={Authentication} />
+          <HeaderSideBottomNavLayoutRoute
             exact
             path="/popular"
             component={Popular}
             site="popular"
           />
-          <HeaderBottomNavLayout exact path="/recs" component={Recs} />
-          <HeaderSideBottomNavLayout
+          <HeaderBottomNavLayoutRoute exact path="/recs" component={Recs} />
+          <HeaderSideBottomNavLayoutRoute
             exact
             path="/lists"
             component={Lists}
             site="lists"
           />
+          <BasicLayoutRoute path="/" Redirect to="/login" />
         </Switch>
       </Router>
     </>

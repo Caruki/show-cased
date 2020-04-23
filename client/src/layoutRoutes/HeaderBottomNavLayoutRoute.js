@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import BasicLayout from './BasicLayout';
+import BasicLayoutRoute from './BasicLayoutRoute';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 
@@ -15,9 +15,9 @@ const MainContainer = styled.div`
   height: 100%;
 `;
 
-const HeaderBottomNavLayout = ({ component: Component, ...rest }) => {
+const HeaderBottomNavLayoutRoute = ({ component: Component, ...rest }) => {
   return (
-    <BasicLayout
+    <BasicLayoutRoute
       {...rest}
       component={(matchProps) => (
         <>
@@ -32,8 +32,8 @@ const HeaderBottomNavLayout = ({ component: Component, ...rest }) => {
   );
 };
 
-HeaderBottomNavLayout.propTypes = {
+HeaderBottomNavLayoutRoute.propTypes = {
   component: PropTypes.elementType,
 };
 
-export default HeaderBottomNavLayout;
+export default HeaderBottomNavLayoutRoute;
