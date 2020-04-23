@@ -1,4 +1,5 @@
-export async function signupUser(userInformation) {
+export async function registerUser(userInformation) {
+  console.log(userInformation);
   const response = await fetch('/api/users/register', {
     method: 'POST',
     headers: {
@@ -10,8 +11,8 @@ export async function signupUser(userInformation) {
     const errorMessage = await response.text();
     throw new Error(errorMessage);
   }
-  const createdUser = await response.json();
-  return createdUser;
+  const createdUserId = await response.json();
+  return createdUserId;
 }
 
 export async function loginUser(userInformation) {

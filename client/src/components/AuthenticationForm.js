@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useMutation } from 'react-query';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
-import useAuthUser from '../hooks/useAuthUser';
+import { registerUser } from '../api/users';
+
+// import useAuthUser from '../hooks/useAuthUser';
 
 const FormContainer = styled.form`
   display: flex;
@@ -96,7 +99,10 @@ function SignInUpform({ authType }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [{ error, loading }, register, login] = useAuthUser();
+  // const [{ error, loading }, register, login] = useAuthUser();
+  const [createUser, { status, data: userId, error }] = useMutation(
+    registerUser
+  );
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -109,31 +115,33 @@ function SignInUpform({ authType }) {
 
     if (authType === 'register') {
       try {
-        const userId = await register({ userInput });
-        if (userId) {
-          alert('Account created 🎉 Please log in now!');
-          history.push('/login');
-        }
+        await createUser(userInput);
       } catch (error) {
-        alert(error.message);
+        return <ErrorMessage>{error.message}</ErrorMessage>;
       }
     }
-    if (authType === 'login') {
-      try {
-        const userToken = await login({ userInput });
-        if (userToken) {
-          alert('Logged in 🎉 ');
-          history.push('/lists');
-        }
-      } catch (error) {
-        alert(error.message);
-      }
-    }
+
+    // if (authType === 'login') {
+    //   try {
+    //     const userToken = await login({ userInput });
+    //     if (userToken) {
+    //       alert('Logged in 🎉 ');
+    //       history.push('/lists');
+    //     }
+    //   } catch (error) {
+    //     alert(error.message);
+    //   }
+    // }
+  }
+
+  if (userId) {
+    history.push('/login');
+    alert('Account created 🎉 Please log in now!');
   }
 
   return (
     <>
-      {loading ? (
+      {status === 'loading' ? (
         <Loading>Loading...</Loading>
       ) : (
         <FormContainer onSubmit={handleSubmit}>
@@ -163,7 +171,7 @@ function SignInUpform({ authType }) {
               onChange={(event) => setPassword(event.target.value)}
             />
           </InputContainer>
-          {error && <ErrorMessage>{error}</ErrorMessage>}
+          {error && <ErrorMessage>{error.message}</ErrorMessage>}
           <ButtonContainer>
             <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
           </ButtonContainer>
