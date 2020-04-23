@@ -93,9 +93,9 @@ const authForm = {
   },
 };
 
-function SignInUpform({ authType }) {
+function AuthenticationForm({ authType }) {
   const history = useHistory();
-  const { saveUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -109,7 +109,7 @@ function SignInUpform({ authType }) {
     { status: loginStatus, data: loggedInUser, error: loginError },
   ] = useMutation(loginUser, {
     onSuccess: () => {
-      saveUser(loggedInUser);
+      setUser(loggedInUser);
     },
   });
 
@@ -194,7 +194,7 @@ function SignInUpform({ authType }) {
   );
 }
 
-SignInUpform.propTypes = {
+AuthenticationForm.propTypes = {
   buttonText: PropTypes.string,
   accountQuestion: PropTypes.string,
   anchor: PropTypes.string,
@@ -203,4 +203,4 @@ SignInUpform.propTypes = {
   authType: PropTypes.string,
 };
 
-export default SignInUpform;
+export default AuthenticationForm;
