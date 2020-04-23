@@ -6,8 +6,6 @@ import Popular from './pages/Popular';
 import Recs from './pages/Recs';
 import Lists from './pages/Lists';
 import Authentication from './pages/Authentication';
-// import Header from './components/Header';
-// import BottomNav from './components/BottomNav';
 
 const AppContainer = styled.div`
   display: flex;
@@ -51,7 +49,6 @@ function App() {
               </Route>
             </Switch>
           </MainContainer>
-          {/* <BottomNav /> */}
         </AppContainer>
       </Router>
     </>
