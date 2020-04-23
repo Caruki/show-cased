@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import PropTypes from 'prop-types';
@@ -6,8 +6,7 @@ import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
 import { registerUser } from '../api/users';
-
-// import useAuthUser from '../hooks/useAuthUser';
+import AuthContext from '../contexts/auth/AuthContext';
 
 const FormContainer = styled.form`
   display: flex;
@@ -96,10 +95,10 @@ const authForm = {
 
 function SignInUpform({ authType }) {
   const history = useHistory();
+  const auth = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [{ error, loading }, register, login] = useAuthUser();
   const [createUser, { status, data: userId, error }] = useMutation(
     registerUser
   );
@@ -120,18 +119,17 @@ function SignInUpform({ authType }) {
         return <ErrorMessage>{error.message}</ErrorMessage>;
       }
     }
-
-    // if (authType === 'login') {
-    //   try {
-    //     const userToken = await login({ userInput });
-    //     if (userToken) {
-    //       alert('Logged in 🎉 ');
-    //       history.push('/lists');
-    //     }
-    //   } catch (error) {
-    //     alert(error.message);
-    //   }
-    // }
+    if (authType === 'login') {
+      try {
+        auth.login(userInput);
+        if (auth.user) {
+          alert('Logged in 🎉 ');
+          history.push('/lists');
+        }
+      } catch (error) {
+        return <ErrorMessage>{error.message}</ErrorMessage>;
+      }
+    }
   }
 
   if (userId) {
@@ -173,7 +171,9 @@ function SignInUpform({ authType }) {
           </InputContainer>
           {error && <ErrorMessage>{error.message}</ErrorMessage>}
           <ButtonContainer>
-            <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
+            <SubmitButton disabled={status === 'loading'}>
+              {authForm[authType].buttonText}
+            </SubmitButton>
           </ButtonContainer>
           <AccountQuestion>
             {authForm[authType].accountQuestion}

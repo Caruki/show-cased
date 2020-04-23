@@ -27,6 +27,6 @@ export async function loginUser(userInformation) {
     const errorMessage = await response.text();
     throw new Error(errorMessage);
   }
-  const userToken = await response.text();
-  return userToken;
+  const user = await response.json();
+  return user;
 }
