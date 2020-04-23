@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import AuthProvider from './contexts/auth/AuthProvider';
+import AuthProvider from './contexts/user/UserProvider';
 import GlobalStyles from './GlobalStyles';
 import styled from '@emotion/styled';
 import Popular from './pages/Popular';

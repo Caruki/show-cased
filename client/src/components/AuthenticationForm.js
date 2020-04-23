@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
-import { registerUser } from '../api/users';
-import AuthContext from '../contexts/auth/AuthContext';
+import { registerUser, loginUser } from '../api/users';
+import UserContext from '../contexts/user/UserContext';
 
 const FormContainer = styled.form`
   display: flex;
@@ -95,13 +95,35 @@ const authForm = {
 
 function SignInUpform({ authType }) {
   const history = useHistory();
-  const auth = useContext(AuthContext);
+  const { saveUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [createUser, { status, data: userId, error }] = useMutation(
-    registerUser
-  );
+  const [
+    createUser,
+    { status: registerStatus, data: userId, error: registerError },
+  ] = useMutation(registerUser);
+
+  const [
+    authUser,
+    { status: loginStatus, data: loggedInUser, error: loginError },
+  ] = useMutation(loginUser, {
+    onSuccess: () => {
+      saveUser(loggedInUser);
+    },
+  });
+
+  React.useEffect(() => {
+    if (authType === 'register' && userId) {
+      alert('Account created 🎉 Please log in now!');
+      history.push('/login');
+    }
+
+    if (authType === 'login' && loggedInUser) {
+      alert('Logged in 🎉 ');
+      history.push('/lists');
+    }
+  }, [loggedInUser, userId, authType, history]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -113,33 +135,17 @@ function SignInUpform({ authType }) {
     };
 
     if (authType === 'register') {
-      try {
-        await createUser(userInput);
-      } catch (error) {
-        return <ErrorMessage>{error.message}</ErrorMessage>;
-      }
+      await createUser(userInput);
     }
-    if (authType === 'login') {
-      try {
-        auth.login(userInput);
-        if (auth.user) {
-          alert('Logged in 🎉 ');
-          history.push('/lists');
-        }
-      } catch (error) {
-        return <ErrorMessage>{error.message}</ErrorMessage>;
-      }
-    }
-  }
 
-  if (userId) {
-    history.push('/login');
-    alert('Account created 🎉 Please log in now!');
+    if (authType === 'login') {
+      await authUser(userInput);
+    }
   }
 
   return (
     <>
-      {status === 'loading' ? (
+      {(registerStatus || loginStatus) === 'loading' ? (
         <Loading>Loading...</Loading>
       ) : (
         <FormContainer onSubmit={handleSubmit}>
@@ -169,11 +175,12 @@ function SignInUpform({ authType }) {
               onChange={(event) => setPassword(event.target.value)}
             />
           </InputContainer>
-          {error && <ErrorMessage>{error.message}</ErrorMessage>}
+          {registerError && (
+            <ErrorMessage>{registerError.message}</ErrorMessage>
+          )}
+          {loginError && <ErrorMessage>{loginError.message}</ErrorMessage>}
           <ButtonContainer>
-            <SubmitButton disabled={status === 'loading'}>
-              {authForm[authType].buttonText}
-            </SubmitButton>
+            <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
           </ButtonContainer>
           <AccountQuestion>
             {authForm[authType].accountQuestion}
