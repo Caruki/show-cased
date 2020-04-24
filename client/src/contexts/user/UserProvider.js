@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const authContextValue = {
+  const userContextValue = {
     user,
     setUser,
   };
 
   return (
-    <UserContext.Provider value={authContextValue}>
+    <UserContext.Provider value={userContextValue}>
       {children}
     </UserContext.Provider>
   );

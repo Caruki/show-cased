@@ -29,3 +29,15 @@ export async function loginUser(userInformation) {
   const user = await response.json();
   return user;
 }
+
+export async function logoutUser() {
+  const response = await fetch('/api/users/logout', {
+    method: 'GET',
+  });
+  if (!response.ok) {
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
+  }
+  const confirmation = await response.json();
+  return confirmation;
+}
