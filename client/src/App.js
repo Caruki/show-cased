@@ -1,13 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import AuthProvider from './contexts/user/UserProvider';
 import GlobalStyles from './GlobalStyles';
 import styled from '@emotion/styled';
 import Popular from './pages/Popular';
 import Recs from './pages/Recs';
 import Lists from './pages/Lists';
 import Authentication from './pages/Authentication';
-// import Header from './components/Header';
-// import BottomNav from './components/BottomNav';
 
 const AppContainer = styled.div`
   display: flex;
@@ -29,31 +28,32 @@ const MainContainer = styled.div`
 function App() {
   return (
     <>
-      <Router>
-        <GlobalStyles />
-        <AppContainer>
-          <MainContainer>
-            <Switch>
-              <Route exact path="/login">
-                <Authentication />
-              </Route>
-              <Route exact path="/register">
-                <Authentication />
-              </Route>
-              <Route exact path="/popular">
-                <Popular />
-              </Route>
-              <Route exact path="/recs">
-                <Recs />
-              </Route>
-              <Route exact path="/lists">
-                <Lists />
-              </Route>
-            </Switch>
-          </MainContainer>
-          {/* <BottomNav /> */}
-        </AppContainer>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <GlobalStyles />
+          <AppContainer>
+            <MainContainer>
+              <Switch>
+                <Route exact path="/login">
+                  <Authentication />
+                </Route>
+                <Route exact path="/register">
+                  <Authentication />
+                </Route>
+                <Route exact path="/popular">
+                  <Popular />
+                </Route>
+                <Route exact path="/recs">
+                  <Recs />
+                </Route>
+                <Route exact path="/lists">
+                  <Lists />
+                </Route>
+              </Switch>
+            </MainContainer>
+          </AppContainer>
+        </Router>
+      </AuthProvider>
     </>
   );
 }
