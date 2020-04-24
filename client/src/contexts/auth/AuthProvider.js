@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import AuthContext from './AuthContext';
 import PropTypes from 'prop-types';
 import logoutUser from '../../api/users';
-import UserContext from '../user/UserContext';
+import useUserInformation from '../user/useUserInformation';
 
 function AuthProvider({ children }) {
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useUserInformation;
 
   async function logout() {
     try {
