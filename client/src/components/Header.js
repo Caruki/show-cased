@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Logo from './Logo';
+import useAuth from '../contexts/auth/useAuth';
 
 const Container = styled.div`
   display: flex;
@@ -39,11 +40,13 @@ const LogOut = styled.button`
 `;
 
 function Header({ username }) {
+  const { logout } = useAuth();
+
   return (
     <Container>
       <Logo size="small" />
       <Title>{`Welcome back, ${username} !`}</Title>
-      <LogOut>Log Out?</LogOut>
+      <LogOut onClick={logout}>Log Out?</LogOut>
     </Container>
   );
 }
