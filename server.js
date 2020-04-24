@@ -3,6 +3,7 @@ const path = require('path');
 require('dotenv').config();
 const { connectDB } = require('./lib/database');
 const authRoute = require('./lib/routes/auth');
+const showsRoute = require('./lib/routes/shows');
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -10,6 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/user', authRoute);
+app.use('/api/shows', showsRoute);
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
