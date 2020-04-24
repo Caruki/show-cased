@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import PropTypes from 'prop-types';
@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
 import { registerUser, loginUser } from '../api/users';
-import UserContext from '../contexts/user/UserContext';
+import useUserInformation from '../contexts/user/useUserInformation';
 
 const FormContainer = styled.form`
   display: flex;
@@ -95,7 +95,7 @@ const authForm = {
 
 function AuthenticationForm({ authType }) {
   const history = useHistory();
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useUserInformation();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import AuthProvider from './contexts/user/UserProvider';
-import GlobalStyles from './GlobalStyles';
 import styled from '@emotion/styled';
+import UserProvider from './contexts/user/UserProvider';
+import AuthProvider from './contexts/auth/AuthProvider';
+import GlobalStyles from './GlobalStyles';
 import Popular from './pages/Popular';
 import Recs from './pages/Recs';
 import Lists from './pages/Lists';
@@ -28,32 +29,34 @@ const MainContainer = styled.div`
 function App() {
   return (
     <>
-      <AuthProvider>
-        <Router>
-          <GlobalStyles />
-          <AppContainer>
-            <MainContainer>
-              <Switch>
-                <Route exact path="/login">
-                  <Authentication />
-                </Route>
-                <Route exact path="/register">
-                  <Authentication />
-                </Route>
-                <Route exact path="/popular">
-                  <Popular />
-                </Route>
-                <Route exact path="/recs">
-                  <Recs />
-                </Route>
-                <Route exact path="/lists">
-                  <Lists />
-                </Route>
-              </Switch>
-            </MainContainer>
-          </AppContainer>
-        </Router>
-      </AuthProvider>
+      <UserProvider>
+        <AuthProvider>
+          <Router>
+            <GlobalStyles />
+            <AppContainer>
+              <MainContainer>
+                <Switch>
+                  <Route exact path="/login">
+                    <Authentication />
+                  </Route>
+                  <Route exact path="/register">
+                    <Authentication />
+                  </Route>
+                  <Route exact path="/popular">
+                    <Popular />
+                  </Route>
+                  <Route exact path="/recs">
+                    <Recs />
+                  </Route>
+                  <Route exact path="/lists">
+                    <Lists />
+                  </Route>
+                </Switch>
+              </MainContainer>
+            </AppContainer>
+          </Router>
+        </AuthProvider>
+      </UserProvider>
     </>
   );
 }

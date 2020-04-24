@@ -11,9 +11,12 @@ function AuthProvider({ children }) {
     try {
       const loggedOutConfirmation = await logoutUser();
       setUser(null);
-      return loggedOutConfirmation;
+      if (loggedOutConfirmation) {
+        alert('You are logged out!');
+        history.push('/');
+      }
     } catch (error) {
-      throw new Error(error.message);
+      return error.message;
     }
   }
 
