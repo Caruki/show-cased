@@ -195,11 +195,6 @@ function AuthenticationForm({ authType }) {
 }
 
 AuthenticationForm.propTypes = {
-  buttonText: PropTypes.string,
-  accountQuestion: PropTypes.string,
-  anchor: PropTypes.string,
-  linkTo: PropTypes.string,
-  accountAnswer: PropTypes.string,
   authType: PropTypes.string,
 };
 
