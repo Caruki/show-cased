@@ -8,6 +8,7 @@ const TabsContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   max-width: 30px;
+  flex-basis: 20%;
 `;
 
 const TabContent = styled.div``;

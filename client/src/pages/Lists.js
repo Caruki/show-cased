@@ -1,8 +1,7 @@
 import React from 'react';
-import Header from '../components/Header';
 
 function Lists() {
-  return <Header />;
+  return <div>Lists</div>;
 }
 
 export default Lists;
