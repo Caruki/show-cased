@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  setUser(user);
-
   const authContextValue = {
     user,
     setUser,
