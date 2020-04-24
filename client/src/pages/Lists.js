@@ -1,7 +1,8 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function Lists() {
-  return <input placeholder="Lists here" />;
+  return <Header />;
 }
 
 export default Lists;

@@ -7,6 +7,7 @@ import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
 import { registerUser, loginUser } from '../api/users';
 import useUserInformation from '../contexts/user/useUserInformation';
+import useAuth from '../contexts/auth/useAuth';
 
 const FormContainer = styled.form`
   display: flex;
@@ -95,7 +96,8 @@ const authForm = {
 
 function AuthenticationForm({ authType }) {
   const history = useHistory();
-  const { setUser } = useUserInformation();
+  const { setUser, user } = useUserInformation();
+  const { setIsAuthenticated } = useAuth();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -104,14 +106,9 @@ function AuthenticationForm({ authType }) {
     { status: registerStatus, data: userId, error: registerError },
   ] = useMutation(registerUser);
 
-  const [
-    authUser,
-    { status: loginStatus, data: loggedInUser, error: loginError },
-  ] = useMutation(loginUser, {
-    onSuccess: () => {
-      setUser(loggedInUser);
-    },
-  });
+  const [authUser, { status: loginStatus, error: loginError }] = useMutation(
+    loginUser
+  );
 
   React.useEffect(() => {
     if (authType === 'register' && userId) {
@@ -119,11 +116,11 @@ function AuthenticationForm({ authType }) {
       history.push('/login');
     }
 
-    if (authType === 'login' && loggedInUser) {
+    if (authType === 'login' && user) {
       alert('Logged in 🎉 ');
       history.push('/lists');
     }
-  }, [loggedInUser, userId, authType, history]);
+  }, [user, userId, authType, history]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -139,7 +136,9 @@ function AuthenticationForm({ authType }) {
     }
 
     if (authType === 'login') {
-      await authUser(userInput);
+      const loggedInUser = await authUser(userInput);
+      setUser(loggedInUser);
+      setIsAuthenticated(true);
     }
   }
 
