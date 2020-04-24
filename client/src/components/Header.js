@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Logo from './Logo';
 import useAuth from '../contexts/auth/useAuth';
@@ -69,9 +68,5 @@ function Header() {
     </Container>
   );
 }
-
-Header.propTypes = {
-  username: PropTypes.string,
-};
 
 export default Header;
