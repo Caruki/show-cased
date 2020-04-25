@@ -48,7 +48,7 @@ function App() {
                 />{' '}
               </>
             ) : (
-              <Redirect to="/" />
+              <Redirect to="/login" />
             )}
             <BasicLayoutRoute path="/" Redirect to="/login" />
           </Switch>
