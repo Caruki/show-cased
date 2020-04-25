@@ -93,7 +93,7 @@ function ActorList({ actors }) {
         {actors.map((actor) => (
           <ActorContainer key={actor.name}>
             <ActorImageWrapper>
-              <img src={actor.image} alt={`picture of ${actor.name}`} />
+              <img src={actor.picture} alt={`picture of ${actor.name}`} />
             </ActorImageWrapper>
             {actor.name}
           </ActorContainer>
