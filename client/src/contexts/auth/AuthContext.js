@@ -1,5 +1,11 @@
 import { createContext } from 'react';
 
-export const AuthContext = createContext(null);
+function noop() {}
+
+export const AuthContext = createContext({
+  logout: noop,
+  setIsAuthenticated: noop,
+  isAuthenticated: false,
+});
 
 export default AuthContext;

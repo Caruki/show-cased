@@ -1,15 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import UserProvider from './contexts/user/UserProvider';
 import AuthProvider from './contexts/auth/AuthProvider';
 import GlobalStyles from './GlobalStyles';
-import Popular from './pages/Popular';
-import Recs from './pages/Recs';
-import Lists from './pages/Lists';
 import Authentication from './pages/Authentication';
 import BasicLayoutRoute from './layoutRoutes/BasicLayoutRoute';
-import HeaderBottomNavLayoutRoute from './layoutRoutes/HeaderBottomNavLayoutRoute';
-import HeaderSideBottomNavLayoutRoute from './layoutRoutes/HeaderSideBottomNavLayoutRoute';
+import UserRoutes from './UserRoutes';
 import useAuth from './contexts/auth/useAuth';
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
         <Router>
           <GlobalStyles />
           <Switch>
+            <Route exact path="/">
+              <Redirect to="/login" />
+            </Route>
             <BasicLayoutRoute exact path="/login" component={Authentication} />
             <BasicLayoutRoute
               exact
@@ -28,29 +32,12 @@ function App() {
               component={Authentication}
             />
             {isAuthenticated ? (
-              <>
-                <HeaderSideBottomNavLayoutRoute
-                  exact
-                  path="/popular"
-                  component={Popular}
-                  site="popular"
-                />
-                <HeaderBottomNavLayoutRoute
-                  exact
-                  path="/recs"
-                  component={Recs}
-                />
-                <HeaderSideBottomNavLayoutRoute
-                  exact
-                  path="/lists"
-                  component={Lists}
-                  site="lists"
-                />{' '}
-              </>
+              <UserRoutes />
             ) : (
-              <Redirect to="/login" />
+              <Route path="/">
+                <Redirect to="/login" />
+              </Route>
             )}
-            <BasicLayoutRoute path="/" Redirect to="/login" />
           </Switch>
         </Router>
       </AuthProvider>
