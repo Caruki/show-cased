@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import UserProvider from './contexts/user/UserProvider';
 import AuthProvider from './contexts/auth/AuthProvider';
 import GlobalStyles from './GlobalStyles';
@@ -21,6 +26,9 @@ function App() {
               component={Authentication}
             />
             <UserRoutes />
+            <Route exact path="/">
+              <Redirect to="/login" />
+            </Route>
           </Switch>
         </Router>
       </AuthProvider>
