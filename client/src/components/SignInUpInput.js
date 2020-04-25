@@ -19,9 +19,15 @@ const Container = styled.div`
 const InputIconContainer = styled.div`
   margin: 0px 10px 0px 13px;
   padding-top: ${(props) => (props.variation === 'email' ? '25px' : '20px')};
+  & :focus {
+    outline-width: 0;
+    ::placeholder {
+      color: transparent;
+    }
+  }
 `;
 
-function SignInUpInput({ variation, type, placeholder }) {
+function SignInUpInput({ variation, type, placeholder, onChange }) {
   return (
     <Container>
       {variation && variation === 'email' && (
@@ -40,7 +46,7 @@ function SignInUpInput({ variation, type, placeholder }) {
         </InputIconContainer>
       )}
 
-      <InputField placeholder={placeholder} type={type} />
+      <InputField placeholder={placeholder} type={type} onChange={onChange} />
     </Container>
   );
 }
@@ -49,6 +55,7 @@ SignInUpInput.propTypes = {
   variation: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 export default SignInUpInput;

@@ -8,7 +8,8 @@
     "dev-client": "cd client && npm start",
     "build": "cd client && npm run build && npm run build-storybook",
     "storybook": "cd client && npm run storybook",
-    "dev": "concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run dev-client\" \"npm run storybook\"",
+    "dev": "concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run dev-client\"",
+    "dev-story": "concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run dev-client\" \"npm run storybook\"",
     "dev-server": "nodemon server.js",
     "start": "node server.js"
   },
@@ -49,6 +50,7 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

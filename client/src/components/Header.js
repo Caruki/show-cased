@@ -1,7 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Logo from './Logo';
+import useAuth from '../contexts/auth/useAuth';
+import useUserInformation from '../contexts/user/useUserInformation';
 
 const Container = styled.div`
   display: flex;
@@ -38,18 +40,33 @@ const LogOut = styled.button`
   }
 `;
 
-function Header({ username }) {
+function Header() {
+  const [logoutConfirmation, setLogoutConfirmation] = useState();
+  const { logout } = useAuth();
+  const { user } = useUserInformation();
+  const history = useHistory();
+
+  React.useEffect(() => {
+    if (logoutConfirmation) {
+      alert('You are logged out! 🥺');
+      history.push('/popular');
+    }
+  }, [logoutConfirmation, history]);
+
+  async function handleLogout() {
+    const loggedOutConfirmation = await logout();
+    if (loggedOutConfirmation) {
+      setLogoutConfirmation(true);
+    }
+  }
+
   return (
     <Container>
       <Logo size="small" />
-      <Title>{`Welcome back, ${username} !`}</Title>
-      <LogOut>Log Out?</LogOut>
+      <Title>{`Welcome back, ${user.username} !`}</Title>
+      <LogOut onClick={handleLogout}>Log Out?</LogOut>
     </Container>
   );
 }
-
-Header.propTypes = {
-  username: PropTypes.string,
-};
 
 export default Header;
