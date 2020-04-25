@@ -4,7 +4,9 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const { connectDB } = require('./lib/database');
 const authRoute = require('./lib/routes/auth');
+const showsRoute = require('./lib/routes/shows');
 const listsRoute = require('./lib/routes/lists');
+
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -13,7 +15,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api/users', authRoute);
+app.use('/api/shows', showsRoute);
 app.use('/api/lists', listsRoute);
+
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 

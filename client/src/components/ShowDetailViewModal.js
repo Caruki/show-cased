@@ -23,22 +23,18 @@ const Container = styled.div`
   }
 `;
 
-function ShowDetailViewModal({
-  showPoster,
-  showTitle,
-  showRating,
-  showOverview,
-  showGenres,
-  showActors,
-}) {
+function ShowDetailViewModal({ showDetails }) {
   return (
     <Container>
       <CloseButton />
-      <Poster showPoster={showPoster} />
-      <TitleSection showRating={showRating} showTitle={showTitle} />
-      <OverviewTextarea showOverview={showOverview} />
-      <GenreList genres={showGenres} />
-      <ActorList actors={showActors} />
+      <Poster showPoster={showDetails.poster} />
+      <TitleSection
+        showRating={showDetails.rating}
+        showTitle={showDetails.title}
+      />
+      <OverviewTextarea showOverview={showDetails.overview} />
+      <GenreList genres={showDetails.genres} />
+      <ActorList actors={showDetails.actors} />
       <WatchlistButtons />
     </Container>
   );
@@ -46,14 +42,7 @@ function ShowDetailViewModal({
 
 ShowDetailViewModal.propTypes = {
   handleClose: PropTypes.func,
-  showModal: PropTypes.bool,
-  showPoster: PropTypes.string,
-  showTitle: PropTypes.string,
-  showRating: PropTypes.number,
-  showOverview: PropTypes.string,
-  showGenres: PropTypes.array,
-  showActors: PropTypes.array,
-  checked: PropTypes.bool,
+  showDetails: PropTypes.object,
 };
 
 export default ShowDetailViewModal;
