@@ -7,7 +7,6 @@ const ItemContainer = styled.div`
   flex-flow: column nowrap;
   align-items: center;
   background: transparent;
-  margin: 10px;
 `;
 
 const PosterContainer = styled.div`
@@ -28,13 +27,13 @@ const PosterContainer = styled.div`
 
 const Title = styled.div`
   color: #d05888;
-  font: 500 1rem;
+  font: 400 0.8rem 'Roboto', sans-serif;
   text-align: center;
 `;
 
 const Rating = styled.div`
   color: #aeb2f5;
-  font: 300 italic 0.8rem;
+  font: 300 0.8rem 'Roboto', sans-serif;
 `;
 
 function ListItem({ poster, title, rating }) {

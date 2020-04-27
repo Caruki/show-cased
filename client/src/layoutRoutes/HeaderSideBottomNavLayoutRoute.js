@@ -13,6 +13,7 @@ const MainContainer = styled.div`
   flex-grow: 1;
   flex-basis: 80%;
   overflow: auto;
+  margin-left: 5px;
   width: 100%;
   height: 100%;
 `;
