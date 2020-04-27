@@ -28,5 +28,11 @@ export async function getShowDetails(showId) {
     throw new Error(response.statusText);
   }
   const showDetails = await response.json();
+  showDetails.actors.map((actor) => {
+    if (actor.picture === 'https://image.tmdb.org/t/p/w92null') {
+      return (actor.picture = '');
+    }
+    return actor;
+  });
   return showDetails;
 }
