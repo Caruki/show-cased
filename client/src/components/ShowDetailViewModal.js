@@ -24,11 +24,13 @@ const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
   top: 70px;
-  right: 15px;
+  right: 10px;
   left: 40px;
-  height: 650px;
+  min-height: 550px;
+  max-height: 660px;
   @media (min-width: 700px) {
-    height: 850px;
+    top: 150px;
+    min-height: 830px;
   }
   flex: 1 0;
   background-color: #504481;
@@ -47,6 +49,7 @@ function ShowDetailViewModal({ showDetails, toggleModal, isShowing }) {
             <TitleSection
               showRating={showDetails.rating}
               showTitle={showDetails.title}
+              showTrailer={showDetails.trailer}
             />
             <OverviewTextarea showOverview={showDetails.overview} />
             <GenreList genres={showDetails.genres} />
