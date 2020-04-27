@@ -1,21 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import ListsIcon from '../assets/lists-icon.svg';
-import ListsIconClicked from '../assets/lists-clicked-icon.svg';
-import PopularIcon from '../assets/popular-icon.svg';
-import PopularIconClicked from '../assets/popular-clicked-icon.svg';
-import RecsIcon from '../assets/recs-icon.svg';
-import RecsIconClicked from '../assets/recs-clicked-icon.svg';
+import { NavLink } from 'react-router-dom';
 
-const NavContainer = styled.div`
+const Container = styled.nav`
   display: flex;
   justify-content: center;
   width: 100%;
   flex: 1 0 10%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
 `;
 
-const ButtonContainer = styled.div`
+const ListItemContainer = styled(NavLink)`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -24,78 +23,49 @@ const ButtonContainer = styled.div`
   flex: 1 0;
   border-radius: 25px 25px 0px 0px;
   background-color: rgba(14, 5, 46, 0.6);
+  cursor: pointer;
+  text-decoration: none;
 `;
 
-const Button = styled.button`
+const ListItem = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   padding: 15px 0px 15px 0px;
   background: transparent;
   border: none;
-  color: ${({ variation, site }) => {
-    if (variation === site) {
-      return '#F79DC1';
-    }
-    return '#AEB2F5';
-  }};
-
-  & :focus,
-  :active {
-    outline-width: 0;
-  }
 `;
 
-function BottomNav({ site }) {
+const Label = styled.span`
+  margin-top: 4px;
+  font: 300 0.7rem 'Roboto', sans-serif;
+  color: ${(props) => (props.active ? '#F79DC1' : '#AEB2F5')};
+`;
+
+const BottomNav = ({ links, value, onTabClick }) => {
   return (
-    <NavContainer>
-      <ButtonContainer>
-        <Button site={site} variation="popular">
-          {site === 'popular' ? (
-            <img
-              src={PopularIconClicked}
-              alt="icon with three stars in pink color"
-            />
-          ) : (
-            <img src={PopularIcon} alt="icon with three stars in blue color" />
-          )}
-          Popular
-        </Button>
-        <Button site={site} variation="recs">
-          {site === 'recs' ? (
-            <img
-              src={RecsIconClicked}
-              alt="icon with a clapperboard and the play symbol in pink color"
-            />
-          ) : (
-            <img
-              src={RecsIcon}
-              alt="icon with a clapperboard and the play symbol in blue color"
-            />
-          )}
-          Recs
-        </Button>
-        <Button site={site} variation="lists">
-          {site === 'lists' ? (
-            <img
-              src={ListsIconClicked}
-              alt="icon with a list and a star inside in pink color"
-            />
-          ) : (
-            <img
-              src={ListsIcon}
-              alt="icon with a list and a star inside in pink color"
-            />
-          )}
-          Your Lists
-        </Button>
-      </ButtonContainer>
-    </NavContainer>
+    <Container>
+      {links.map((link) => (
+        <ListItemContainer
+          key={link.label}
+          to={link.navLink}
+          active={value === link.label}
+          onClick={() => onTabClick(link.label)}
+        >
+          <ListItem>
+            <link.Icon active={value === link.label} />
+            <Label active={value === link.label}>{link.label}</Label>
+          </ListItem>
+        </ListItemContainer>
+      ))}
+    </Container>
   );
-}
+};
 
 BottomNav.propTypes = {
-  site: PropTypes.string,
+  links: PropTypes.array,
+  value: PropTypes.string,
+  onTabClick: PropTypes.func,
 };
 
 export default BottomNav;
