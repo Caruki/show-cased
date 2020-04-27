@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import ListItem from './ListItem';
-import { getNewestShows } from '../api/shows';
+import { getNewestShows, getShowDetails } from '../api/shows';
+import ShowDetailViewModal from './ShowDetailViewModal';
 
 const ListContainer = styled.div`
   display: grid;
@@ -12,10 +13,27 @@ const ListContainer = styled.div`
 `;
 
 function NewestShows() {
+  const [selectedItem, setSelectedItem] = useState({});
+  const [showModal, setShowModal] = useState(false);
   const { status, data: newestShowsList, error } = useQuery(
     'newestShows',
     getNewestShows
   );
+  const [
+    loadShowDetails,
+    // { status: showDetailsStatus, error: showDetailsError },
+  ] = useMutation(getShowDetails);
+
+  async function handleItemClick(showId) {
+    const showDetails = await loadShowDetails(showId);
+    setSelectedItem(showDetails);
+    toggleModal();
+  }
+
+  function toggleModal() {
+    setShowModal(!showModal);
+    console.log(showModal);
+  }
 
   if (status === 'loading') {
     return <span>Loading...</span>;
@@ -26,16 +44,28 @@ function NewestShows() {
   }
 
   return (
-    <ListContainer>
-      {newestShowsList.map((show) => (
-        <ListItem
-          poster={show.poster}
-          title={show.title}
-          rating={show.rating}
-          key={show.id}
+    <>
+      {showModal && (
+        <ShowDetailViewModal
+          toggleModal={toggleModal}
+          showDetails={selectedItem}
         />
-      ))}
-    </ListContainer>
+      )}
+      <ListContainer>
+        {newestShowsList.map((show) => (
+          <ListItem
+            poster={show.poster}
+            title={show.title}
+            rating={show.rating}
+            key={show.id}
+            id={show.id}
+            onClick={() => {
+              handleItemClick(show.id);
+            }}
+          />
+        ))}
+      </ListContainer>
+    </>
   );
 }
 
