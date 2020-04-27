@@ -9,7 +9,7 @@ const AllActorsContainer = styled.div`
   flex-flow: row nowrap;
   align-items: baseline;
   justify-content: flex-start;
-  margin: 10px;
+  margin: 5px 10px;
   word-break: break-word;
   position: relative;
   width: auto;
@@ -72,8 +72,7 @@ function ActorList({ actors }) {
 
   useLayoutEffect(() => {
     const target = targetRef.current;
-    const maxWidth =
-      target.getBoundingClientRect().right - target.offsetLeft - 100;
+    const maxWidth = target.scrollWidth - 310;
     function handleScroll() {
       if (target.scrollLeft >= maxWidth) {
         setScrolled(true);
