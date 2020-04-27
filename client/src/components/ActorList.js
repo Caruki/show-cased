@@ -11,7 +11,6 @@ const AllActorsContainer = styled.div`
   margin: 10px;
   word-break: break-word;
   position: relative;
-  flex: 1 1;
   width: auto;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;

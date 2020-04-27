@@ -12,21 +12,23 @@ import WatchlistButtons from './WatchlistButtons';
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  max-height: 660px;
-  flex: 1 1;
-  margin: 60px 25px 60px 25px;
+  top: 60px;
+  right: 10px;
+  left: 40px;
+  height: 660px;
+  @media (min-width: 700px) {
+    height: 850px;
+  }
+  flex: 1 0;
   background-color: #504481;
   border: 4px solid #1e194f;
-  position: relative;
-  & > * {
-    box-sizing: border-box;
-  }
+  position: absolute;
 `;
 
-function ShowDetailViewModal({ showDetails }) {
+function ShowDetailViewModal({ showDetails, toggleModal }) {
   return (
     <Container>
-      <CloseButton />
+      <CloseButton onClick={() => toggleModal()} />
       <Poster showPoster={showDetails.poster} />
       <TitleSection
         showRating={showDetails.rating}
@@ -41,8 +43,8 @@ function ShowDetailViewModal({ showDetails }) {
 }
 
 ShowDetailViewModal.propTypes = {
-  handleClose: PropTypes.func,
   showDetails: PropTypes.object,
+  toggleModal: PropTypes.func,
 };
 
 export default ShowDetailViewModal;

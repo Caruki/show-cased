@@ -4,6 +4,9 @@ import styled from '@emotion/styled';
 
 const PosterContainer = styled.div`
   flex: 0 0 150px;
+  @media (min-width: 700px) {
+    flex: 1 0 150px;
+  }
   border: hidden;
   border-radius: 0px 0px 80px 80px;
   background: transparent;
