@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import TabSideNavigation from '../components/TabSideNavigation';
@@ -6,6 +6,7 @@ import BasicLayoutRoute from './BasicLayoutRoute';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import { Lists, Popular, Recs } from '../assets/BottomIcons';
+import useBottomNav from '../hooks/useBottomNav';
 
 const MainContainer = styled.div`
   display: flex;
@@ -28,8 +29,7 @@ const HeaderSideBottomNavLayoutRoute = ({
   component: Component,
   ...rest
 }) => {
-  const [activeNavItem, setActiveNavItem] = useState('Popular');
-
+  const { activeNavItem, onNavItemClick } = useBottomNav();
   return (
     <BasicLayoutRoute
       {...rest}
@@ -63,8 +63,8 @@ const HeaderSideBottomNavLayoutRoute = ({
               },
               { label: 'Lists', Icon: Lists, navLink: '/lists' },
             ]}
-            value={activeNavItem}
-            onTabClick={(page) => setActiveNavItem(page)}
+            activeNavItem={activeNavItem}
+            onNavItemClick={onNavItemClick}
           />
         </>
       )}

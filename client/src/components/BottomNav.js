@@ -42,19 +42,18 @@ const Label = styled.span`
   color: ${(props) => (props.active ? '#F79DC1' : '#AEB2F5')};
 `;
 
-const BottomNav = ({ links, value, onTabClick }) => {
+const BottomNav = ({ links, onNavItemClick, activeNavItem }) => {
   return (
     <Container>
       {links.map((link) => (
         <ListItemContainer
           key={link.label}
           to={link.navLink}
-          active={value === link.label}
-          onClick={() => onTabClick(link.label)}
+          onClick={() => onNavItemClick(link.label)}
         >
-          <ListItem>
-            <link.Icon active={value === link.label} />
-            <Label active={value === link.label}>{link.label}</Label>
+          <ListItem active={activeNavItem === link.label}>
+            <link.Icon active={activeNavItem === link.label} />
+            <Label active={activeNavItem === link.label}>{link.label}</Label>
           </ListItem>
         </ListItemContainer>
       ))}
@@ -64,8 +63,8 @@ const BottomNav = ({ links, value, onTabClick }) => {
 
 BottomNav.propTypes = {
   links: PropTypes.array,
-  value: PropTypes.string,
-  onTabClick: PropTypes.func,
+  activeNavItem: PropTypes.string,
+  onNavItemClick: PropTypes.func,
 };
 
 export default BottomNav;
