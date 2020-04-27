@@ -1,16 +1,15 @@
 import React from 'react';
 import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
-import NewestShows from '../components/NewestShows';
-import TrendingShows from '../components/TrendingShows';
+import PopularShows from '../components/PopularShows';
 
 function Popular() {
   const { tabContent } = useSideNavInformation();
 
   return (
     <>
-      {tabContent === 'default' && <TrendingShows />}
-      {tabContent === 'Trending' && <TrendingShows />}
-      {tabContent === 'Newest' && <NewestShows />}
+      {tabContent === 'default' && <PopularShows tab="trending" />}
+      {tabContent === 'Trending' && <PopularShows tab="trending" />}
+      {tabContent === 'Newest' && <PopularShows tab="newest" />}
     </>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import CloseIcon from '../assets/close-icon.svg';
 
 const Button = styled.button`
@@ -18,12 +19,16 @@ const Button = styled.button`
   }
 `;
 
-function CloseButton() {
+function CloseButton({ onClick }) {
   return (
-    <Button>
+    <Button onClick={onClick}>
       <img src={CloseIcon} alt="small icon with an x symbol" />
     </Button>
   );
 }
+
+CloseButton.propTypes = {
+  onClick: PropTypes.func,
+};
 
 export default CloseButton;
