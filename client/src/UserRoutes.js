@@ -12,7 +12,7 @@ function UserRoutes() {
 
   return (
     <>
-      {isAuthenticated && (
+      {!isAuthenticated && (
         <>
           <HeaderSideBottomNavLayoutRoute
             exact

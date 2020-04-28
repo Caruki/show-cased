@@ -7,7 +7,7 @@ const ItemContainer = styled.div`
   flex-flow: column nowrap;
   align-items: center;
   background: transparent;
-  margin: 10px;
+  cursor: pointer;
 `;
 
 const PosterContainer = styled.div`
@@ -28,18 +28,18 @@ const PosterContainer = styled.div`
 
 const Title = styled.div`
   color: #d05888;
-  font: 500 1rem;
+  font: 400 0.8rem 'Roboto', sans-serif;
   text-align: center;
 `;
 
 const Rating = styled.div`
   color: #aeb2f5;
-  font: 300 italic 0.8rem;
+  font: 300 0.8rem 'Roboto', sans-serif;
 `;
 
-function ListItem({ poster, title, rating }) {
+function ListItem({ poster, title, rating, id, onClick }) {
   return (
-    <ItemContainer>
+    <ItemContainer id={id} onClick={onClick}>
       <PosterContainer>
         <img src={poster} alt={title} />
       </PosterContainer>
@@ -53,6 +53,8 @@ ListItem.propTypes = {
   poster: PropTypes.string,
   title: PropTypes.string,
   rating: PropTypes.number,
+  id: PropTypes.number,
+  onClick: PropTypes.func,
 };
 
 export default ListItem;

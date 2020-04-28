@@ -11,6 +11,7 @@ import GlobalStyles from './GlobalStyles';
 import Authentication from './pages/Authentication';
 import BasicLayoutRoute from './layoutRoutes/BasicLayoutRoute';
 import UserRoutes from './UserRoutes';
+import SideNavProvider from './contexts/sideNav/SideNavProvider';
 
 function App() {
   return (
@@ -25,7 +26,9 @@ function App() {
               path="/register"
               component={Authentication}
             />
-            <UserRoutes />
+            <SideNavProvider>
+              <UserRoutes />
+            </SideNavProvider>
             <Route exact path="/">
               <Redirect to="/login" />
             </Route>
