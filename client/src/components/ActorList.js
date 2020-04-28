@@ -2,7 +2,6 @@ import React, { useState, useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import ArrowIcon from '../assets/arrow-icon.svg';
-import DefaultPicture from '../assets/default.png';
 
 const AllActorsContainer = styled.div`
   display: flex;
@@ -92,10 +91,7 @@ function ActorList({ actors }) {
         {actors.map((actor) => (
           <ActorContainer key={actor.name}>
             <ActorImageWrapper>
-              <img
-                src={actor.picture === '' ? DefaultPicture : actor.picture}
-                alt={`${actor.name}`}
-              />
+              <img src={actor.picture} alt={`${actor.name}`} />
             </ActorImageWrapper>
             {actor.name}
           </ActorContainer>
