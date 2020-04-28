@@ -42,8 +42,8 @@ export async function logoutUser() {
   return confirmation;
 }
 
-export async function getUser() {
-  const response = await fetch('/api/users/:id', {
+export async function getUser(userId) {
+  const response = await fetch(`/api/users/${userId}`, {
     method: 'GET',
   });
   if (!response.ok) {
