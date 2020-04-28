@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
-import { registerUser, loginUser } from '../api/users';
-import useUserInformation from '../contexts/user/useUserInformation';
+import { registerUser } from '../api/users';
 import useAuth from '../contexts/auth/useAuth';
 
 const FormContainer = styled.form`
@@ -68,8 +67,23 @@ const AccountQuestion = styled.div`
 `;
 
 const ErrorMessage = styled.div`
+  padding: 20px;
   color: #d05888;
   font: 300 1rem 'Roboto', sans-serif;
+  border: 1px solid #d05888;
+  border-radius: 15px;
+`;
+const UserInformation = styled.div`
+  padding: 20px;
+  color: #d05888;
+  font: 300 1.2rem 'Roboto', sans-serif;
+  border: 1px solid #d05888;
+  border-radius: 15px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  line-height: 25px;
+  margin-top: 40px;
 `;
 
 const Loading = styled.div`
@@ -96,31 +110,31 @@ const authForm = {
 
 function AuthenticationForm({ authType }) {
   const history = useHistory();
-  const { setUser, user } = useUserInformation();
-  const { setIsAuthenticated } = useAuth();
+  const { login, authenticatedUser } = useAuth();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [
     createUser,
-    { status: registerStatus, data: userId, error: registerError },
+    { status: registerStatus, data: registeredUserId, error: registerError },
   ] = useMutation(registerUser);
 
-  const [authUser, { status: loginStatus, error: loginError }] = useMutation(
-    loginUser
-  );
+  const [
+    loginUser,
+    { status: loginStatus, data: loggedinUser, error: loginError },
+  ] = useMutation(login);
 
   React.useEffect(() => {
-    if (authType === 'register' && userId) {
+    if (authType === 'register' && registeredUserId) {
       alert('Account created 🎉 Please log in now!');
       history.push('/login');
     }
 
-    if (authType === 'login' && user) {
+    if (authType === 'login' && loggedinUser) {
       alert('Logged in 🎉 ');
       history.push('/lists');
     }
-  }, [user, userId, authType, history]);
+  }, [registeredUserId, loggedinUser, authType, history]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -136,14 +150,20 @@ function AuthenticationForm({ authType }) {
     }
 
     if (authType === 'login') {
-      const loggedInUser = await authUser(userInput);
-      setUser(loggedInUser);
-      setIsAuthenticated(true);
+      await loginUser(userInput);
     }
   }
 
   return (
     <>
+      {authenticatedUser && (
+        <UserInformation>
+          <span>You are already logged in! 🥳</span>{' '}
+          <span>
+            Please click <a href="/popular">here</a>
+          </span>
+        </UserInformation>
+      )}
       {(registerStatus || loginStatus) === 'loading' ? (
         <Loading>Loading...</Loading>
       ) : (
@@ -178,6 +198,7 @@ function AuthenticationForm({ authType }) {
             <ErrorMessage>{registerError.message}</ErrorMessage>
           )}
           {loginError && <ErrorMessage>{loginError.message}</ErrorMessage>}
+
           <ButtonContainer>
             <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
           </ButtonContainer>

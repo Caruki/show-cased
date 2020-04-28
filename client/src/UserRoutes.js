@@ -8,11 +8,11 @@ import HeaderSideBottomNavLayoutRoute from './layoutRoutes/HeaderSideBottomNavLa
 import useAuth from './contexts/auth/useAuth';
 
 function UserRoutes() {
-  const { isAuthenticated } = useAuth();
+  const { authenticatedUser } = useAuth();
 
   return (
     <>
-      {!isAuthenticated && (
+      {authenticatedUser && (
         <>
           <HeaderSideBottomNavLayoutRoute
             exact
@@ -29,7 +29,7 @@ function UserRoutes() {
           />
         </>
       )}
-      {!isAuthenticated && (
+      {!authenticatedUser && (
         <Route path="/">
           <Redirect to="/login" />
         </Route>

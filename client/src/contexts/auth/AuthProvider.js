@@ -1,28 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AuthContext from './AuthContext';
 import PropTypes from 'prop-types';
-import { logoutUser } from '../../api/users';
-import useUserInformation from '../user/useUserInformation';
+import { logoutUser, loginUser } from '../../api/users';
+import usePersistentState from '../../hooks/usePersistentState';
 
 function AuthProvider({ children }) {
-  const { setUser } = useUserInformation;
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authenticatedUser, setAuthenticatedUser] = usePersistentState(
+    'authenticatedUser',
+    false
+  );
 
   async function logout() {
     try {
-      const loggedOutConfirmation = await logoutUser();
-      setUser(null);
-      setIsAuthenticated(false);
-      return loggedOutConfirmation;
+      setAuthenticatedUser(false);
+      await logoutUser();
     } catch (error) {
-      return error.message;
+      console.error(error.message);
     }
   }
 
+  async function login(userInput) {
+    const user = await loginUser(userInput);
+    setAuthenticatedUser(user);
+    return user;
+  }
+
+  React.useEffect(() => {
+    if (!authenticatedUser) {
+      setAuthenticatedUser(false);
+    } else {
+      setAuthenticatedUser(authenticatedUser);
+    }
+  }, [authenticatedUser, setAuthenticatedUser]);
+
   const authContextValue = {
     logout,
-    setIsAuthenticated,
-    isAuthenticated,
+    login,
+    authenticatedUser,
   };
 
   return (

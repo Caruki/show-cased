@@ -41,3 +41,15 @@ export async function logoutUser() {
   const confirmation = await response.json();
   return confirmation;
 }
+
+export async function getUser() {
+  const response = await fetch('/api/users/:id', {
+    method: 'GET',
+  });
+  if (!response.ok) {
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
+  }
+  const user = await response.json();
+  return user;
+}
