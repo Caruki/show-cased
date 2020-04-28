@@ -6,7 +6,7 @@ import BasicLayoutRoute from './BasicLayoutRoute';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
 import { Lists, Popular, Recs } from '../assets/BottomIcons';
-import useBottomNav from '../hooks/useBottomNav';
+import { useLocation } from 'react-router-dom';
 
 const MainContainer = styled.div`
   display: flex;
@@ -29,7 +29,8 @@ const HeaderSideBottomNavLayoutRoute = ({
   component: Component,
   ...rest
 }) => {
-  const { activeNavItem, onNavItemClick } = useBottomNav();
+  const location = useLocation();
+
   return (
     <BasicLayoutRoute
       {...rest}
@@ -63,8 +64,7 @@ const HeaderSideBottomNavLayoutRoute = ({
               },
               { label: 'Lists', Icon: Lists, navLink: '/lists' },
             ]}
-            activeNavItem={activeNavItem}
-            onNavItemClick={onNavItemClick}
+            activeNavItem={location.pathname}
           />
         </>
       )}

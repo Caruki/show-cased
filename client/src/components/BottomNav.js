@@ -38,22 +38,19 @@ const ListItem = styled.div`
 
 const Label = styled.span`
   margin-top: 4px;
-  font: 300 0.7rem 'Roboto', sans-serif;
+  font: 300 0.7rem 'Roboto', sans-sergiif;
   color: ${(props) => (props.active ? '#F79DC1' : '#AEB2F5')};
 `;
 
-const BottomNav = ({ links, onNavItemClick, activeNavItem }) => {
+const BottomNav = ({ links, activeNavItem }) => {
+  console.log('active: ', activeNavItem);
   return (
     <Container>
       {links.map((link) => (
-        <ListItemContainer
-          key={link.label}
-          to={link.navLink}
-          onClick={() => onNavItemClick(link.label)}
-        >
-          <ListItem active={activeNavItem === link.label}>
-            <link.Icon active={activeNavItem === link.label} />
-            <Label active={activeNavItem === link.label}>{link.label}</Label>
+        <ListItemContainer key={link.label} to={link.navLink}>
+          <ListItem active={activeNavItem === link.navLink}>
+            <link.Icon active={activeNavItem === link.navLink} />
+            <Label active={activeNavItem === link.navLink}>{link.label}</Label>
           </ListItem>
         </ListItemContainer>
       ))}
