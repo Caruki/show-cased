@@ -33,15 +33,15 @@ const HeaderBottomNavLayoutRoute = ({ component: Component, ...rest }) => {
             links={[
               {
                 label: 'Popular',
-                Icon: Popular,
+                icon: Popular,
                 navLink: '/popular',
               },
               {
                 label: 'Recs',
-                Icon: Recs,
+                icon: Recs,
                 navLink: '/recs',
               },
-              { label: 'Lists', Icon: Lists, navLink: '/lists' },
+              { label: 'Lists', icon: Lists, navLink: '/lists' },
             ]}
             activeNavItem={location.pathname}
           />

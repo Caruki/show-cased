@@ -14,7 +14,7 @@ const Container = styled.nav`
   background: transparent;
 `;
 
-const ListItemContainer = styled(NavLink)`
+const NavItemContainer = styled(NavLink)`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -27,7 +27,7 @@ const ListItemContainer = styled(NavLink)`
   text-decoration: none;
 `;
 
-const ListItem = styled.div`
+const NavItem = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -47,12 +47,12 @@ const BottomNav = ({ links, activeNavItem }) => {
   return (
     <Container>
       {links.map((link) => (
-        <ListItemContainer key={link.label} to={link.navLink}>
-          <ListItem active={activeNavItem === link.navLink}>
-            <link.Icon active={activeNavItem === link.navLink} />
+        <NavItemContainer key={link.label} to={link.navLink}>
+          <NavItem active={activeNavItem === link.navLink}>
+            <link.icon active={activeNavItem === link.navLink} />
             <Label active={activeNavItem === link.navLink}>{link.label}</Label>
-          </ListItem>
-        </ListItemContainer>
+          </NavItem>
+        </NavItemContainer>
       ))}
     </Container>
   );
