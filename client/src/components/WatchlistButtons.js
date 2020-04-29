@@ -54,13 +54,15 @@ const WatchListCheckText = styled.div`
 `;
 
 function WatchlistButtons({ showDetails }) {
-  const { userId } = useAuth();
+  const { authenticatedUser } = useAuth();
   const [watchlistAction, setWatchlistAction] = useState(null);
   const selectedShow = {
     id: showDetails.id,
     title: showDetails.title,
     genres: showDetails.genres,
-    actors: showDetails.actors,
+    actors: showDetails.actors.map((actor) => {
+      return actor.name;
+    }),
   };
 
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
@@ -68,7 +70,8 @@ function WatchlistButtons({ showDetails }) {
 
   async function handleWatchlistClick(event) {
     const targetWatchlistAction = event.target.value;
-    await addToWatchList(userId, selectedShow);
+    console.log(authenticatedUser.userId);
+    await addToWatchList(authenticatedUser.userId, selectedShow);
 
     if (watchlistAction === targetWatchlistAction) {
       setWatchlistAction(null);
