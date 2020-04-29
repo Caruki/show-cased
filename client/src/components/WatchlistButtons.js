@@ -5,8 +5,9 @@ import WatchlistIcon from '../assets/watchlist-icon.svg';
 import WatchlistIconClicked from '../assets/watchlist-icon-clicked.svg';
 import WatchedIcon from '../assets/watched-icon.svg';
 import WatchedIconClicked from '../assets/watched-icon-clicked.svg';
-import { addToWatchList } from '../api/lists';
+import { addToWatchList, addToWatchedList } from '../api/lists';
 import useAuth from '../contexts/auth/useAuth';
+import { useMutation } from 'react-query/types';
 
 const Container = styled.div`
   display: flex;
@@ -64,14 +65,16 @@ function WatchlistButtons({ showDetails }) {
       return actor.name;
     }),
   };
+  const [addWatchedList] = useMutation(addToWatchedList);
+  const [addWatchList] = useMutation(addToWatchList);
 
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
   const addedToWatched = watchlistAction === 'addToWatched';
 
   async function handleWatchlistClick(event) {
+    await addWatchList(authenticatedUser.userId, selectedShow);
+
     const targetWatchlistAction = event.target.value;
-    console.log(authenticatedUser.userId);
-    await addToWatchList(authenticatedUser.userId, selectedShow);
 
     if (watchlistAction === targetWatchlistAction) {
       setWatchlistAction(null);
@@ -80,11 +83,11 @@ function WatchlistButtons({ showDetails }) {
     }
   }
 
-  function handleWatchedClick(event) {
+  async function handleWatchedClick(event) {
+    await addWatchedList(authenticatedUser.userId, selectedShow);
+
     const targetWatchlistAction = event.target.value;
-    console.log(
-      'this will do a fetch, move show to watchedlist and if needed remove show from towatchlist'
-    );
+
     if (watchlistAction === targetWatchlistAction) {
       setWatchlistAction(null);
     } else {
@@ -110,11 +113,11 @@ function WatchlistButtons({ showDetails }) {
           <img src={WatchlistIcon} alt="star icon to symbolize watchlist" />
         )}
         {addedToWatchlist ? (
-          <WatchListCheckText checked={addedToWatchlist}>
+          <WatchListCheckText active={addedToWatchlist}>
             Added to watchlist
           </WatchListCheckText>
         ) : (
-          <WatchListCheckText checked={addedToWatchlist}>
+          <WatchListCheckText active={addedToWatchlist}>
             Add to watchlist
           </WatchListCheckText>
         )}
