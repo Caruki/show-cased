@@ -86,9 +86,9 @@ function WatchlistButtons({ showDetails }) {
 
   React.useEffect(() => {
     if (user) {
-      if (user?.towatch.some((show) => show.id === selectedShow.id)) {
+      if (user.towatch.some((show) => show.id === selectedShow.id)) {
         setWatchlistAction('addToWatchlist');
-      } else if (user?.watched.some((show) => show.id === selectedShow.id)) {
+      } else if (user.watched.some((show) => show.id === selectedShow.id)) {
         setWatchlistAction('addToWatched');
       }
     }
