@@ -1,3 +1,5 @@
+import DefaultPicture from '../assets/default.png';
+
 export async function getTrendingShows() {
   const response = await fetch('/api/shows/trending', {
     method: 'GET',
@@ -28,5 +30,11 @@ export async function getShowDetails(showId) {
     throw new Error(response.statusText);
   }
   const showDetails = await response.json();
+  showDetails.actors.map((actor) => {
+    if (actor.picture === 'https://image.tmdb.org/t/p/w92null') {
+      return (actor.picture = DefaultPicture);
+    }
+    return actor;
+  });
   return showDetails;
 }

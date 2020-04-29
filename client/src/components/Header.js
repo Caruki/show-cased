@@ -16,7 +16,7 @@ const Container = styled.div`
 const Title = styled.h1`
   font: 300 1.2rem 'Roboto', sans-serif;
   color: #aeb2f5;
-  margin-left: 20px;
+  margin-left: 10px;
   display: flex;
   align-items: center;
 `;

@@ -10,7 +10,13 @@ const TitleContainer = styled.div`
   flex: 0 0;
   align-items: center;
   justify-content: space-around;
-  margin: 10px 10px;
+  margin: 5px 10px;
+
+  & :focus-within {
+    outline-width: 0;
+    border: 1px solid #aeb2f5;
+    border-radius: 8px;
+  }
 `;
 
 const Rating = styled.div`
@@ -54,18 +60,16 @@ const TrailerButton = styled.button`
     margin-bottom: 5px;
   }
 
-  & :focus {
-    outline-width: 0;
-    border: 1px solid #aeb2f5;
-    border-radius: 8px;
-  }
-
   & :active {
     font-style: italic;
   }
 `;
 
-function TitleSection({ showRating, showTitle }) {
+function TitleSection({ showRating, showTitle, showTrailer }) {
+  function handleOnClick(showTrailer) {
+    window.open(showTrailer);
+  }
+
   return (
     <TitleContainer>
       <Rating>
@@ -73,7 +77,7 @@ function TitleSection({ showRating, showTitle }) {
         {`${showRating} %`}
       </Rating>
       <ShowTitle>{showTitle}</ShowTitle>
-      <TrailerButton>
+      <TrailerButton onClick={() => handleOnClick(showTrailer)}>
         <img src={TrailerIcon} alt="a play icon to represent a video" />
         Watch the Trailer
       </TrailerButton>
@@ -84,6 +88,7 @@ function TitleSection({ showRating, showTitle }) {
 TitleSection.propTypes = {
   showRating: PropTypes.number,
   showTitle: PropTypes.string,
+  showTrailer: PropTypes.string,
 };
 
 export default TitleSection;

@@ -15,13 +15,16 @@ const MainContainer = styled.div`
   flex-grow: 1;
   flex-basis: 80%;
   overflow: auto;
+  margin-left: 5px;
   width: 100%;
+  height: 100%;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
   height: 100%;
+  width: 100%;
 `;
 
 const HeaderSideBottomNavLayoutRoute = ({
@@ -39,12 +42,8 @@ const HeaderSideBottomNavLayoutRoute = ({
           <Header />
           <Container>
             <TabSideNavigation>
-              <div label={site === 'recs' ? 'Trending' : 'Watched'}>
-                <div></div>
-              </div>
-              <div label={site === 'recs' ? 'Newest' : 'ToWatch'}>
-                <div></div>
-              </div>
+              <div label={site === 'popular' ? 'Trending' : 'Watched'}></div>
+              <div label={site === 'popular' ? 'Newest' : 'ToWatch'}></div>
             </TabSideNavigation>
             <MainContainer>
               <Component {...matchProps} />

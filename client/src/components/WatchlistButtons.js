@@ -9,7 +9,13 @@ const Container = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
-  margin: 5px 10px;
+  margin: 10px 10px;
+
+  & :focus-within {
+    outline-width: 0;
+    border: 1px solid #aeb2f5;
+    border-radius: 8px;
+  }
 `;
 
 const WatchListCheckLabel = styled.label`
@@ -19,12 +25,6 @@ const WatchListCheckLabel = styled.label`
   margin: 5px;
   padding: 5px;
   cursor: pointer;
-
-  & :focus-within {
-    outline-width: 0;
-    border: 1px solid #aeb2f5;
-    border-radius: 8px;
-  }
 
   & > * {
     margin: 2.5px 0px;
