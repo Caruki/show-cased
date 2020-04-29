@@ -27,7 +27,7 @@ const Container = styled.div`
   right: 10px;
   left: 40px;
   min-height: 550px;
-  max-height: 600px;
+  max-height: 620px;
   @media (min-width: 700px) {
     top: 150px;
     min-height: 830px;
