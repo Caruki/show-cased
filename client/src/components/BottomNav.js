@@ -61,7 +61,6 @@ const BottomNav = ({ links, activeNavItem }) => {
 BottomNav.propTypes = {
   links: PropTypes.array,
   activeNavItem: PropTypes.string,
-  onNavItemClick: PropTypes.func,
 };
 
 export default BottomNav;
