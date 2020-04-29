@@ -5,7 +5,12 @@ import WatchlistIcon from '../assets/watchlist-icon.svg';
 import WatchlistIconClicked from '../assets/watchlist-icon-clicked.svg';
 import WatchedIcon from '../assets/watched-icon.svg';
 import WatchedIconClicked from '../assets/watched-icon-clicked.svg';
-import { addToWatchList, addToWatchedList } from '../api/lists';
+import {
+  addToWatchList,
+  addToWatchedList,
+  removeFromWatchedList,
+  removeFromToWatchList,
+} from '../api/lists';
 import useAuth from '../contexts/auth/useAuth';
 import { useQuery } from 'react-query';
 import { getUser } from '../api/users';
@@ -92,22 +97,23 @@ function WatchlistButtons({ showDetails }) {
   async function handleWatchlistClick(event) {
     const targetWatchlistAction = event.target.value;
 
-    await addToWatchList(authenticatedUser.userId, selectedShow);
-
     if (watchlistAction === targetWatchlistAction) {
+      await removeFromToWatchList(authenticatedUser.userId, selectedShow);
       setWatchlistAction(null);
     } else {
+      await addToWatchList(authenticatedUser.userId, selectedShow);
       setWatchlistAction(targetWatchlistAction);
     }
   }
 
   async function handleWatchedClick(event) {
     const targetWatchlistAction = event.target.value;
-    await addToWatchedList(authenticatedUser.userId, selectedShow);
 
     if (watchlistAction === targetWatchlistAction) {
+      await removeFromWatchedList(authenticatedUser.userId, selectedShow);
       setWatchlistAction(null);
     } else {
+      await addToWatchedList(authenticatedUser.userId, selectedShow);
       setWatchlistAction(targetWatchlistAction);
     }
   }
