@@ -1,6 +1,6 @@
 export async function addToWatchList(userId, show) {
-  const response = await fetch(`/api/users/${userId}/towatch/add`, {
-    method: 'PATCH',
+  const response = await fetch(`/api/users/${userId}/towatch`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -16,8 +16,8 @@ export async function addToWatchList(userId, show) {
 }
 
 export async function addToWatchedList(userId, show) {
-  const response = await fetch(`/api/users/${userId}/watched/add`, {
-    method: 'PATCH',
+  const response = await fetch(`/api/users/${userId}/watched`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
