@@ -42,7 +42,6 @@ const Label = styled.span`
 `;
 
 const BottomNav = ({ links, activeNavItem }) => {
-  console.log('active: ', activeNavItem);
   return (
     <Container>
       {links.map((link) => (

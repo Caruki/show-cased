@@ -12,7 +12,6 @@ const SVG = styled.svg`
 `;
 
 export const Lists = ({ active }) => {
-  console.log('lists: ', active);
   return (
     <SVG width="40" height="37" viewBox="0 0 40 42" active={active}>
       <defs>
@@ -56,8 +55,6 @@ export const Lists = ({ active }) => {
 };
 
 export const Popular = ({ active }) => {
-  console.log('popular: ', active);
-
   return (
     <SVG active={active} width="54.107" height="37" viewBox="0 0 54.107 37">
       <defs>
@@ -101,8 +98,6 @@ export const Popular = ({ active }) => {
 };
 
 export const Recs = ({ active }) => {
-  console.log('recs: ', active);
-
   return (
     <SVG active={active} width="52" height="37" viewBox="0 0 52 37">
       <defs>
