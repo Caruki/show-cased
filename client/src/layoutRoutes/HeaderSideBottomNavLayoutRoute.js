@@ -12,19 +12,19 @@ const MainContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  flex-grow: 1;
-  flex-basis: 80%;
-  overflow: auto;
+  flex-basis: 85%;
   margin-left: 5px;
-  width: 100%;
+  overflow: auto;
   height: 100%;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  flex: 1;
+  overflow: auto;
 `;
 
 const HeaderSideBottomNavLayoutRoute = ({

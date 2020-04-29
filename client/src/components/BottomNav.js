@@ -7,10 +7,11 @@ const Container = styled.nav`
   display: flex;
   justify-content: center;
   width: 100%;
-  flex: 1 0 10%;
+  flex: 0 0 10%;
   margin: 0;
   padding: 0;
-  background: transparent;
+  background-color: rgba(14, 5, 46, 0.6);
+  border-radius: 25px 25px 0px 0px;
 `;
 
 const NavItemContainer = styled.div`
