@@ -56,7 +56,12 @@ const WatchListCheckText = styled.div`
 function WatchlistButtons({ showDetails }) {
   const { userId } = useAuth();
   const [watchlistAction, setWatchlistAction] = useState(null);
-  const selectedShow = showDetails;
+  const selectedShow = {
+    id: showDetails.id,
+    title: showDetails.title,
+    genres: showDetails.genres,
+    actors: showDetails.actors,
+  };
 
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
   const addedToWatched = watchlistAction === 'addToWatched';
