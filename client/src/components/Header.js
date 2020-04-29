@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import Logo from './Logo';
 import useAuth from '../contexts/auth/useAuth';
-// import useUserInformation from '../contexts/user/useUserInformation';
+import useUserInformation from '../contexts/user/useUserInformation';
 
 const Container = styled.div`
   display: flex;
@@ -43,7 +43,7 @@ const LogOut = styled.button`
 function Header() {
   const [logoutConfirmation, setLogoutConfirmation] = useState();
   const { logout } = useAuth();
-  // const { user } = useUserInformation();
+  const { user } = useUserInformation();
   const history = useHistory();
 
   React.useEffect(() => {
@@ -63,7 +63,7 @@ function Header() {
   return (
     <Container>
       <Logo size="small" />
-      <Title>{`Welcome back, username !`}</Title>
+      <Title>{`Welcome back, ${user.username} !`}</Title>
       <LogOut onClick={handleLogout}>Log Out?</LogOut>
     </Container>
   );
