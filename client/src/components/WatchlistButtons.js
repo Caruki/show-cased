@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import WatchlistIcon from '../assets/watchlist-icon.svg';
 import WatchlistIconClicked from '../assets/watchlist-icon-clicked.svg';
 import WatchedIcon from '../assets/watched-icon.svg';
 import WatchedIconClicked from '../assets/watched-icon-clicked.svg';
+import { addToWatchList } from '../api/lists';
+import useAuth from '../contexts/auth/useAuth';
 
 const Container = styled.div`
   display: flex;
@@ -50,15 +53,17 @@ const WatchListCheckText = styled.div`
   background: transparent;
 `;
 
-function WatchlistButtons() {
+function WatchlistButtons({ showDetails }) {
+  const { userId } = useAuth();
   const [watchlistAction, setWatchlistAction] = useState(null);
+  const selectedShow = showDetails;
 
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
   const addedToWatched = watchlistAction === 'addToWatched';
 
-  function handleWatchlistClick(event) {
+  async function handleWatchlistClick(event) {
     const targetWatchlistAction = event.target.value;
-    console.log('this will do a fetch and move show to towatchlist');
+    await addToWatchList(userId, selectedShow);
 
     if (watchlistAction === targetWatchlistAction) {
       setWatchlistAction(null);
@@ -132,5 +137,9 @@ function WatchlistButtons() {
     </Container>
   );
 }
+
+WatchlistButtons.propTypes = {
+  showDetails: PropTypes.object,
+};
 
 export default WatchlistButtons;
