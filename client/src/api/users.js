@@ -42,7 +42,7 @@ export async function logoutUser() {
   return confirmation;
 }
 
-export async function getUser(userId) {
+export async function getUser(key, userId) {
   const response = await fetch(`/api/users/${userId}`, {
     method: 'GET',
   });
