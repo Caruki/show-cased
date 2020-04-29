@@ -7,7 +7,8 @@ import WatchedIcon from '../assets/watched-icon.svg';
 import WatchedIconClicked from '../assets/watched-icon-clicked.svg';
 import { addToWatchList, addToWatchedList } from '../api/lists';
 import useAuth from '../contexts/auth/useAuth';
-import { useMutation } from 'react-query/types';
+import { useQuery } from 'react-query';
+import { getUser } from '../api/users';
 
 const Container = styled.div`
   display: flex;
@@ -46,7 +47,7 @@ const WatchListCheck = styled.input`
 
 const WatchListCheckText = styled.div`
   display: block;
-  font-style: ${(props) => (props.checked ? 'italic' : 'normal')};
+  font-style: ${(props) => (props.active ? 'italic' : 'normal')};
   font-size: 0.7rem;
   font-weight: 200;
   font-family: 'Roboto', sans-serif;
@@ -56,7 +57,6 @@ const WatchListCheckText = styled.div`
 
 function WatchlistButtons({ showDetails }) {
   const { authenticatedUser } = useAuth();
-  const [watchlistAction, setWatchlistAction] = useState(null);
   const selectedShow = {
     id: showDetails.id,
     title: showDetails.title,
@@ -65,16 +65,34 @@ function WatchlistButtons({ showDetails }) {
       return actor.name;
     }),
   };
-  const [addWatchedList] = useMutation(addToWatchedList);
-  const [addWatchList] = useMutation(addToWatchList);
+  const { data: user } = useQuery(['user', authenticatedUser.userId], getUser, {
+    staleTime: 3600000,
+  });
+  const [watchlistAction, setWatchlistAction] = useState(
+    user?.towatch.some((show) => show.id === selectedShow.id)
+      ? 'addToWatchlist'
+      : user?.watched.some((show) => show.id === selectedShow.id)
+      ? 'addToWatched'
+      : null
+  );
 
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
   const addedToWatched = watchlistAction === 'addToWatched';
 
-  async function handleWatchlistClick(event) {
-    await addWatchList(authenticatedUser.userId, selectedShow);
+  React.useEffect(() => {
+    if (user) {
+      if (user?.towatch.some((show) => show.id === selectedShow.id)) {
+        setWatchlistAction('addToWatchlist');
+      } else if (user?.watched.some((show) => show.id === selectedShow.id)) {
+        setWatchlistAction('addToWatched');
+      }
+    }
+  }, [user]);
 
+  async function handleWatchlistClick(event) {
     const targetWatchlistAction = event.target.value;
+
+    await addToWatchList(authenticatedUser.userId, selectedShow);
 
     if (watchlistAction === targetWatchlistAction) {
       setWatchlistAction(null);
@@ -84,9 +102,8 @@ function WatchlistButtons({ showDetails }) {
   }
 
   async function handleWatchedClick(event) {
-    await addWatchedList(authenticatedUser.userId, selectedShow);
-
     const targetWatchlistAction = event.target.value;
+    await addToWatchedList(authenticatedUser.userId, selectedShow);
 
     if (watchlistAction === targetWatchlistAction) {
       setWatchlistAction(null);
@@ -101,7 +118,7 @@ function WatchlistButtons({ showDetails }) {
         <WatchListCheck
           type="radio"
           value="addToWatchlist"
-          checked={addedToWatchlist}
+          defaultChecked={addedToWatchlist}
           onClick={handleWatchlistClick}
         />
         {addedToWatchlist ? (
@@ -127,7 +144,7 @@ function WatchlistButtons({ showDetails }) {
         <WatchListCheck
           type="radio"
           value="addToWatched"
-          checked={addedToWatched}
+          defaultChecked={addedToWatched}
           onClick={handleWatchedClick}
         />
         {addedToWatched ? (
@@ -141,7 +158,7 @@ function WatchlistButtons({ showDetails }) {
             alt="check mark icon to symbolize already watched list"
           />
         )}
-        <WatchListCheckText checked={addedToWatched}>
+        <WatchListCheckText active={addedToWatched}>
           Already watched
         </WatchListCheckText>
       </WatchListCheckLabel>
