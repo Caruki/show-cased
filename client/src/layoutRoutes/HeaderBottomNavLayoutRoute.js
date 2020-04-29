@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 import BasicLayoutRoute from './BasicLayoutRoute';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
+import { Lists, Popular, Recs } from '../assets/BottomIcons';
+import { useLocation } from 'react-router-dom';
 
 const MainContainer = styled.div`
   display: flex;
@@ -16,6 +18,8 @@ const MainContainer = styled.div`
 `;
 
 const HeaderBottomNavLayoutRoute = ({ component: Component, ...rest }) => {
+  const location = useLocation();
+
   return (
     <BasicLayoutRoute
       {...rest}
@@ -25,7 +29,22 @@ const HeaderBottomNavLayoutRoute = ({ component: Component, ...rest }) => {
           <MainContainer>
             <Component {...matchProps} />
           </MainContainer>
-          <BottomNav />
+          <BottomNav
+            links={[
+              {
+                label: 'Popular',
+                icon: Popular,
+                navLink: '/popular',
+              },
+              {
+                label: 'Recs',
+                icon: Recs,
+                navLink: '/recs',
+              },
+              { label: 'Lists', icon: Lists, navLink: '/lists' },
+            ]}
+            activeNavItem={location.pathname}
+          />
         </>
       )}
     />
