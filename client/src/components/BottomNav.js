@@ -13,26 +13,26 @@ const Container = styled.nav`
   background: transparent;
 `;
 
-const NavItemContainer = styled(NavLink)`
+const NavItemContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   flex: 1 0;
-  border-radius: 25px 25px 0px 0px;
   background-color: rgba(14, 5, 46, 0.6);
-  cursor: pointer;
-  text-decoration: none;
+  border-radius: 25px 25px 0px 0px;
 `;
 
-const NavItem = styled.div`
+const NavItem = styled(NavLink)`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   padding: 15px 0px 15px 0px;
   background: transparent;
   border: none;
+  cursor: pointer;
+  text-decoration: none;
 `;
 
 const Label = styled.span`
@@ -44,14 +44,18 @@ const Label = styled.span`
 const BottomNav = ({ links, activeNavItem }) => {
   return (
     <Container>
-      {links.map((link) => (
-        <NavItemContainer key={link.label} to={link.navLink}>
-          <NavItem active={activeNavItem === link.navLink}>
+      <NavItemContainer>
+        {links.map((link) => (
+          <NavItem
+            active={activeNavItem === link.navLink}
+            key={link.label}
+            to={link.navLink}
+          >
             <link.icon active={activeNavItem === link.navLink} />
             <Label active={activeNavItem === link.navLink}>{link.label}</Label>
           </NavItem>
-        </NavItemContainer>
-      ))}
+        ))}
+      </NavItemContainer>
     </Container>
   );
 };
