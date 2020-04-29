@@ -8,7 +8,6 @@ const Container = styled.nav`
   justify-content: center;
   width: 100%;
   flex: 1 0 10%;
-  list-style: none;
   margin: 0;
   padding: 0;
   background: transparent;
