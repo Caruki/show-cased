@@ -11,7 +11,10 @@ const Container = styled.nav`
   margin: 0;
   padding: 0;
   background-color: rgba(14, 5, 46, 0.6);
-  border-radius: 25px 25px 0px 0px;
+  border: 1px solid transparent;
+  border-radius: 50px 50px 0px 0px;
+  position: fixed;
+  bottom: 0;
 `;
 
 const NavItemContainer = styled.div`
@@ -21,8 +24,7 @@ const NavItemContainer = styled.div`
   justify-content: space-around;
   width: 100%;
   flex: 1 0;
-  background-color: rgba(14, 5, 46, 0.6);
-  border-radius: 25px 25px 0px 0px;
+  background: transparent;
 `;
 
 const NavItem = styled(NavLink)`
