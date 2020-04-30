@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import WatchlistIcon from '../assets/watchlist-icon.svg';
@@ -12,7 +12,7 @@ import {
   removeFromToWatchList,
 } from '../api/lists';
 import useAuth from '../contexts/auth/useAuth';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import { getUser } from '../api/users';
 
 const Container = styled.div`
@@ -62,6 +62,7 @@ const WatchListCheckText = styled.div`
 
 function WatchlistButtons({ showDetails }) {
   const { authenticatedUser } = useAuth();
+  const userId = authenticatedUser.userId;
   const selectedShow = {
     id: showDetails.id,
     title: showDetails.title,
@@ -70,9 +71,15 @@ function WatchlistButtons({ showDetails }) {
       return actor.name;
     }),
   };
-  const { data: user } = useQuery(['user', authenticatedUser.userId], getUser, {
-    staleTime: 3600000,
+
+  const { data: user } = useQuery(['user', userId], getUser, {
+    staleTime: 1200000,
   });
+  const [addToWatch] = useMutation(addToWatchList);
+  const [addToWatched] = useMutation(addToWatchedList);
+  const [removeFromWatched] = useMutation(removeFromWatchedList);
+  const [removeFromToWatch] = useMutation(removeFromToWatchList);
+
   const [watchlistAction, setWatchlistAction] = useState(
     user?.towatch.some((show) => show.id === selectedShow.id)
       ? 'addToWatchlist'
@@ -84,7 +91,7 @@ function WatchlistButtons({ showDetails }) {
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
   const addedToWatched = watchlistAction === 'addToWatched';
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       if (user.towatch.some((show) => show.id === selectedShow.id)) {
         setWatchlistAction('addToWatchlist');
@@ -98,10 +105,11 @@ function WatchlistButtons({ showDetails }) {
     const targetWatchlistAction = event.target.value;
 
     if (watchlistAction === targetWatchlistAction) {
-      await removeFromToWatchList(authenticatedUser.userId, selectedShow);
+      await removeFromToWatch({ userId, selectedShow });
       setWatchlistAction(null);
     } else {
-      await addToWatchList(authenticatedUser.userId, selectedShow);
+      console.log({ userId, selectedShow });
+      await addToWatch({ userId, selectedShow });
       setWatchlistAction(targetWatchlistAction);
     }
   }
@@ -110,10 +118,12 @@ function WatchlistButtons({ showDetails }) {
     const targetWatchlistAction = event.target.value;
 
     if (watchlistAction === targetWatchlistAction) {
-      await removeFromWatchedList(authenticatedUser.userId, selectedShow);
+      await removeFromWatched({ userId, selectedShow });
       setWatchlistAction(null);
     } else {
-      await addToWatchedList(authenticatedUser.userId, selectedShow);
+      console.log({ userId, selectedShow });
+
+      await addToWatched({ userId, selectedShow });
       setWatchlistAction(targetWatchlistAction);
     }
   }

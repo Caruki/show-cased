@@ -1,10 +1,10 @@
-export async function addToWatchList(userId, show) {
+export async function addToWatchList({ userId, selectedShow }) {
   const response = await fetch(`/api/users/${userId}/towatch`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(show),
+    body: JSON.stringify(selectedShow),
   });
 
   if (!response.ok) {
@@ -15,13 +15,13 @@ export async function addToWatchList(userId, show) {
   return confirmation;
 }
 
-export async function removeFromToWatchList(userId, show) {
+export async function removeFromToWatchList({ userId, selectedShow }) {
   const response = await fetch(`/api/users/${userId}/towatch`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(show),
+    body: JSON.stringify(selectedShow),
   });
 
   if (!response.ok) {
@@ -32,13 +32,13 @@ export async function removeFromToWatchList(userId, show) {
   return confirmation;
 }
 
-export async function addToWatchedList(userId, show) {
+export async function addToWatchedList({ userId, selectedShow }) {
   const response = await fetch(`/api/users/${userId}/watched`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(show),
+    body: JSON.stringify(selectedShow),
   });
 
   if (!response.ok) {
@@ -49,13 +49,13 @@ export async function addToWatchedList(userId, show) {
   return confirmation;
 }
 
-export async function removeFromWatchedList(userId, show) {
+export async function removeFromWatchedList({ userId, selectedShow }) {
   const response = await fetch(`/api/users/${userId}/watched`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(show),
+    body: JSON.stringify(selectedShow),
   });
 
   if (!response.ok) {
