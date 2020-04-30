@@ -54,7 +54,7 @@ function ShowDetailViewModal({ showDetails, toggleModal, isShowing }) {
             <OverviewTextarea showOverview={showDetails.overview} />
             <GenreList genres={showDetails.genres} />
             <ActorList actors={showDetails.actors} />
-            <WatchlistButtons />
+            <WatchlistButtons showDetails={showDetails} />
           </Container>
         </Background>
       ) : null}

@@ -1,5 +1,5 @@
 export async function registerUser(userInformation) {
-  const response = await fetch('/api/users/register', {
+  const response = await fetch('/api/auth/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ export async function registerUser(userInformation) {
 }
 
 export async function loginUser(userInformation) {
-  const response = await fetch('/api/users/login', {
+  const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export async function loginUser(userInformation) {
 }
 
 export async function logoutUser() {
-  const response = await fetch('/api/users/logout', {
+  const response = await fetch('/api/auth/logout', {
     method: 'GET',
   });
   if (!response.ok) {
@@ -42,7 +42,7 @@ export async function logoutUser() {
   return confirmation;
 }
 
-export async function getUser(userId) {
+export async function getUser(key, userId) {
   const response = await fetch(`/api/users/${userId}`, {
     method: 'GET',
   });
