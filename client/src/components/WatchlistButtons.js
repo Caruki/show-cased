@@ -12,7 +12,7 @@ import {
   removeFromToWatchList,
 } from '../api/lists';
 import useAuth from '../contexts/auth/useAuth';
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation, queryCache } from 'react-query';
 import { getUser } from '../api/users';
 
 const Container = styled.div`
@@ -72,13 +72,19 @@ function WatchlistButtons({ showDetails }) {
     }),
   };
 
-  const { data: user } = useQuery(['user', userId], getUser, {
-    staleTime: 1200000,
-  });
+  const { data: user } = useQuery(['user', userId], getUser);
   const [addToWatch] = useMutation(addToWatchList);
   const [addToWatched] = useMutation(addToWatchedList);
-  const [removeFromWatched] = useMutation(removeFromWatchedList);
-  const [removeFromToWatch] = useMutation(removeFromToWatchList);
+  const [removeFromWatched] = useMutation(removeFromWatchedList, {
+    onSuccess: () => {
+      queryCache.refetchQueries('user');
+    },
+  });
+  const [removeFromToWatch] = useMutation(removeFromToWatchList, {
+    onSuccess: () => {
+      queryCache.refetchQueries('user');
+    },
+  });
 
   const [watchlistAction, setWatchlistAction] = useState(
     user?.towatch.some((show) => show.id === selectedShow.id)
@@ -108,7 +114,6 @@ function WatchlistButtons({ showDetails }) {
       await removeFromToWatch({ userId, selectedShow });
       setWatchlistAction(null);
     } else {
-      console.log({ userId, selectedShow });
       await addToWatch({ userId, selectedShow });
       setWatchlistAction(targetWatchlistAction);
     }
@@ -121,8 +126,6 @@ function WatchlistButtons({ showDetails }) {
       await removeFromWatched({ userId, selectedShow });
       setWatchlistAction(null);
     } else {
-      console.log({ userId, selectedShow });
-
       await addToWatched({ userId, selectedShow });
       setWatchlistAction(targetWatchlistAction);
     }
