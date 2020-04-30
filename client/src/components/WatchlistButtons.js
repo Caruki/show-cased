@@ -75,16 +75,32 @@ function WatchlistButtons({ showDetails }) {
   const { data: user } = useQuery(['user', userId], getUser, {
     staleTime: 3600000,
   });
-  const [addToWatch] = useMutation(addToWatchList);
-  const [addToWatched] = useMutation(addToWatchedList);
+  const [addToWatch] = useMutation(addToWatchList, {
+    onSuccess: () => {
+      queryCache.refetchQueries('user', {
+        force: true,
+      });
+    },
+  });
+  const [addToWatched] = useMutation(addToWatchedList, {
+    onSuccess: () => {
+      queryCache.refetchQueries('user', {
+        force: true,
+      });
+    },
+  });
   const [removeFromWatched] = useMutation(removeFromWatchedList, {
     onSuccess: () => {
-      queryCache.refetchQueries('user');
+      queryCache.refetchQueries('user', {
+        force: true,
+      });
     },
   });
   const [removeFromToWatch] = useMutation(removeFromToWatchList, {
     onSuccess: () => {
-      queryCache.refetchQueries('user');
+      queryCache.refetchQueries('user', {
+        force: true,
+      });
     },
   });
 
