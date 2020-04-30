@@ -14,6 +14,7 @@ const MainContainer = styled.div`
   flex: 1;
   overflow: auto;
   width: 100%;
+  padding-bottom: 80px;
 `;
 
 const HeaderBottomNavLayoutRoute = ({ component: Component, ...rest }) => {

@@ -16,6 +16,7 @@ const MainContainer = styled.div`
   margin-left: 5px;
   overflow: auto;
   height: 100%;
+  padding-bottom: 80px;
 `;
 
 const Container = styled.div`
