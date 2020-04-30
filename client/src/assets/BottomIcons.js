@@ -13,7 +13,7 @@ const SVG = styled.svg`
 
 export const Lists = ({ active }) => {
   return (
-    <SVG width="40" height="37" viewBox="0 0 40 42" active={active}>
+    <SVG height="33" viewBox="0 0 40 42" active={active}>
       <defs>
         <linearGradient
           id="linear-gradientlists"
@@ -56,7 +56,7 @@ export const Lists = ({ active }) => {
 
 export const Popular = ({ active }) => {
   return (
-    <SVG active={active} width="54.107" height="37" viewBox="0 0 54.107 37">
+    <SVG active={active} height="33" viewBox="0 0 54.107 37">
       <defs>
         <linearGradient
           id="linear-gradientpopular"
@@ -99,7 +99,7 @@ export const Popular = ({ active }) => {
 
 export const Recs = ({ active }) => {
   return (
-    <SVG active={active} width="52" height="37" viewBox="0 0 52 37">
+    <SVG active={active} height="33" viewBox="0 0 52 37">
       <defs>
         <linearGradient
           id="linear-gradientrecs"

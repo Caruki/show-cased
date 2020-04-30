@@ -31,7 +31,7 @@ const NavItem = styled(NavLink)`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  padding: 15px 0px 15px 0px;
+  padding: 10px 0px 5px 10px;
   background: transparent;
   border: none;
   cursor: pointer;
