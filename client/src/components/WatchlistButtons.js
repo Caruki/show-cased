@@ -72,7 +72,9 @@ function WatchlistButtons({ showDetails }) {
     }),
   };
 
-  const { data: user } = useQuery(['user', userId], getUser);
+  const { data: user } = useQuery(['user', userId], getUser, {
+    staleTime: 3600000,
+  });
   const [addToWatch] = useMutation(addToWatchList);
   const [addToWatched] = useMutation(addToWatchedList);
   const [removeFromWatched] = useMutation(removeFromWatchedList, {
