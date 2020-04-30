@@ -8,10 +8,10 @@ import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 
 const ListContainer = styled.div`
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 10px;
-  row-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 2fr));
+  grid-gap: 1rem;
 `;
 
 function PopularShows({ tab }) {
