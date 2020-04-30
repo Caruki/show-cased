@@ -4,12 +4,12 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 const AppContainer = styled.div`
-  background-color: rgba(14, 5, 46, 1);
   height: 100vh;
   width: 100vw;
 `;
 
 const LayoutContainer = styled.div`
+  background-color: rgba(14, 5, 46, 1);
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
