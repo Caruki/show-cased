@@ -10,6 +10,7 @@ const TabsContainer = styled.div`
   justify-content: center;
   max-width: 30px;
   flex-basis: 20%;
+  margin-right: 10px;
 `;
 
 function TabSideNavigation({ children }) {

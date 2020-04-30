@@ -7,32 +7,35 @@ const Container = styled.nav`
   display: flex;
   justify-content: center;
   width: 100%;
-  flex: 1 0 10%;
+  flex: 0 0 10%;
   margin: 0;
   padding: 0;
-  background: transparent;
+  background-color: rgba(14, 5, 46, 0.6);
+  border: 1px solid transparent;
+  border-radius: 50px 50px 0px 0px;
+  position: fixed;
+  bottom: 0;
 `;
 
-const NavItemContainer = styled(NavLink)`
+const NavItemContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   flex: 1 0;
-  border-radius: 25px 25px 0px 0px;
-  background-color: rgba(14, 5, 46, 0.6);
-  cursor: pointer;
-  text-decoration: none;
+  background: transparent;
 `;
 
-const NavItem = styled.div`
+const NavItem = styled(NavLink)`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  padding: 15px 0px 15px 0px;
+  padding: 10px 0px 5px 10px;
   background: transparent;
   border: none;
+  cursor: pointer;
+  text-decoration: none;
 `;
 
 const Label = styled.span`
@@ -42,17 +45,20 @@ const Label = styled.span`
 `;
 
 const BottomNav = ({ links, activeNavItem }) => {
-  console.log('active: ', activeNavItem);
   return (
     <Container>
-      {links.map((link) => (
-        <NavItemContainer key={link.label} to={link.navLink}>
-          <NavItem active={activeNavItem === link.navLink}>
+      <NavItemContainer>
+        {links.map((link) => (
+          <NavItem
+            active={activeNavItem === link.navLink}
+            key={link.label}
+            to={link.navLink}
+          >
             <link.icon active={activeNavItem === link.navLink} />
             <Label active={activeNavItem === link.navLink}>{link.label}</Label>
           </NavItem>
-        </NavItemContainer>
-      ))}
+        ))}
+      </NavItemContainer>
     </Container>
   );
 };

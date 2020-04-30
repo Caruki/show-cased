@@ -8,6 +8,9 @@ const ItemContainer = styled.div`
   align-items: center;
   background: transparent;
   cursor: pointer;
+  & > * {
+    margin: 2px 0px;
+  }
 `;
 
 const PosterContainer = styled.div`

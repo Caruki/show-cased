@@ -19,7 +19,7 @@ const Container = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
-  margin: 10px 10px;
+  margin: 0px 10px;
 
   & :focus-within {
     outline-width: 0;

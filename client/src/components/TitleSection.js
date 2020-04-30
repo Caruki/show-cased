@@ -24,7 +24,7 @@ const Rating = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-  font: 500 0.7rem 'Roboto', sans-serif;
+  font: 400 0.6rem 'Roboto', sans-serif;
   color: #e7eaff;
   flex: 0 0 75px;
 
@@ -74,7 +74,7 @@ function TitleSection({ showRating, showTitle, showTrailer }) {
     <TitleContainer>
       <Rating>
         <img src={RatingIcon} alt="star icon to represent rating" />
-        {`${showRating} %`}
+        {`${showRating} / 10`}
       </Rating>
       <ShowTitle>{showTitle}</ShowTitle>
       <TrailerButton onClick={() => handleOnClick(showTrailer)}>

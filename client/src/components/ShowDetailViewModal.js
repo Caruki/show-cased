@@ -23,11 +23,11 @@ const Background = styled.div`
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  top: 70px;
+  top: 30px;
   right: 10px;
   left: 40px;
   min-height: 550px;
-  max-height: 660px;
+  max-height: 620px;
   @media (min-width: 700px) {
     top: 150px;
     min-height: 830px;
