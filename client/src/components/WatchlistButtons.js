@@ -64,6 +64,7 @@ function WatchlistButtons({ showDetails }) {
   const { authenticatedUser } = useAuth();
   const selectedShow = {
     id: showDetails.id,
+    poster: showDetails.poster_portrait,
     title: showDetails.title,
     genres: showDetails.genres,
     actors: showDetails.actors.map((actor) => {

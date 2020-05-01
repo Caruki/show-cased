@@ -45,7 +45,7 @@ function ShowDetailViewModal({ showDetails, toggleModal, isShowing }) {
         <Background>
           <Container>
             <CloseButton onClick={toggleModal} />
-            <Poster showPoster={showDetails.poster} />
+            <Poster showPoster={showDetails.poster_landscape} />
             <TitleSection
               showRating={showDetails.rating}
               showTitle={showDetails.title}
