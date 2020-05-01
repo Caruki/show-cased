@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import WatchlistIcon from '../assets/watchlist-icon.svg';
-import WatchlistIconClicked from '../assets/watchlist-icon-clicked.svg';
-import WatchedIcon from '../assets/watched-icon.svg';
-import WatchedIconClicked from '../assets/watched-icon-clicked.svg';
+import { WatchedButton, ToWatchButton } from '../assets/WatchListIcons';
 import {
   addToWatchList,
   addToWatchedList,
@@ -60,7 +57,7 @@ const WatchListCheckText = styled.div`
   background: transparent;
 `;
 
-function WatchlistButtons({ showDetails }) {
+function WatchlistButtonsDetailView({ showDetails }) {
   const { authenticatedUser } = useAuth();
   const selectedShow = {
     id: showDetails.id,
@@ -93,7 +90,7 @@ function WatchlistButtons({ showDetails }) {
         setWatchlistAction('addToWatched');
       }
     }
-  }, [user]);
+  }, [user, selectedShow.id]);
 
   async function handleWatchlistClick(event) {
     const targetWatchlistAction = event.target.value;
@@ -128,14 +125,7 @@ function WatchlistButtons({ showDetails }) {
           defaultChecked={addedToWatchlist}
           onClick={handleWatchlistClick}
         />
-        {addedToWatchlist ? (
-          <img
-            src={WatchlistIconClicked}
-            alt="star icon to symbolize watchlist"
-          />
-        ) : (
-          <img src={WatchlistIcon} alt="star icon to symbolize watchlist" />
-        )}
+        <ToWatchButton active={addedToWatchlist} size="big" />
         {addedToWatchlist ? (
           <WatchListCheckText active={addedToWatchlist}>
             Added to watchlist
@@ -154,17 +144,8 @@ function WatchlistButtons({ showDetails }) {
           defaultChecked={addedToWatched}
           onClick={handleWatchedClick}
         />
-        {addedToWatched ? (
-          <img
-            src={WatchedIconClicked}
-            alt="check mark icon to symbolize already watched list"
-          />
-        ) : (
-          <img
-            src={WatchedIcon}
-            alt="check mark icon to symbolize already watched list"
-          />
-        )}
+
+        <WatchedButton active={addedToWatched} size="big" />
         <WatchListCheckText active={addedToWatched}>
           Already watched
         </WatchListCheckText>
@@ -173,8 +154,8 @@ function WatchlistButtons({ showDetails }) {
   );
 }
 
-WatchlistButtons.propTypes = {
+WatchlistButtonsDetailView.propTypes = {
   showDetails: PropTypes.object,
 };
 
-export default WatchlistButtons;
+export default WatchlistButtonsDetailView;
