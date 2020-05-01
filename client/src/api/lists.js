@@ -66,7 +66,7 @@ export async function removeFromWatchedList(userId, show) {
   return confirmation;
 }
 
-export async function getToWatchList(userId) {
+export async function getToWatchList(key, userId) {
   const response = await fetch(`/api/users/${userId}/towatch`, {
     method: 'GET',
   });
@@ -79,7 +79,7 @@ export async function getToWatchList(userId) {
   return towatchList;
 }
 
-export async function getWatchedList(userId) {
+export async function getWatchedList(key, userId) {
   const response = await fetch(`/api/users/${userId}/watched`, {
     method: 'GET',
   });
