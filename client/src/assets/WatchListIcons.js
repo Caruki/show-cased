@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const SVG = styled.svg`
   height: ${(props) => (props.size === 'big' ? '39px' : '25px')};
   .offset0 {
-    stop-color: ${(props) => (props.active ? '#e7eaff' : '#e7eaff')};
+    stop-color: '#e7eaff';
   }
   .offset1 {
     stop-color: ${(props) => (props.active ? '#d05888' : '#aeb2f5')};
