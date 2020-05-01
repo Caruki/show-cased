@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const SVG = styled.svg`
   height: ${(props) => (props.size === 'big' ? '39px' : '25px')};
   .offset0 {
-    stop-color: '#e7eaff';
+    stop-color: ${(props) => (props.active ? '#e7eaff' : '#e7eaff')};
   }
   .offset1 {
     stop-color: ${(props) => (props.active ? '#d05888' : '#aeb2f5')};
@@ -24,7 +24,7 @@ export const WatchedButton = ({ active, size, id }) => {
           y2="0.849"
           gradientUnits="objectBoundingBox"
         >
-          <stop className="offset0" offset="0" />
+          <stop offset="0" stopColor="#e7eaff" />
           <stop className="offset1" offset="1" />
         </linearGradient>
         <filter
@@ -67,7 +67,7 @@ export const ToWatchButton = ({ active, size, id }) => {
           y2="0.888"
           gradientUnits="objectBoundingBox"
         >
-          <stop className="offset0" offset="0" />
+          <stop offset="0" stopColor="#e7eaff" />
           <stop className="offset1" offset="1" />
         </linearGradient>
         <filter
