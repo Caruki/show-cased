@@ -62,6 +62,7 @@ function WatchLists({ tab }) {
               title={show.title}
               key={show.id}
               id={show.id}
+              show={show}
               onClick={() => {
                 handleItemClick(show.id);
               }}
@@ -77,6 +78,7 @@ function WatchLists({ tab }) {
               title={show.title}
               key={show.id}
               id={show.id}
+              show={show}
               onClick={() => {
                 handleItemClick(show.id);
               }}

@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import WatchlistButtonsListView from './WatchlistButtonsListView';
+
+const Container = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  background: transparent;
+`;
 
 const ItemContainer = styled.div`
   display: flex;
@@ -17,7 +25,7 @@ const PosterContainer = styled.div`
   border: hidden;
   border-radius: 30px;
   overflow: hidden;
-  max-width: 95px;
+  max-width: 85px;
 
   & > img {
     height: 100%;
@@ -35,22 +43,26 @@ const Title = styled.div`
   text-align: center;
 `;
 
-function ListItem({ poster, title, id, onClick }) {
+function WatchListItem({ poster, title, id, onClick, show }) {
   return (
-    <ItemContainer id={id} onClick={onClick}>
-      <PosterContainer>
-        <img src={poster} alt={title} />
-      </PosterContainer>
-      <Title>{title}</Title>
-    </ItemContainer>
+    <Container>
+      <ItemContainer id={id} onClick={onClick}>
+        <PosterContainer>
+          <img src={poster} alt={title} />
+        </PosterContainer>
+        <Title>{title}</Title>
+      </ItemContainer>
+      <WatchlistButtonsListView id={id} size="small" listShow={show} />
+    </Container>
   );
 }
 
-ListItem.propTypes = {
+WatchListItem.propTypes = {
   poster: PropTypes.string,
   title: PropTypes.string,
   id: PropTypes.number,
   onClick: PropTypes.func,
+  show: PropTypes.object,
 };
 
-export default ListItem;
+export default WatchListItem;
