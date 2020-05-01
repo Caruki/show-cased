@@ -44,6 +44,7 @@ const Title = styled.div`
 `;
 
 function WatchListItem({ poster, title, id, onClick, show }) {
+  console.log(show);
   return (
     <Container>
       <ItemContainer id={id} onClick={onClick}>
