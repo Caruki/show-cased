@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from 'react-query';
-import ListItem from './ListItem';
+import WatchListItem from './WatchListItem';
 import { getToWatchList, getWatchedList } from '../api/lists';
 import { getShowDetails } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
@@ -54,13 +54,12 @@ function WatchLists({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
-      {tab === 'toWatch' && (
+      {tab === 'towatch' && (
         <ListContainer>
-          {toWatchList.map((show) => (
-            <ListItem
+          {toWatchList?.map((show) => (
+            <WatchListItem
               poster={show.poster}
               title={show.title}
-              rating={show.rating}
               key={show.id}
               id={show.id}
               onClick={() => {
@@ -72,11 +71,10 @@ function WatchLists({ tab }) {
       )}
       {tab === 'watched' && (
         <ListContainer>
-          {watchedList.map((show) => (
-            <ListItem
+          {watchedList?.map((show) => (
+            <WatchListItem
               poster={show.poster}
               title={show.title}
-              rating={show.rating}
               key={show.id}
               id={show.id}
               onClick={() => {
