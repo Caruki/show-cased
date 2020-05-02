@@ -75,7 +75,6 @@ function PopularShows({ userId }) {
 }
 
 PopularShows.propTypes = {
-  tab: PropTypes.string,
   userId: PropTypes.number,
 };
 
