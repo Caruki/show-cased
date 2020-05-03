@@ -7,7 +7,7 @@ import TitleSection from './TitleSection';
 import OverviewTextarea from './OverviewTextarea';
 import GenreList from './GenreList';
 import ActorList from './ActorList';
-import WatchlistButtons from './WatchlistButtons';
+import WatchlistButtonsDetailView from './WatchlistButtonsDetailView';
 
 const Background = styled.div`
   position: absolute;
@@ -45,7 +45,7 @@ function ShowDetailViewModal({ showDetails, toggleModal, isShowing }) {
         <Background>
           <Container>
             <CloseButton onClick={toggleModal} />
-            <Poster showPoster={showDetails.poster} />
+            <Poster showPoster={showDetails.poster_landscape} />
             <TitleSection
               showRating={showDetails.rating}
               showTitle={showDetails.title}
@@ -54,7 +54,7 @@ function ShowDetailViewModal({ showDetails, toggleModal, isShowing }) {
             <OverviewTextarea showOverview={showDetails.overview} />
             <GenreList genres={showDetails.genres} />
             <ActorList actors={showDetails.actors} />
-            <WatchlistButtons showDetails={showDetails} />
+            <WatchlistButtonsDetailView showDetails={showDetails} />
           </Container>
         </Background>
       ) : null}
