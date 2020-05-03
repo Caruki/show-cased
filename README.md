@@ -53,8 +53,6 @@ Also for the user authentication a jwt secret is needed.
 
 _Please update these two variables in the `.env`!_
 
-You can also change the PORT
-
 To start the server and client in development mode at the same time:
 
 ```
