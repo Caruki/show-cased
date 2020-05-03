@@ -1,68 +1,79 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ShowCased
 
-## Available Scripts
+ShowCased 🎬 is your app to discover new shows and track what you've already seen. It gives personal recommendations based on your watch lists 👀 - the more you use it the better it becomes 💪
 
-In the project directory, you can run:
+## Motivation
 
-### `npm start`
+This app was created as the capstone project for my bootcamp around web development. The idea was to have an on-the-go app that will show recommendations independent of any particular streaming provider but still based on a viewing profile.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Overview
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<p align="center">
+<img src="./.github/preview_lists.png" alt="Overview" height="450" align="left" /> <img src="./.github/preview_detailview.png" alt="Overview" height="450" />
+</p>
 
-### `npm test`
+## Techs
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- MERN Stack
+- [storybook](https://github.com/storybookjs/storybook)
+- [emotion](https://github.com/emotion-js/emotion)
+- [mongoose](https://github.com/Automattic/mongoose)
+- [react-query](https://github.com/tannerlinsley/react-query)
+- [node-fetch](https://github.com/node-fetch/node-fetch)
+- [jwt](https://github.com/auth0/node-jsonwebtoken)
+- [joi](https://github.com/hapijs/joi)
+- [bcrypt](https://github.com/dcodeIO/bcrypt.js)
 
-### `npm run build`
+## Features
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Dynamic updates on new and trending shows
+- Recommendations based on your watch lists
+- Extensive API (_The Movie Database_)
+- User authentication
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Development / Deployment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install client and server dependencies:
 
-### `npm run eject`
+```
+npm install
+cd client
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Add environment variables in .env file. You can copy the .env.example and update the variables.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+cp .env.example .env
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+For this app to run you need to have a key for _The Movie Database API_. You need to make an account [here](https://www.themoviedb.org/account/signup?language=en-US) and then you find your key under settings -> API.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Also for the user authentication a jwt secret is needed.
 
-## Learn More
+_Please update these two variables in the `.env`!_
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To start the server and client in development mode at the same time:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+npm run dev
+```
 
-### Code Splitting
+To also run the storybook alongside server and client:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```
+npm run dev-story
+```
 
-### Analyzing the Bundle Size
+If you like to run the production build, you have to build the client first.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```
+npm run build
+npm start
+```
 
-### Making a Progressive Web App
+## Credits
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+The logo was created after a vector by <a href="https://www.freepik.com/studiogstock">studiogstock</a>.
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> and <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">iconixar</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
