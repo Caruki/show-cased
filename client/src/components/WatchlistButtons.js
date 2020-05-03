@@ -65,8 +65,8 @@ function WatchlistButtons({ showDetails }) {
   const selectedShow = {
     id: showDetails.id,
     title: showDetails.title,
-    genres_id: showDetails.genres_id,
-    genres_name: showDetails.genres_name,
+    genreIds: showDetails.genreIds,
+    genreNames: showDetails.genreNames,
     networks: showDetails.networks,
     actors: showDetails.actors.map((actor) => {
       return actor.name;
