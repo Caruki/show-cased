@@ -7,7 +7,7 @@ import TitleSection from './TitleSection';
 import OverviewTextarea from './OverviewTextarea';
 import GenreList from './GenreList';
 import ActorList from './ActorList';
-import WatchlistButtons from './WatchlistButtons';
+import WatchlistButtonsDetailView from './WatchlistButtonsDetailView';
 import { useLocation } from 'react-router-dom';
 
 const Background = styled.div`
@@ -48,7 +48,7 @@ function ShowDetailViewModal({ showDetails, toggleModal, isShowing }) {
         <Background>
           <Container big={location.pathname === '/recs'}>
             <CloseButton onClick={toggleModal} />
-            <Poster showPoster={showDetails.poster} />
+            <Poster showPoster={showDetails.poster_landscape} />
             <TitleSection
               showRating={showDetails.rating}
               showTitle={showDetails.title}
@@ -57,7 +57,7 @@ function ShowDetailViewModal({ showDetails, toggleModal, isShowing }) {
             <OverviewTextarea showOverview={showDetails.overview} />
             <GenreList genres={showDetails.genreNames} />
             <ActorList actors={showDetails.actors} />
-            <WatchlistButtons showDetails={showDetails} />
+            <WatchlistButtonsDetailView showDetails={showDetails} />
           </Container>
         </Background>
       ) : null}
