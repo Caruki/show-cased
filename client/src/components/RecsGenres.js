@@ -11,7 +11,7 @@ import { GoBack, GoForward } from '../assets/RecsNavigation';
 
 const Button = styled.button`
   display: flex;
-  margin: 10px;
+  margin: 20px;
   justify-content: space-around;
 `;
 
@@ -21,7 +21,7 @@ const Heading = styled.div`
   text-decoration: underline;
   text-shadow: 0px 0px 4px #d05888;
   color: #d05888;
-  margin: 10px;
+  margin: 20px;
 `;
 
 const ListContainer = styled.div`
