@@ -80,11 +80,35 @@ function WatchlistButtonsDetailView({ showDetails }) {
       queryCache.refetchQueries('user', {
         force: true,
       });
+      queryCache.refetchQueries('recsGenres', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsNetworks', {
+        force: true,
+      });
+      queryCache.refetchQueries('toWatchList', {
+        force: true,
+      });
+      queryCache.refetchQueries('watchedList', {
+        force: true,
+      });
     },
   });
   const [addToWatched] = useMutation(addToWatchedList, {
     onSuccess: () => {
       queryCache.refetchQueries('user', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsGenres', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsNetworks', {
+        force: true,
+      });
+      queryCache.refetchQueries('toWatchList', {
+        force: true,
+      });
+      queryCache.refetchQueries('watchedList', {
         force: true,
       });
     },
@@ -94,11 +118,35 @@ function WatchlistButtonsDetailView({ showDetails }) {
       queryCache.refetchQueries('user', {
         force: true,
       });
+      queryCache.refetchQueries('recsGenres', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsNetworks', {
+        force: true,
+      });
+      queryCache.refetchQueries('toWatchList', {
+        force: true,
+      });
+      queryCache.refetchQueries('watchedList', {
+        force: true,
+      });
     },
   });
   const [removeFromToWatch] = useMutation(removeFromToWatchList, {
     onSuccess: () => {
       queryCache.refetchQueries('user', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsGenres', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsNetworks', {
+        force: true,
+      });
+      queryCache.refetchQueries('toWatchList', {
+        force: true,
+      });
+      queryCache.refetchQueries('watchedList', {
         force: true,
       });
     },

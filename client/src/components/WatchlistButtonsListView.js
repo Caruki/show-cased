@@ -9,7 +9,7 @@ import {
   removeFromToWatchList,
 } from '../api/lists';
 import useAuth from '../contexts/auth/useAuth';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, queryCache } from 'react-query';
 import { getUser } from '../api/users';
 
 const Container = styled.div`
@@ -48,9 +48,64 @@ const WatchListCheck = styled.input`
 
 function WatchlistButtonsListView({ listShow, id }) {
   const { authenticatedUser } = useAuth();
+  const userId = authenticatedUser.userId;
   const { data: user } = useQuery(['user', authenticatedUser.userId], getUser, {
     staleTime: 3600000,
   });
+
+  const [addToWatch] = useMutation(addToWatchList, {
+    onSuccess: () => {
+      queryCache.refetchQueries('user', {
+        force: true,
+      });
+      queryCache.refetchQueries('toWatchList', {
+        force: true,
+      });
+      queryCache.refetchQueries('watchedList', {
+        force: true,
+      });
+    },
+  });
+  const [addToWatched] = useMutation(addToWatchedList, {
+    onSuccess: () => {
+      queryCache.refetchQueries('user', {
+        force: true,
+      });
+      queryCache.refetchQueries('toWatchList', {
+        force: true,
+      });
+      queryCache.refetchQueries('watchedList', {
+        force: true,
+      });
+    },
+  });
+  const [removeFromWatched] = useMutation(removeFromWatchedList, {
+    onSuccess: () => {
+      queryCache.refetchQueries('user', {
+        force: true,
+      });
+      queryCache.refetchQueries('toWatchList', {
+        force: true,
+      });
+      queryCache.refetchQueries('watchedList', {
+        force: true,
+      });
+    },
+  });
+  const [removeFromToWatch] = useMutation(removeFromToWatchList, {
+    onSuccess: () => {
+      queryCache.refetchQueries('user', {
+        force: true,
+      });
+      queryCache.refetchQueries('toWatchList', {
+        force: true,
+      });
+      queryCache.refetchQueries('watchedList', {
+        force: true,
+      });
+    },
+  });
+
   const [watchlistAction, setWatchlistAction] = useState(
     user?.towatch.some((show) => show.id === listShow.id)
       ? 'addToWatchlist'
@@ -62,24 +117,24 @@ function WatchlistButtonsListView({ listShow, id }) {
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
   const addedToWatched = watchlistAction === 'addToWatched';
 
-  React.useEffect(() => {
-    if (user) {
-      if (user.towatch.some((show) => show.id === listShow.id)) {
-        setWatchlistAction('addToWatchlist');
-      } else if (user.watched.some((show) => show.id === listShow.id)) {
-        setWatchlistAction('addToWatched');
-      }
-    }
-  }, [user, listShow.id]);
+  // React.useEffect(() => {
+  //   if (user) {
+  //     if (user.towatch.some((show) => show.id === listShow.id)) {
+  //       setWatchlistAction('addToWatchlist');
+  //     } else if (user.watched.some((show) => show.id === listShow.id)) {
+  //       setWatchlistAction('addToWatched');
+  //     }
+  //   }
+  // }, [user, listShow.id]);
 
-  async function handleWatchlistClick(event) {
+  async function handleToWatchClick(event) {
     const targetWatchlistAction = event.target.value;
 
     if (watchlistAction === targetWatchlistAction) {
-      await removeFromToWatchList(authenticatedUser.userId, listShow);
+      await removeFromToWatch({ userId, listShow });
       setWatchlistAction(null);
     } else {
-      await addToWatchList(authenticatedUser.userId, listShow);
+      await addToWatch({ userId, listShow });
       setWatchlistAction(targetWatchlistAction);
     }
   }
@@ -88,10 +143,10 @@ function WatchlistButtonsListView({ listShow, id }) {
     const targetWatchlistAction = event.target.value;
 
     if (watchlistAction === targetWatchlistAction) {
-      await removeFromWatchedList(authenticatedUser.userId, listShow);
+      await removeFromWatched({ userId, listShow });
       setWatchlistAction(null);
     } else {
-      await addToWatchedList(authenticatedUser.userId, listShow);
+      await addToWatched({ userId, listShow });
       setWatchlistAction(targetWatchlistAction);
     }
   }
@@ -103,7 +158,7 @@ function WatchlistButtonsListView({ listShow, id }) {
           type="radio"
           value="addToWatchlist"
           defaultChecked={addedToWatchlist}
-          onClick={handleWatchlistClick}
+          onClick={handleToWatchClick}
         />
         <ToWatchButton active={addedToWatchlist} size="small" id={id} />
       </WatchListCheckLabel>
