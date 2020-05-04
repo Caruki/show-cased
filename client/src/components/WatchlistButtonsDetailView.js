@@ -63,7 +63,9 @@ function WatchlistButtonsDetailView({ showDetails }) {
     id: showDetails.id,
     poster: showDetails.poster_portrait,
     title: showDetails.title,
-    genres: showDetails.genres,
+    genreIds: showDetails.genreIds,
+    genreNames: showDetails.genreNames,
+    networks: showDetails.networks,
     actors: showDetails.actors.map((actor) => {
       return actor.name;
     }),

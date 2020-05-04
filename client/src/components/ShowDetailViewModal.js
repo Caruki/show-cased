@@ -8,6 +8,7 @@ import OverviewTextarea from './OverviewTextarea';
 import GenreList from './GenreList';
 import ActorList from './ActorList';
 import WatchlistButtonsDetailView from './WatchlistButtonsDetailView';
+import { useLocation } from 'react-router-dom';
 
 const Background = styled.div`
   position: absolute;
@@ -23,9 +24,9 @@ const Background = styled.div`
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  top: 30px;
+  top: ${(props) => (props.big ? '40px' : '30px')};
   right: 10px;
-  left: 40px;
+  left: ${(props) => (props.big ? '10px' : '40px')};
   min-height: 550px;
   max-height: 620px;
   @media (min-width: 700px) {
@@ -39,11 +40,13 @@ const Container = styled.div`
 `;
 
 function ShowDetailViewModal({ showDetails, toggleModal, isShowing }) {
+  const location = useLocation();
+
   return (
     <>
       {isShowing ? (
         <Background>
-          <Container>
+          <Container big={location.pathname === '/recs'}>
             <CloseButton onClick={toggleModal} />
             <Poster showPoster={showDetails.poster_landscape} />
             <TitleSection
@@ -52,7 +55,7 @@ function ShowDetailViewModal({ showDetails, toggleModal, isShowing }) {
               showTrailer={showDetails.trailer}
             />
             <OverviewTextarea showOverview={showDetails.overview} />
-            <GenreList genres={showDetails.genres} />
+            <GenreList genres={showDetails.genreNames} />
             <ActorList actors={showDetails.actors} />
             <WatchlistButtonsDetailView showDetails={showDetails} />
           </Container>
