@@ -1,4 +1,4 @@
-export async function getRecsByGenres(key, userId, pageNumber) {
+export async function getPaginatedRecsByGenres(key, userId, pageNumber) {
   const response = await fetch(
     `/api/users/${userId}/recs/genres/${pageNumber}`,
     {
@@ -8,22 +8,11 @@ export async function getRecsByGenres(key, userId, pageNumber) {
   if (!response.ok) {
     throw new Error(response.statusText);
   }
-  const recsByGenres = await response.json();
-  return recsByGenres;
+  const { recs, maxPageReached } = await response.json();
+  return { recs, maxPageReached };
 }
 
-export async function getMaxPageRecsByGenres(key, userId) {
-  const response = await fetch(`/api/users/${userId}/recs/genres/`, {
-    method: 'GET',
-  });
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-  const maxPageRecsByGenres = await response.json();
-  return maxPageRecsByGenres;
-}
-
-export async function getRecsByNetworks(key, userId, pageNumber) {
+export async function getPaginatedRecsByNetworks(key, userId, pageNumber) {
   const response = await fetch(
     `/api/users/${userId}/recs/networks/${pageNumber}`,
     {
@@ -33,17 +22,6 @@ export async function getRecsByNetworks(key, userId, pageNumber) {
   if (!response.ok) {
     throw new Error(response.statusText);
   }
-  const recsByNetworks = await response.json();
-  return recsByNetworks;
-}
-
-export async function getMaxPageRecsByNetworks(key, userId) {
-  const response = await fetch(`/api/users/${userId}/recs/networks/`, {
-    method: 'GET',
-  });
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-  const maxPageRecsByNetworks = await response.json();
-  return maxPageRecsByNetworks;
+  const { recs, maxPageReached } = await response.json();
+  return { recs, maxPageReached };
 }

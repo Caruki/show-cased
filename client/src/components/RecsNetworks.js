@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { useQuery, useMutation, usePaginatedQuery } from 'react-query';
+import { useMutation, usePaginatedQuery, queryCache } from 'react-query';
 import ListItem from './ListItem';
 import { getShowDetails } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
-import { getRecsByNetworks, getMaxPageRecsByNetworks } from '../api/recs';
+import { getPaginatedRecsByNetworks } from '../api/recs';
 import { GoBack, GoForward } from '../assets/RecsNavigation';
 
 const Button = styled.button`
@@ -35,21 +35,28 @@ function RecsNetworks({ userId }) {
   const [selectedItem, setSelectedItem] = useState({});
   const [page, setPage] = useState(1);
   const { isShowing, toggleModal } = useModal();
-  const { status: recsNetworksStatus, resolvedData } = usePaginatedQuery(
+  const {
+    status: recsNetworksStatus,
+    resolvedData,
+    latestData,
+  } = usePaginatedQuery(
     ['recsNetworks', userId, page],
-    getRecsByNetworks,
-    { staleTime: 3600000 }
-  );
-
-  const { data: maxPage } = useQuery(
-    ['maxPage', userId],
-    getMaxPageRecsByNetworks,
+    getPaginatedRecsByNetworks,
     {
       staleTime: 3600000,
     }
   );
 
   const [loadShowDetails] = useMutation(getShowDetails);
+
+  React.useEffect(() => {
+    if (!latestData?.maxPageReached) {
+      queryCache.prefetchQuery(
+        ['recsNetworks', userId, page + 1],
+        getPaginatedRecsByNetworks
+      );
+    }
+  }, [latestData, userId, page]);
 
   async function handleItemClick(showId) {
     const showDetails = await loadShowDetails(showId);
@@ -80,13 +87,17 @@ function RecsNetworks({ userId }) {
       </Button>
       <Heading>Networks</Heading>
       <Button
-        onClick={() => setPage((old) => old + 1)}
-        disabled={page === maxPage}
+        onClick={() =>
+          setPage((old) =>
+            !latestData || latestData.maxPageReached ? old : old + 1
+          )
+        }
+        disabled={latestData.maxPageReached}
       >
-        <GoForward disabled={page === maxPage} />
+        <GoForward disabled={latestData.maxPageReached} />
       </Button>
       <ListContainer>
-        {resolvedData.map((show) => (
+        {resolvedData.recs.map((show) => (
           <ListItem
             poster={show.poster}
             title={show.title}
