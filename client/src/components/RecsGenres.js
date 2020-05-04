@@ -13,6 +13,10 @@ const Button = styled.button`
   display: flex;
   margin: 20px;
   justify-content: space-around;
+  background-color: transparent;
+  outline: hidden;
+  text-decoration: none;
+  border: transparent;
 `;
 
 const Heading = styled.div`
