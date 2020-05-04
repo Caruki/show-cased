@@ -64,6 +64,12 @@ function WatchlistButtonsListView({ selectedShow, id }) {
       queryCache.refetchQueries('watchedList', {
         force: true,
       });
+      queryCache.refetchQueries('recsGenres', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsNetworks', {
+        force: true,
+      });
     },
   });
   const [addToWatched] = useMutation(addToWatchedList, {
@@ -75,6 +81,12 @@ function WatchlistButtonsListView({ selectedShow, id }) {
         force: true,
       });
       queryCache.refetchQueries('watchedList', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsGenres', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsNetworks', {
         force: true,
       });
     },
@@ -90,6 +102,12 @@ function WatchlistButtonsListView({ selectedShow, id }) {
       queryCache.refetchQueries('watchedList', {
         force: true,
       });
+      queryCache.refetchQueries('recsGenres', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsNetworks', {
+        force: true,
+      });
     },
   });
   const [removeFromToWatch] = useMutation(removeFromToWatchList, {
@@ -101,6 +119,12 @@ function WatchlistButtonsListView({ selectedShow, id }) {
         force: true,
       });
       queryCache.refetchQueries('watchedList', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsGenres', {
+        force: true,
+      });
+      queryCache.refetchQueries('recsNetworks', {
         force: true,
       });
     },
