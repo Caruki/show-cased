@@ -32,9 +32,6 @@ const Input = styled(InputField)`
   margin: 0px;
   border: 1px solid rgba(147, 49, 102, 0.8);
   border-style: hidden hidden solid hidden;
-
-
-  }
 `;
 
 function SearchInput({ value, onChange }) {

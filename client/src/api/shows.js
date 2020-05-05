@@ -1,5 +1,16 @@
 import DefaultPicture from '../assets/default.png';
 
+export async function searchShows({ value }) {
+  const response = await fetch(`/api/shows/search?q=${value}`, {
+    method: 'GET',
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const searchResults = await response.json();
+  return searchResults;
+}
+
 export async function getTrendingShows() {
   const response = await fetch('/api/shows/trending', {
     method: 'GET',
