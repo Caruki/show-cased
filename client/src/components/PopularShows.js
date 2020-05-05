@@ -17,14 +17,14 @@ const ListContainer = styled.div`
 function PopularShows({ tab }) {
   const [selectedItem, setSelectedItem] = useState({});
   const { isShowing, toggleModal } = useModal();
-  const {
-    status: newestStatus,
-    data: newestShowsList,
-  } = useQuery('newestShows', getNewestShows, { staleTime: 3600000 });
-  const {
-    status: trendingStatus,
-    data: trendingShowsList,
-  } = useQuery('trendingShows', getTrendingShows, { staleTime: 3600000 });
+  const { status: newestStatus, data: newestShowsList } = useQuery(
+    'newestShows',
+    getNewestShows
+  );
+  const { status: trendingStatus, data: trendingShowsList } = useQuery(
+    'trendingShows',
+    getTrendingShows
+  );
   const [loadShowDetails] = useMutation(getShowDetails);
 
   async function handleItemClick(showId) {

@@ -16,6 +16,7 @@ const ItemContainer = styled.div`
   align-items: center;
   background: transparent;
   cursor: pointer;
+  flex-grow: 1;
   & > * {
     margin: 2px 0px;
   }
@@ -52,7 +53,7 @@ function WatchListItem({ poster, title, id, onClick, show }) {
         </PosterContainer>
         <Title>{title}</Title>
       </ItemContainer>
-      <WatchlistButtonsListView id={id} size="small" listShow={show} />
+      <WatchlistButtonsListView id={id} size="small" selectedShow={show} />
     </Container>
   );
 }

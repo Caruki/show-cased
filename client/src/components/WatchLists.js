@@ -23,13 +23,11 @@ function WatchLists({ tab }) {
   const userId = authenticatedUser.userId;
   const { status: toWatchStatus, data: toWatchList } = useQuery(
     ['toWatchList', userId],
-    getToWatchList,
-    { staleTime: 3600000 }
+    getToWatchList
   );
   const { status: watchedStatus, data: watchedList } = useQuery(
     ['watchedList', userId],
-    getWatchedList,
-    { staleTime: 3600000 }
+    getWatchedList
   );
   const [loadShowDetails] = useMutation(getShowDetails);
 

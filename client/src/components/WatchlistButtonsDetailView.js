@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { useQuery, useMutation } from 'react-query';
 import { WatchedButton, ToWatchButton } from '../assets/WatchListIcons';
 import {
   addToWatchList,
@@ -9,7 +10,7 @@ import {
   removeFromToWatchList,
 } from '../api/lists';
 import useAuth from '../contexts/auth/useAuth';
-import { useQuery } from 'react-query';
+import refetchQueries from '../utils/refetchQueries';
 import { getUser } from '../api/users';
 
 const Container = styled.div`
@@ -59,6 +60,7 @@ const WatchListCheckText = styled.div`
 
 function WatchlistButtonsDetailView({ showDetails }) {
   const { authenticatedUser } = useAuth();
+  const userId = authenticatedUser.userId;
   const selectedShow = {
     id: showDetails.id,
     poster: showDetails.poster_portrait,
@@ -70,9 +72,31 @@ function WatchlistButtonsDetailView({ showDetails }) {
       return actor.name;
     }),
   };
-  const { data: user } = useQuery(['user', authenticatedUser.userId], getUser, {
+
+  const { data: user } = useQuery(['user', userId], getUser, {
     staleTime: 3600000,
   });
+  const [addToWatch] = useMutation(addToWatchList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+  const [addToWatched] = useMutation(addToWatchedList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+  const [removeFromWatched] = useMutation(removeFromWatchedList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+  const [removeFromToWatch] = useMutation(removeFromToWatchList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+
   const [watchlistAction, setWatchlistAction] = useState(
     user?.towatch.some((show) => show.id === selectedShow.id)
       ? 'addToWatchlist'
@@ -84,7 +108,7 @@ function WatchlistButtonsDetailView({ showDetails }) {
   const addedToWatchlist = watchlistAction === 'addToWatchlist';
   const addedToWatched = watchlistAction === 'addToWatched';
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       if (user.towatch.some((show) => show.id === selectedShow.id)) {
         setWatchlistAction('addToWatchlist');
@@ -98,10 +122,10 @@ function WatchlistButtonsDetailView({ showDetails }) {
     const targetWatchlistAction = event.target.value;
 
     if (watchlistAction === targetWatchlistAction) {
-      await removeFromToWatchList(authenticatedUser.userId, selectedShow);
+      await removeFromToWatch({ userId, selectedShow });
       setWatchlistAction(null);
     } else {
-      await addToWatchList(authenticatedUser.userId, selectedShow);
+      await addToWatch({ userId, selectedShow });
       setWatchlistAction(targetWatchlistAction);
     }
   }
@@ -110,10 +134,10 @@ function WatchlistButtonsDetailView({ showDetails }) {
     const targetWatchlistAction = event.target.value;
 
     if (watchlistAction === targetWatchlistAction) {
-      await removeFromWatchedList(authenticatedUser.userId, selectedShow);
+      await removeFromWatched({ userId, selectedShow });
       setWatchlistAction(null);
     } else {
-      await addToWatchedList(authenticatedUser.userId, selectedShow);
+      await addToWatched({ userId, selectedShow });
       setWatchlistAction(targetWatchlistAction);
     }
   }

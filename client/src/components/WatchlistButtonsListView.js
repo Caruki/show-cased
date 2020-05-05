@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { useQuery, useMutation } from 'react-query';
 import { WatchedButton, ToWatchButton } from '../assets/WatchListIcons';
 import {
   addToWatchList,
@@ -9,7 +10,7 @@ import {
   removeFromToWatchList,
 } from '../api/lists';
 import useAuth from '../contexts/auth/useAuth';
-import { useQuery } from 'react-query';
+import refetchQueries from '../utils/refetchQueries';
 import { getUser } from '../api/users';
 
 const Container = styled.div`
@@ -46,15 +47,38 @@ const WatchListCheck = styled.input`
   user-select: none;
 `;
 
-function WatchlistButtonsListView({ listShow, id }) {
+function WatchlistButtonsListView({ selectedShow, id }) {
   const { authenticatedUser } = useAuth();
+  const userId = authenticatedUser.userId;
   const { data: user } = useQuery(['user', authenticatedUser.userId], getUser, {
     staleTime: 3600000,
   });
+
+  const [addToWatch] = useMutation(addToWatchList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+  const [addToWatched] = useMutation(addToWatchedList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+  const [removeFromWatched] = useMutation(removeFromWatchedList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+  const [removeFromToWatch] = useMutation(removeFromToWatchList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+
   const [watchlistAction, setWatchlistAction] = useState(
-    user?.towatch.some((show) => show.id === listShow.id)
+    user?.towatch.some((show) => show.id === selectedShow.id)
       ? 'addToWatchlist'
-      : user?.watched.some((show) => show.id === listShow.id)
+      : user?.watched.some((show) => show.id === selectedShow.id)
       ? 'addToWatched'
       : null
   );
@@ -64,22 +88,22 @@ function WatchlistButtonsListView({ listShow, id }) {
 
   React.useEffect(() => {
     if (user) {
-      if (user.towatch.some((show) => show.id === listShow.id)) {
+      if (user.towatch.some((show) => show.id === selectedShow.id)) {
         setWatchlistAction('addToWatchlist');
-      } else if (user.watched.some((show) => show.id === listShow.id)) {
+      } else if (user.watched.some((show) => show.id === selectedShow.id)) {
         setWatchlistAction('addToWatched');
       }
     }
-  }, [user, listShow.id]);
+  }, [user, selectedShow.id]);
 
-  async function handleWatchlistClick(event) {
+  async function handleToWatchClick(event) {
     const targetWatchlistAction = event.target.value;
 
     if (watchlistAction === targetWatchlistAction) {
-      await removeFromToWatchList(authenticatedUser.userId, listShow);
+      await removeFromToWatch({ userId, selectedShow });
       setWatchlistAction(null);
     } else {
-      await addToWatchList(authenticatedUser.userId, listShow);
+      await addToWatch({ userId, selectedShow });
       setWatchlistAction(targetWatchlistAction);
     }
   }
@@ -88,10 +112,10 @@ function WatchlistButtonsListView({ listShow, id }) {
     const targetWatchlistAction = event.target.value;
 
     if (watchlistAction === targetWatchlistAction) {
-      await removeFromWatchedList(authenticatedUser.userId, listShow);
+      await removeFromWatched({ userId, selectedShow });
       setWatchlistAction(null);
     } else {
-      await addToWatchedList(authenticatedUser.userId, listShow);
+      await addToWatched({ userId, selectedShow });
       setWatchlistAction(targetWatchlistAction);
     }
   }
@@ -103,7 +127,7 @@ function WatchlistButtonsListView({ listShow, id }) {
           type="radio"
           value="addToWatchlist"
           defaultChecked={addedToWatchlist}
-          onClick={handleWatchlistClick}
+          onClick={handleToWatchClick}
         />
         <ToWatchButton active={addedToWatchlist} size="small" id={id} />
       </WatchListCheckLabel>
@@ -123,7 +147,7 @@ function WatchlistButtonsListView({ listShow, id }) {
 }
 
 WatchlistButtonsListView.propTypes = {
-  listShow: PropTypes.object,
+  selectedShow: PropTypes.object,
   id: PropTypes.number,
 };
 
