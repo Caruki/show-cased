@@ -6,14 +6,12 @@ const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  background: transparent;
 `;
 
 const ItemContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  background: transparent;
   cursor: pointer;
   flex-grow: 1;
   & > * {
@@ -41,12 +39,13 @@ const Title = styled.div`
   color: #d05888;
   font: 400 0.8rem 'Roboto', sans-serif;
   text-align: center;
-  margin: 0px 0px 10px 0px;
+  margin: 0px 0px 5px 0px;
 `;
 
 const Rating = styled.div`
   color: #aeb2f5;
   font: 300 0.8rem 'Roboto', sans-serif;
+  margin: 5px 0px 10px 0px;
 `;
 
 function ListItem({ poster, title, rating, id, onClick }) {
