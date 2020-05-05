@@ -7,22 +7,34 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
-  padding: 18px 10px 10px 10px;
-  border: 2px solid rgba(150, 31, 86, 0.8);
+  margin: 12px 10px;
+  padding: 22px 15px 15px 15px;
+  border: 2px solid rgba(150, 31, 86, 0.7);
   border-radius: 11px;
   background-color: rgba(30, 25, 79, 0.8);
 
   & :focus-within {
-    background-color: rgba(80, 68, 129, 0.5);
-    border: 2px solid rgba(150, 31, 86, 1);
+    outline-width: 0px;
+    padding: 5px;
+    margin: 0px 0px 7px 0px;
+    background-color: rgba(80, 68, 180, 0.3);
+    border: 1px solid rgba(150, 31, 86, 0.8);
+    ::placeholder {
+      color: transparent;
+    }
   }
 `;
 
 const Input = styled(InputField)`
-  font-size: 0.9rem;
-  border: 1px solid rgba(208, 88, 136, 0.8);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin: 0px;
+  border: 1px solid rgba(147, 49, 102, 0.8);
   border-style: hidden hidden solid hidden;
+
+
+  }
 `;
 
 function SearchInput({ value, onChange }) {

@@ -10,11 +10,11 @@ const Container = styled.div`
   justify-content: space-around;
   width: auto;
   height: 60%;
-  margin: 50px 20px;
+  margin: 50px 10px;
 
   & > * {
     flex-basis: 100%;
-    margin: 0px 20px;
+    margin: 10px 10px;
   }
 `;
 
@@ -22,7 +22,7 @@ const IntroductionText = styled.div`
   text-align: center;
   font: 300 0.9rem 'Roboto', sans-serif;
   color: #aeb2f5;
-  line-height: 17px;
+  line-height: 20px;
 `;
 
 const InputContainer = styled.div`
@@ -32,7 +32,7 @@ const InputContainer = styled.div`
 
   & > * {
     margin: 10px;
-    width: 80%;
+    width: 90%;
     border: 1px solid rgba(150, 31, 86, 0.8);
   }
 `;
@@ -65,6 +65,7 @@ function SearchSubmitForm({ textvariation }) {
           onChange={handleChange}
           /* searchResults={searchResults} */
         />
+        <SearchInput />
         <SearchInput />
         <SearchInput />
       </InputContainer>
