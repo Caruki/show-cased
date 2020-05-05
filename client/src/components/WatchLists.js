@@ -53,10 +53,10 @@ function WatchLists({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
-      {tab === 'towatch' && !toWatchList.length && (
+      {tab === 'towatch' && (!toWatchList || !toWatchList.length) && (
         <SearchSubmitForm textvariation="want to watch" />
       )}
-      {tab === 'watched' && !watchedList.length && (
+      {tab === 'watched' && (!watchedList || !watchedList.length) && (
         <SearchSubmitForm textvariation="have watched" />
       )}
 
