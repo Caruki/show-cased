@@ -1,7 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import InputField from './InputField';
+import useDebounce from '../hooks/useDebounce';
+import { searchShows } from '../api/shows';
 
 const Container = styled.div`
   display: flex;
@@ -34,26 +35,66 @@ const Input = styled(InputField)`
   border-style: hidden hidden solid hidden;
 `;
 
-function SearchInput({ value, onChange }) {
+const ResultsContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  border: 1px solid #d0588865;
+  background-color: #1e194f;
+`;
+
+const ResultItem = styled.div`
+  text-align: left;
+  font: 300 0.7rem 'Roboto', sans-serif;
+  color: #aeb2f5;
+`;
+
+function SearchInput() {
+  const [value, setValue] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [error, setError] = useState('');
+
+  const debouncedValue = useDebounce(value, 400);
+
+  useEffect(() => {
+    if (debouncedValue) {
+      setIsSearching(true);
+      searchShows(debouncedValue)
+        .then((results) => {
+          setSearchResults(results);
+        })
+        .catch((error) => setError(error.message))
+        .finally(() => setIsSearching(false));
+    } else {
+      setIsSearching(false);
+      setSearchResults([]);
+    }
+  }, [debouncedValue]);
+
   return (
-    <Container>
-      <Input
-        type="search"
-        value={value}
-        onChange={onChange}
-        placeholder="Search for a tv show..."
-      />
-      {/* {searchResults.map((searchResult) => (
-        <div key={searchResult}>{searchResult}</div>
-      ))} */}
-    </Container>
+    <>
+      <Container>
+        <Input
+          type="search"
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          placeholder="Search for a tv show..."
+        />
+      </Container>
+      {error && <div>{error}</div>}
+      {isSearching && <div>Searching ...</div>}
+      {searchResults.length !== 0 && (
+        <ResultsContainer>
+          {searchResults.map((searchResult) => (
+            <ResultItem key={searchResult.id}>
+              {searchResult.title} ({searchResult.airYear})
+            </ResultItem>
+          ))}
+        </ResultsContainer>
+      )}
+    </>
   );
 }
-
-SearchInput.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  searchResults: PropTypes.array,
-};
 
 export default SearchInput;

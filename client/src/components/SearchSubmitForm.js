@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SearchInput from './SearchInput';
@@ -46,13 +46,6 @@ const ButtonContainer = styled.div`
 `;
 
 function SearchSubmitForm({ textvariation }) {
-  const [value, setValue] = useState('');
-  /*  const [searchResults, setSearchResults] = useState([]); */
-
-  function handleChange(event) {
-    setValue(event.target.value);
-  }
-
   return (
     <Container>
       <IntroductionText>
@@ -60,11 +53,7 @@ function SearchSubmitForm({ textvariation }) {
         choose up to four shows you ${textvariation}`}
       </IntroductionText>
       <InputContainer>
-        <SearchInput
-          value={value}
-          onChange={handleChange}
-          /* searchResults={searchResults} */
-        />
+        <SearchInput />
         <SearchInput />
         <SearchInput />
         <SearchInput />
