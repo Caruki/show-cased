@@ -8,6 +8,7 @@ import { getShowDetails } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import useAuth from '../contexts/auth/useAuth';
+import SearchSubmitForm from '../components/SearchSubmitForm';
 
 const ListContainer = styled.div`
   width: 100%;
@@ -52,7 +53,14 @@ function WatchLists({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
-      {tab === 'towatch' && (
+      {tab === 'towatch' && !toWatchList.length && (
+        <SearchSubmitForm textvariation="want to watch" />
+      )}
+      {tab === 'watched' && !watchedList.length && (
+        <SearchSubmitForm textvariation="have watched" />
+      )}
+
+      {tab === 'towatch' && toWatchList && (
         <ListContainer>
           {toWatchList?.map((show) => (
             <WatchListItem
@@ -68,7 +76,8 @@ function WatchLists({ tab }) {
           ))}
         </ListContainer>
       )}
-      {tab === 'watched' && (
+
+      {tab === 'watched' && watchedList && (
         <ListContainer>
           {watchedList?.map((show) => (
             <WatchListItem

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import InputField from './InputField';
 
@@ -24,12 +25,26 @@ const Input = styled(InputField)`
   border-style: hidden hidden solid hidden;
 `;
 
-function SearchInput() {
+function SearchInput({ value, onChange }) {
   return (
     <Container>
-      <Input type="search" placeholder="Search for a tv show..." />
+      <Input
+        type="search"
+        value={value}
+        onChange={onChange}
+        placeholder="Search for a tv show..."
+      />
+      {/* {searchResults.map((searchResult) => (
+        <div key={searchResult}>{searchResult}</div>
+      ))} */}
     </Container>
   );
 }
+
+SearchInput.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  searchResults: PropTypes.array,
+};
 
 export default SearchInput;
