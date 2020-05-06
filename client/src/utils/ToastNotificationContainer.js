@@ -12,14 +12,22 @@ const WrappedToastContainer = styled(ToastContainer)`
     text-align: center;
     color: #d05888;
     font: 300 bold 1.1rem 'Roboto', sans-serif;
-    height: 100px;
-    margin-top: 70%;
   }
   .Toastify__toast--error {
+    background-color: rgba(30, 25, 79);
+    text-align: center;
+    color: #d05888;
+    font: 300 bold 1.1rem 'Roboto', sans-serif;
   }
   .Toastify__toast--warning {
   }
   .Toastify__toast--success {
+    background-color: rgba(30, 25, 79);
+    text-align: center;
+    color: #d05888;
+    font: 300 bold 1.1rem 'Roboto', sans-serif;
+    height: 100px;
+    margin-top: 70%;
   }
   .Toastify__toast-body {
     background-color: rgba(30, 25, 79);

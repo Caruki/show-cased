@@ -9,6 +9,7 @@ import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import useAuth from '../contexts/auth/useAuth';
 import Loading from '../utils/Loading';
+import { toast } from 'react-toastify';
 
 const ListContainer = styled.div`
   width: 100%;
@@ -22,24 +23,22 @@ function WatchLists({ tab }) {
   const { isShowing, toggleModal } = useModal();
   const { authenticatedUser } = useAuth();
   const userId = authenticatedUser.userId;
-  const { status: toWatchStatus, data: toWatchList } = useQuery(
-    ['toWatchList', userId],
-    getToWatchList
-  );
-  const { status: watchedStatus, data: watchedList } = useQuery(
-    ['watchedList', userId],
-    getWatchedList
-  );
+  const {
+    status: toWatchStatus,
+    data: toWatchList,
+    error: toWatchShowsError,
+  } = useQuery(['toWatchList', userId], getToWatchList, { retry: 2 });
+  const {
+    status: watchedStatus,
+    data: watchedList,
+    error: watchedShowsError,
+  } = useQuery(['watchedList', userId], getWatchedList, { retry: 2 });
   const [loadShowDetails] = useMutation(getShowDetails);
 
   async function handleItemClick(showId) {
     const showDetails = await loadShowDetails(showId);
     setSelectedItem(showDetails);
     toggleModal();
-  }
-
-  if ((toWatchStatus || watchedStatus) === 'error') {
-    return <span>Error</span>;
   }
 
   return (
@@ -49,6 +48,13 @@ function WatchLists({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
+      {tab === 'towatch' &&
+        toWatchShowsError &&
+        toast.error(toWatchShowsError.message, {
+          closeOnClick: true,
+          closeButton: true,
+          autoClose: '5000',
+        })}
       {tab === 'towatch' && toWatchStatus === 'loading' && <Loading />}
       {tab === 'towatch' && (
         <ListContainer>
@@ -66,6 +72,13 @@ function WatchLists({ tab }) {
           ))}
         </ListContainer>
       )}
+      {tab === 'watched' &&
+        watchedShowsError &&
+        toast.error(watchedShowsError.message, {
+          closeOnClick: true,
+          closeButton: true,
+          autoClose: '5000',
+        })}
       {tab === 'watched' && watchedStatus === 'loading' && <Loading />}
       {tab === 'watched' && (
         <ListContainer>

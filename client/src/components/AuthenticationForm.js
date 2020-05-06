@@ -117,7 +117,7 @@ function AuthenticationForm({ authType }) {
     { status: registerStatus, error: registerError },
   ] = useMutation(registerUser, {
     onSuccess: () => {
-      toast('Account created 🎉 Please log in now!');
+      toast.success('Account created 🎉 Please log in now!');
       history.push('/login');
     },
   });
