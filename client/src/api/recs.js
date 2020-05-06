@@ -5,7 +5,7 @@ export async function getPaginatedRecsByGenres(key, userId, pageNumber) {
       method: 'GET',
     }
   );
-  if (!response.ok) {
+  if (response.status === 400) {
     throw new Error(response.statusText);
   }
   const { recs, maxPageReached } = await response.json();
@@ -19,7 +19,7 @@ export async function getPaginatedRecsByNetworks(key, userId, pageNumber) {
       method: 'GET',
     }
   );
-  if (!response.ok) {
+  if (response.status === 400) {
     throw new Error(response.statusText);
   }
   const { recs, maxPageReached } = await response.json();
