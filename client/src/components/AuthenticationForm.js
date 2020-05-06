@@ -7,6 +7,8 @@ import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
 import { registerUser } from '../api/users';
 import useAuth from '../contexts/auth/useAuth';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FormContainer = styled.form`
   display: flex;
@@ -117,7 +119,11 @@ function AuthenticationForm({ authType }) {
   const [
     createUser,
     { status: registerStatus, data: registeredUserId, error: registerError },
-  ] = useMutation(registerUser);
+  ] = useMutation(registerUser, {
+    onSuccess: () => {
+      toast('Account created 🎉 Please log in now!');
+    },
+  });
 
   const [
     loginUser,
@@ -126,12 +132,10 @@ function AuthenticationForm({ authType }) {
 
   React.useEffect(() => {
     if (authType === 'register' && registeredUserId) {
-      alert('Account created 🎉 Please log in now!');
       history.push('/login');
     }
 
     if (authType === 'login' && loggedinUser) {
-      alert('Logged in 🎉 ');
       history.push('/lists');
     }
   }, [registeredUserId, loggedinUser, authType, history]);
@@ -153,6 +157,8 @@ function AuthenticationForm({ authType }) {
       await loginUser(userInput);
     }
   }
+
+  /* const notify = () => toast('Account created 🎉 Please log in now!'); */
 
   return (
     <>

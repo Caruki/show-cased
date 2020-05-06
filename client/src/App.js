@@ -11,12 +11,14 @@ import Authentication from './pages/Authentication';
 import BasicLayoutRoute from './layoutRoutes/BasicLayoutRoute';
 import UserRoutes from './UserRoutes';
 import SideNavProvider from './contexts/sideNav/SideNavProvider';
+import ToastNotificationContainer from './utils/ToastNotificationContainer';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <GlobalStyles />
+        <ToastNotificationContainer />
         <Switch>
           <BasicLayoutRoute exact path="/login" component={Authentication} />
           <BasicLayoutRoute exact path="/register" component={Authentication} />
