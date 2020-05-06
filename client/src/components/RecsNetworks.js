@@ -83,7 +83,7 @@ function RecsNetworks({ userId }) {
       <Button
         onClick={() =>
           setPage((old) =>
-            !latestData || latestData?.maxPageReached ? old : old + 1
+            !latestData || latestData.maxPageReached ? old : old + 1
           )
         }
         disabled={latestData?.maxPageReached}
