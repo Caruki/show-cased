@@ -118,27 +118,22 @@ function AuthenticationForm({ authType }) {
   const [password, setPassword] = useState('');
   const [
     createUser,
-    { status: registerStatus, data: registeredUserId, error: registerError },
+    { status: registerStatus, error: registerError },
   ] = useMutation(registerUser, {
     onSuccess: () => {
       toast('Account created 🎉 Please log in now!');
+      history.push('/login');
     },
   });
 
-  const [
-    loginUser,
-    { status: loginStatus, data: loggedinUser, error: loginError },
-  ] = useMutation(login);
-
-  React.useEffect(() => {
-    if (authType === 'register' && registeredUserId) {
-      history.push('/login');
+  const [loginUser, { status: loginStatus, error: loginError }] = useMutation(
+    login,
+    {
+      onSuccess: () => {
+        history.push('/lists');
+      },
     }
-
-    if (authType === 'login' && loggedinUser) {
-      history.push('/lists');
-    }
-  }, [registeredUserId, loggedinUser, authType, history]);
+  );
 
   async function handleSubmit(event) {
     event.preventDefault();

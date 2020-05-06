@@ -35,7 +35,7 @@ function ToastNotificationContainer() {
       hideProgressBar={true}
       closeButton={false}
       position="center"
-      autoClose={3000}
+      autoClose={1000}
       pauseOnFocusLoss
       draggable
       pauseOnHover
