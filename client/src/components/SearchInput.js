@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import InputField from './InputField';
-import useDebounce from '../hooks/useDebounce';
-import { searchShows } from '../api/shows';
 
 const Container = styled.div`
   display: flex;
@@ -49,45 +48,34 @@ const ResultItem = styled.div`
   color: #aeb2f5;
 `;
 
-function SearchInput() {
-  const [value, setValue] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [error, setError] = useState('');
-
-  const debouncedValue = useDebounce(value, 400);
-
-  useEffect(() => {
-    if (debouncedValue) {
-      setIsSearching(true);
-      searchShows(debouncedValue)
-        .then((results) => {
-          setIsSearching(false);
-          setSearchResults(results);
-        })
-        .catch((error) => setError(error.message));
-    } else {
-      setIsSearching(false);
-      setSearchResults([]);
-    }
-  }, [debouncedValue]);
-
+function SearchInput({
+  value,
+  searchResults,
+  error,
+  isSearching,
+  onSelect,
+  onChange,
+  isSelected,
+}) {
   return (
     <>
       <Container>
         <Input
           type="search"
           value={value}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={onChange}
           placeholder="Search for a tv show..."
         />
       </Container>
       {error && <div>{error}</div>}
-      {isSearching && <div>Searching ...</div>}
-      {searchResults.length !== 0 && (
+      {isSearching && !isSelected && <div>Searching ...</div>}
+      {searchResults.length !== 0 && !isSelected && (
         <ResultsContainer>
           {searchResults.map((searchResult) => (
-            <ResultItem key={searchResult.id}>
+            <ResultItem
+              key={searchResult.id}
+              onClick={() => onSelect(searchResult)}
+            >
               {searchResult.title} ({searchResult.airYear})
             </ResultItem>
           ))}
@@ -96,5 +84,15 @@ function SearchInput() {
     </>
   );
 }
+
+SearchInput.propTypes = {
+  value: PropTypes.string,
+  searchResults: PropTypes.array,
+  error: PropTypes.any,
+  isSearching: PropTypes.bool,
+  onSelect: PropTypes.func,
+  onChange: PropTypes.func,
+  isSelected: PropTypes.bool,
+};
 
 export default SearchInput;

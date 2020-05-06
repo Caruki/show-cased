@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import SearchInput from './SearchInput';
 import SubmitButton from './SubmitButton';
+import useDebounce from '../hooks/useDebounce';
+import { searchShows } from '../api/shows';
 
 const Container = styled.div`
   display: flex;
@@ -46,6 +48,40 @@ const ButtonContainer = styled.div`
 `;
 
 function SearchSubmitForm({ textvariation }) {
+  const [value, setValue] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [error, setError] = useState('');
+  const [isSelected, setIsSelected] = useState(false);
+
+  const debouncedValue = useDebounce(value, 400);
+
+  useEffect(() => {
+    if (debouncedValue) {
+      setIsSearching(true);
+      searchShows(debouncedValue)
+        .then((results) => {
+          setIsSearching(false);
+          setSearchResults(results);
+        })
+        .catch((error) => setError(error.message));
+    } else {
+      setIsSearching(false);
+      setSearchResults([]);
+    }
+  }, [debouncedValue]);
+
+  async function handleSelect(searchResult) {
+    setValue(searchResult.title);
+    setSearchResults([]);
+    setIsSelected(true);
+  }
+
+  function handleChange(event) {
+    const value = event.target.value;
+    setValue(value);
+  }
+
   return (
     <Container>
       <IntroductionText>
@@ -53,10 +89,18 @@ function SearchSubmitForm({ textvariation }) {
         choose up to four shows you ${textvariation}`}
       </IntroductionText>
       <InputContainer>
+        <SearchInput
+          value={value}
+          searchResults={searchResults}
+          error={error}
+          isSearching={isSearching}
+          onSelect={handleSelect}
+          onChange={handleChange}
+          isSelected={isSelected}
+        />
+        {/* <SearchInput />
         <SearchInput />
-        <SearchInput />
-        <SearchInput />
-        <SearchInput />
+        <SearchInput /> */}
       </InputContainer>
       <ButtonContainer>
         <SubmitButton>Submit</SubmitButton>
