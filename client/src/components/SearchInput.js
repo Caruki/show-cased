@@ -62,10 +62,10 @@ function SearchInput() {
       setIsSearching(true);
       searchShows(debouncedValue)
         .then((results) => {
+          setIsSearching(false);
           setSearchResults(results);
         })
-        .catch((error) => setError(error.message))
-        .finally(() => setIsSearching(false));
+        .catch((error) => setError(error.message));
     } else {
       setIsSearching(false);
       setSearchResults([]);
