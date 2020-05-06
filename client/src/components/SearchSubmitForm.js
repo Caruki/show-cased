@@ -48,13 +48,14 @@ const ButtonContainer = styled.div`
 `;
 
 function SearchSubmitForm({ textvariation }) {
-  const [value, setValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState('');
   const [isSelected, setIsSelected] = useState(false);
+  const [state, setState] = useState({});
+  const [focused, setFocused] = useState('');
 
-  const debouncedValue = useDebounce(value, 400);
+  const debouncedValue = useDebounce(state[focused], 400);
 
   useEffect(() => {
     if (debouncedValue) {
@@ -71,16 +72,26 @@ function SearchSubmitForm({ textvariation }) {
     }
   }, [debouncedValue]);
 
-  async function handleSelect(searchResult) {
-    setValue(searchResult.title);
+  async function handleSelect(searchResult, name) {
+    setState({
+      ...state,
+      [name]: searchResult.title,
+    });
     setSearchResults([]);
     setIsSelected(true);
   }
 
   function handleChange(event) {
     const value = event.target.value;
-    setValue(value);
+    setState({
+      ...state,
+      [event.target.name]: value,
+    });
+    setFocused(event.target.name);
+    console.log(focused);
   }
+
+  const searchInputs = ['show1', 'show2', 'show3', 'show4'];
 
   return (
     <Container>
@@ -89,18 +100,19 @@ function SearchSubmitForm({ textvariation }) {
         choose up to four shows you ${textvariation}`}
       </IntroductionText>
       <InputContainer>
-        <SearchInput
-          value={value}
-          searchResults={searchResults}
-          error={error}
-          isSearching={isSearching}
-          onSelect={handleSelect}
-          onChange={handleChange}
-          isSelected={isSelected}
-        />
-        {/* <SearchInput />
-        <SearchInput />
-        <SearchInput /> */}
+        {searchInputs.map((searchInput) => (
+          <SearchInput
+            key={searchInput}
+            focused={focused}
+            name={searchInput}
+            searchResults={searchResults}
+            error={error}
+            isSearching={isSearching}
+            onSelect={handleSelect}
+            onChange={handleChange}
+            isSelected={isSelected}
+          />
+        ))}
       </InputContainer>
       <ButtonContainer>
         <SubmitButton>Submit</SubmitButton>

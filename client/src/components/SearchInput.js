@@ -51,30 +51,30 @@ const ResultItem = styled.div`
 function SearchInput({
   value,
   searchResults,
-  error,
-  isSearching,
   onSelect,
   onChange,
   isSelected,
+  name,
+  focused,
 }) {
   return (
     <>
       <Container>
         <Input
-          type="search"
           value={value}
+          focused={focused}
+          name={name}
+          type="search"
           onChange={onChange}
           placeholder="Search for a tv show..."
         />
       </Container>
-      {error && <div>{error}</div>}
-      {isSearching && !isSelected && <div>Searching ...</div>}
-      {searchResults.length !== 0 && !isSelected && (
+      {focused === name && searchResults.length !== 0 && !isSelected && (
         <ResultsContainer>
           {searchResults.map((searchResult) => (
             <ResultItem
               key={searchResult.id}
-              onClick={() => onSelect(searchResult)}
+              onClick={() => onSelect(searchResult, name)}
             >
               {searchResult.title} ({searchResult.airYear})
             </ResultItem>
@@ -93,6 +93,8 @@ SearchInput.propTypes = {
   onSelect: PropTypes.func,
   onChange: PropTypes.func,
   isSelected: PropTypes.bool,
+  name: PropTypes.string,
+  focused: PropTypes.string,
 };
 
 export default SearchInput;
