@@ -11,7 +11,6 @@ export async function searchShows(value) {
   const filteredSearchResults = searchResults.filter(
     (result) => result.airYear
   );
-  console.log(filteredSearchResults);
   return filteredSearchResults;
 }
 
