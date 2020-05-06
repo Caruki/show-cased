@@ -8,6 +8,7 @@ import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import { getPaginatedRecsByGenres } from '../api/recs';
 import { GoBack, GoForward } from '../assets/RecsNavigation';
+import Loading from '../utils/Loading';
 
 const Button = styled.button`
   display: flex;
@@ -39,11 +40,7 @@ function RecsGenres({ userId }) {
   const [selectedItem, setSelectedItem] = useState({});
   const [page, setPage] = useState(1);
   const { isShowing, toggleModal } = useModal();
-  const {
-    status: recsGenresStatus,
-    resolvedData,
-    latestData,
-  } = usePaginatedQuery(
+  const { status, resolvedData, latestData } = usePaginatedQuery(
     ['recsGenres', userId, page],
     getPaginatedRecsByGenres,
     {
@@ -68,11 +65,7 @@ function RecsGenres({ userId }) {
     toggleModal();
   }
 
-  if (recsGenresStatus === 'loading') {
-    return <span>Loading...</span>;
-  }
-
-  if (recsGenresStatus === 'error') {
+  if (status === 'error') {
     return <span>Error</span>;
   }
 
@@ -94,15 +87,17 @@ function RecsGenres({ userId }) {
       <Button
         onClick={() =>
           setPage((old) =>
-            !latestData || latestData.maxPageReached ? old : old + 1
+            !latestData || latestData?.maxPageReached ? old : old + 1
           )
         }
-        disabled={latestData.maxPageReached}
+        disabled={latestData?.maxPageReached}
       >
-        <GoForward disabled={latestData.maxPageReached} />
+        <GoForward disabled={latestData?.maxPageReached} />
       </Button>
+
+      {status === 'loading' && <Loading />}
       <ListContainer>
-        {resolvedData.recs.map((show) => (
+        {resolvedData?.recs.map((show) => (
           <ListItem
             poster={show.poster}
             title={show.title}

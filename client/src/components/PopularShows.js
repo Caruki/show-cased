@@ -6,6 +6,7 @@ import ListItem from './ListItem';
 import { getNewestShows, getShowDetails, getTrendingShows } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
+import Loading from '../utils/Loading';
 
 const ListContainer = styled.div`
   width: 100%;
@@ -33,10 +34,6 @@ function PopularShows({ tab }) {
     toggleModal();
   }
 
-  if ((trendingStatus || newestStatus) === 'loading') {
-    return <span>Loading...</span>;
-  }
-
   if ((trendingStatus || newestStatus) === 'error') {
     return <span>Error</span>;
   }
@@ -48,9 +45,10 @@ function PopularShows({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
+      {tab === 'newest' && newestStatus === 'loading' && <Loading />}
       {tab === 'newest' && (
         <ListContainer>
-          {newestShowsList.map((show) => (
+          {newestShowsList?.map((show) => (
             <ListItem
               poster={show.poster}
               title={show.title}
@@ -64,9 +62,11 @@ function PopularShows({ tab }) {
           ))}
         </ListContainer>
       )}
+
+      {tab === 'trending' && trendingStatus === 'loading' && <Loading />}
       {tab === 'trending' && (
         <ListContainer>
-          {trendingShowsList.map((show) => (
+          {trendingShowsList?.map((show) => (
             <ListItem
               poster={show.poster}
               title={show.title}

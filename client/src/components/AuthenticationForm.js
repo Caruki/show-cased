@@ -9,6 +9,7 @@ import { registerUser } from '../api/users';
 import useAuth from '../contexts/auth/useAuth';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../utils/Loading';
 
 const FormContainer = styled.form`
   display: flex;
@@ -88,11 +89,6 @@ const UserInformation = styled.div`
   margin-top: 40px;
 `;
 
-const Loading = styled.div`
-  color: #d05888;
-  font: 300 1.8rem 'Roboto', sans-serif;
-`;
-
 const authForm = {
   login: {
     buttonText: 'Login',
@@ -166,7 +162,7 @@ function AuthenticationForm({ authType }) {
         </UserInformation>
       )}
       {(registerStatus || loginStatus) === 'loading' ? (
-        <Loading>Loading...</Loading>
+        <Loading />
       ) : (
         <FormContainer onSubmit={handleSubmit}>
           <InputContainer>

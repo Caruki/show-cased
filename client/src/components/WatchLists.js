@@ -8,6 +8,7 @@ import { getShowDetails } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import useAuth from '../contexts/auth/useAuth';
+import Loading from '../utils/Loading';
 
 const ListContainer = styled.div`
   width: 100%;
@@ -37,10 +38,6 @@ function WatchLists({ tab }) {
     toggleModal();
   }
 
-  if ((toWatchStatus || watchedStatus) === 'loading') {
-    return <span>Loading...</span>;
-  }
-
   if ((toWatchStatus || watchedStatus) === 'error') {
     return <span>Error</span>;
   }
@@ -52,6 +49,7 @@ function WatchLists({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
+      {tab === 'towatch' && toWatchStatus === 'loading' && <Loading />}
       {tab === 'towatch' && (
         <ListContainer>
           {toWatchList?.map((show) => (
@@ -68,6 +66,7 @@ function WatchLists({ tab }) {
           ))}
         </ListContainer>
       )}
+      {tab === 'watched' && watchedStatus === 'loading' && <Loading />}
       {tab === 'watched' && (
         <ListContainer>
           {watchedList?.map((show) => (

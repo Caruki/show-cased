@@ -8,6 +8,7 @@ import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import { getPaginatedRecsByNetworks } from '../api/recs';
 import { GoBack, GoForward } from '../assets/RecsNavigation';
+import Loading from '../utils/Loading';
 
 const Button = styled.button`
   display: flex;
@@ -39,11 +40,7 @@ function RecsNetworks({ userId }) {
   const [selectedItem, setSelectedItem] = useState({});
   const [page, setPage] = useState(1);
   const { isShowing, toggleModal } = useModal();
-  const {
-    status: recsNetworksStatus,
-    resolvedData,
-    latestData,
-  } = usePaginatedQuery(
+  const { status, resolvedData, latestData } = usePaginatedQuery(
     ['recsNetworks', userId, page],
     getPaginatedRecsByNetworks,
     {
@@ -68,11 +65,7 @@ function RecsNetworks({ userId }) {
     toggleModal();
   }
 
-  if (recsNetworksStatus === 'loading') {
-    return <span>Loading...</span>;
-  }
-
-  if (recsNetworksStatus === 'error') {
+  if (status === 'error') {
     return <span>Error</span>;
   }
 
@@ -93,15 +86,16 @@ function RecsNetworks({ userId }) {
       <Button
         onClick={() =>
           setPage((old) =>
-            !latestData || latestData.maxPageReached ? old : old + 1
+            !latestData || latestData?.maxPageReached ? old : old + 1
           )
         }
-        disabled={latestData.maxPageReached}
+        disabled={latestData?.maxPageReached}
       >
-        <GoForward disabled={latestData.maxPageReached} />
+        <GoForward disabled={latestData?.maxPageReached} />
       </Button>
+      {status === 'loading' && <Loading />}
       <ListContainer>
-        {resolvedData.recs.map((show) => (
+        {resolvedData?.recs.map((show) => (
           <ListItem
             poster={show.poster}
             title={show.title}
@@ -114,6 +108,7 @@ function RecsNetworks({ userId }) {
           />
         ))}
       </ListContainer>
+      )
     </>
   );
 }
