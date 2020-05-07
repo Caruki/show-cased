@@ -74,11 +74,11 @@ function SelectShowsForm({ tab, textvariation }) {
     });
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(event) {
+    event.preventDefault();
     const showIds = Object.values(selectedShows).map(
       (selectedShow) => selectedShow.id
     );
-    console.log(showIds);
     if (tab === 'towatch') {
       await addMultipleToWatch({ userId, showIds });
     } else if (tab === 'watched') {
@@ -104,7 +104,9 @@ function SelectShowsForm({ tab, textvariation }) {
         ))}
       </InputContainer>
       <ButtonContainer>
-        <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+        <SubmitButton onClick={(event) => handleSubmit(event)}>
+          Submit
+        </SubmitButton>
       </ButtonContainer>
     </Container>
   );

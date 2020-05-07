@@ -1,5 +1,6 @@
 export async function addMultipleToWatchList({ userId, showIds }) {
-  const response = await fetch(`/api/users/${userId}/towatch/multi`, {
+  console.log(showIds);
+  const response = await fetch(`/api/users/${userId}/towatch`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -16,7 +17,7 @@ export async function addMultipleToWatchList({ userId, showIds }) {
 }
 
 export async function addMultipleToWatchedList({ userId, showIds }) {
-  const response = await fetch(`/api/users/${userId}/watched/multi`, {
+  const response = await fetch(`/api/users/${userId}/watched`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
