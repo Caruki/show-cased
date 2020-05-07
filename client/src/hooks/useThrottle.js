@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+function useThrottle(value, delay) {
+  const [debouncedValue, setThrottledValue] = useState(value);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      setDebouncedValue(value);
+      setThrottledValue(value);
     }, delay);
 
     return () => {
@@ -17,9 +17,9 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-useDebounce.propTypes = {
+useThrottle.propTypes = {
   value: PropTypes.string,
   delay: PropTypes.number,
 };
 
-export default useDebounce;
+export default useThrottle;
