@@ -8,9 +8,6 @@ export async function getPaginatedRecsByGenres(key, userId, pageNumber) {
   if (!response.ok) {
     throw new Error(response.statusText);
   }
-  if (response.status === 404) {
-    throw new Error(404, response.statusText);
-  }
   const { recs, maxPageReached } = await response.json();
   return { recs, maxPageReached };
 }
@@ -24,9 +21,6 @@ export async function getPaginatedRecsByNetworks(key, userId, pageNumber) {
   );
   if (!response.ok) {
     throw new Error(response.statusText);
-  }
-  if (response.status === 404) {
-    throw new Error(404, response.statusText);
   }
   const { recs, maxPageReached } = await response.json();
   return { recs, maxPageReached };

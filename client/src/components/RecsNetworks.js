@@ -90,7 +90,9 @@ function RecsNetworks({ userId }) {
       >
         <GoForward disabled={latestData?.maxPageReached} />
       </Button>
-      {error.status === 404 && <ErrorMessageRecs />}
+      {status === 'error' && error.message === 'Not Found' && (
+        <ErrorMessageRecs />
+      )}
       {status === 'loading' && <Loading />}
       <ListContainer>
         {resolvedData?.recs.map((show) => (
@@ -112,7 +114,7 @@ function RecsNetworks({ userId }) {
 }
 
 RecsNetworks.propTypes = {
-  userId: PropTypes.number,
+  userId: PropTypes.string,
 };
 
 export default RecsNetworks;
