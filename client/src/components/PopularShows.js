@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from 'react-query';
@@ -47,6 +47,24 @@ function PopularShows({ tab }) {
     toggleModal();
   }
 
+  useEffect(() => {
+    if (tab === 'trending' && trendingShowsError) {
+      toast.error(trendingShowsError.message, {
+        closeOnClick: true,
+        closeButton: true,
+        autoClose: '5000',
+      });
+    }
+
+    if (tab === 'newest' && newestShowsError) {
+      toast.error(newestShowsError.message, {
+        closeOnClick: true,
+        closeButton: true,
+        autoClose: '5000',
+      });
+    }
+  }, [tab, trendingShowsError, newestShowsError]);
+
   return (
     <>
       <ShowDetailViewModal
@@ -54,13 +72,7 @@ function PopularShows({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
-      {tab === 'newest' &&
-        newestShowsError &&
-        toast.error(newestShowsError.message, {
-          closeOnClick: true,
-          closeButton: true,
-          autoClose: '5000',
-        })}
+
       {tab === 'newest' && newestStatus === 'loading' && <Loading />}
       <SearchInput
         isOpen={searchActive}
@@ -85,13 +97,6 @@ function PopularShows({ tab }) {
         </ListContainer>
       )}
 
-      {tab === 'trending' &&
-        trendingShowsError &&
-        toast.error(trendingShowsError.message, {
-          closeOnClick: true,
-          closeButton: true,
-          autoClose: '5000',
-        })}
       {tab === 'trending' && trendingStatus === 'loading' && <Loading />}
       {tab === 'trending' && (
         <ListContainer>
