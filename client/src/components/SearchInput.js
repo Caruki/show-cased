@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import InputField from './InputField';
 import useThrottle from '../hooks/useThrottle';
 import { searchShows } from '../api/shows';
+import CloseIcon from '../assets/CloseIcon';
 
 const Background = styled.div`
   position: absolute;
@@ -16,12 +17,21 @@ const Background = styled.div`
   z-index: 10;
 `;
 
+const SearchLayoutContainer = styled.div`
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin: auto;
+  max-width: 730px;
+  width: 100%;
+`;
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30% 10% 0 20%;
-  width: 70%;
+  /* margin-top: 20%; */
+  width: 80%;
   padding: 22px 15px 15px 15px;
   border: 2px solid rgba(150, 31, 86, 1);
   border-radius: 11px;
@@ -56,9 +66,9 @@ const ResultsContainer = styled.div`
   background-color: #1e194f;
   padding: 10px;
   overflow: auto;
+  width: 70%;
   max-height: 350px;
-  margin: 5% 0% 0% 15%;
-  width: 80%;
+  margin-top: 10px;
 `;
 
 const ItemLabel = styled.label`
@@ -97,6 +107,17 @@ const Error = styled.span`
   border: 1px solid #d0588865;
 `;
 
+const CloseSearch = styled.button`
+  margin: 20% 0 -8% 75%;
+  @media (min-width: 700px) {
+    margin: 20% 0 -5% 75%;
+  }
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+`;
+
 function SearchInput({ isOpen, onSelect, toggleSearchActive }) {
   const [inputValue, setInputValue] = useState('');
   const throttledValue = useThrottle(inputValue, 400);
@@ -124,37 +145,43 @@ function SearchInput({ isOpen, onSelect, toggleSearchActive }) {
     <>
       {isOpen ? (
         <Background>
-          <Container>
-            <Input
-              autoComplete="off"
-              value={inputValue}
-              type="search"
-              onChange={(event) => setInputValue(event.target.value)}
-              placeholder={'Search for a tv show...'}
-              onFocus={() => setShowResults(true)}
-              onBlur={() => toggleSearchActive()}
-            />
-          </Container>
-          {showResults && isSearching && <Searching>Searching ...</Searching>}
-          {showResults && error && <Error>{error.message}</Error>}
-          {showResults && searchResults.length !== 0 && (
-            <ResultsContainer>
-              {searchResults.map((searchResult) => (
-                <ItemLabel
-                  key={searchResult.id}
-                  onClick={() => {
-                    setInputValue('');
-                    onSelect(searchResult);
-                    setShowResults(false);
-                  }}
-                >
-                  <ResultItem value={searchResult.id}>
-                    {searchResult.title} ({searchResult.airYear})
-                  </ResultItem>
-                </ItemLabel>
-              ))}
-            </ResultsContainer>
-          )}
+          <SearchLayoutContainer>
+            <CloseSearch onClick={() => toggleSearchActive()}>
+              <CloseIcon size="big" />
+            </CloseSearch>
+            <Container>
+              <Input
+                autoFocus={true}
+                autoComplete="off"
+                value={inputValue}
+                type="search"
+                onChange={(event) => setInputValue(event.target.value)}
+                placeholder={'Search for a tv show...'}
+                onFocus={() => setShowResults(true)}
+              />
+            </Container>
+            {showResults && isSearching && <Searching>Searching ...</Searching>}
+            {showResults && error && <Error>{error.message}</Error>}
+            {showResults && searchResults.length !== 0 && (
+              <ResultsContainer>
+                {searchResults.map((searchResult) => (
+                  <ItemLabel
+                    key={searchResult.id}
+                    onClick={() => {
+                      setInputValue('');
+                      setShowResults(false);
+                      onSelect(searchResult);
+                    }}
+                    onBlur={() => toggleSearchActive()}
+                  >
+                    <ResultItem value={searchResult.id}>
+                      {searchResult.title} ({searchResult.airYear})
+                    </ResultItem>
+                  </ItemLabel>
+                ))}
+              </ResultsContainer>
+            )}
+          </SearchLayoutContainer>
         </Background>
       ) : null}
     </>
