@@ -6,6 +6,8 @@ import ListItem from './ListItem';
 import { getNewestShows, getShowDetails, getTrendingShows } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
+import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
+import SearchInput from './SearchInput';
 
 const ListContainer = styled.div`
   width: 100%;
@@ -17,6 +19,8 @@ const ListContainer = styled.div`
 function PopularShows({ tab }) {
   const [selectedItem, setSelectedItem] = useState({});
   const { isShowing, toggleModal } = useModal();
+  const { searchActive, toggleSearchActive } = useSideNavInformation();
+
   const { status: newestStatus, data: newestShowsList } = useQuery(
     'newestShows',
     getNewestShows
@@ -30,6 +34,13 @@ function PopularShows({ tab }) {
   async function handleItemClick(showId) {
     const showDetails = await loadShowDetails(showId);
     setSelectedItem(showDetails);
+    toggleModal();
+  }
+
+  async function handleSearchSelect(showId) {
+    const showDetails = await loadShowDetails(showId);
+    setSelectedItem(showDetails);
+    toggleSearchActive();
     toggleModal();
   }
 
@@ -48,9 +59,15 @@ function PopularShows({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
+      <SearchInput
+        isOpen={searchActive}
+        onSelect={(searchResult) => handleSearchSelect(searchResult.id)}
+        toggleSearchActive={toggleSearchActive}
+      />
+
       {tab === 'newest' && (
         <ListContainer>
-          {newestShowsList.map((show) => (
+          {newestShowsList?.map((show) => (
             <ListItem
               poster={show.poster}
               title={show.title}
@@ -66,7 +83,7 @@ function PopularShows({ tab }) {
       )}
       {tab === 'trending' && (
         <ListContainer>
-          {trendingShowsList.map((show) => (
+          {trendingShowsList?.map((show) => (
             <ListItem
               poster={show.poster}
               title={show.title}

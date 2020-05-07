@@ -4,10 +4,17 @@ import PropTypes from 'prop-types';
 
 function SideNavProvider({ children }) {
   const [tabContent, setTabContent] = useState('default');
+  const [searchActive, setSearchActive] = useState(false);
+
+  function toggleSearchActive() {
+    setSearchActive(!searchActive);
+  }
 
   const sideNavContextValue = {
     tabContent,
     setTabContent,
+    searchActive,
+    toggleSearchActive,
   };
 
   return (
