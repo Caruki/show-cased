@@ -7,6 +7,7 @@ const Container = styled.nav`
   display: flex;
   justify-content: center;
   width: 100%;
+  max-width: 768px;
   flex: 0 0 10%;
   margin: 0;
   padding: 0;

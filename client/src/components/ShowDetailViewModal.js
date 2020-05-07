@@ -24,14 +24,17 @@ const Background = styled.div`
 const Container = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  top: ${(props) => (props.big ? '40px' : '30px')};
-  right: 10px;
-  left: ${(props) => (props.big ? '10px' : '40px')};
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 350px;
   min-height: 550px;
-  max-height: 620px;
+  max-height: 90%;
+  padding: 20px;
   @media (min-width: 700px) {
-    top: 150px;
-    min-height: 830px;
+    max-width: 650px;
   }
   flex: 1 0;
   background-color: #504481;
