@@ -12,7 +12,7 @@ const Container = styled.div`
   justify-content: space-around;
   width: auto;
   height: 60%;
-  margin: 50px 10px;
+  margin: 30px 10px;
 
   & > * {
     flex-basis: 100%;
