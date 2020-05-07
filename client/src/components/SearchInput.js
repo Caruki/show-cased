@@ -41,6 +41,10 @@ const ResultsContainer = styled.div`
   border: 2px solid #d0588865;
   background-color: #1e194f;
   padding: 10px;
+  overflow: auto;
+  max-height: 200px;
+  margin: -30px 15px 10px 15px;
+  z-index: 1;
 `;
 
 const ResultItem = styled.div`
