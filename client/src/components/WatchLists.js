@@ -54,10 +54,10 @@ function WatchLists({ tab }) {
         showDetails={selectedItem}
       />
       {tab === 'towatch' && (!toWatchList || !toWatchList.length) && (
-        <SearchSubmitForm textvariation="want to watch" />
+        <SearchSubmitForm tab={tab} textvariation="want to watch" />
       )}
       {tab === 'watched' && (!watchedList || !watchedList.length) && (
-        <SearchSubmitForm textvariation="have watched" />
+        <SearchSubmitForm tab={tab} textvariation="have watched" />
       )}
 
       {tab === 'towatch' && toWatchList && (

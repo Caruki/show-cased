@@ -43,7 +43,7 @@ const ResultsContainer = styled.div`
   padding: 10px;
   overflow: auto;
   max-height: 200px;
-  margin: -30px 15px 10px 15px;
+  margin: -30px 0px 10px 0px;
   z-index: 1;
 `;
 

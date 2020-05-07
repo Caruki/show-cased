@@ -5,6 +5,10 @@ import SearchInput from './SearchInput';
 import SubmitButton from './SubmitButton';
 import useDebounce from '../hooks/useDebounce';
 import { searchShows } from '../api/shows';
+import { addMultipleToWatchedList, addMultipleToWatchList } from '../api/lists';
+import useAuth from '../contexts/auth/useAuth';
+import refetchQueries from '../utils/refetchQueries';
+import { useMutation } from 'react-query';
 
 const Container = styled.div`
   display: flex;
@@ -47,15 +51,29 @@ const ButtonContainer = styled.div`
   }
 `;
 
-function SearchSubmitForm({ textvariation }) {
+function SearchSubmitForm({ tab, textvariation }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState('');
   const [selectedInputs, setSelectedInputs] = useState([]);
+  const [selectedShowsInputs, setSelectedShowsInputs] = useState({});
   const [selectedShows, setSelectedShows] = useState({});
   const [focused, setFocused] = useState('');
+  const { authenticatedUser } = useAuth();
+  const userId = authenticatedUser.userId;
 
-  const debouncedValue = useDebounce(selectedShows[focused], 400);
+  const [addMultipleToWatch] = useMutation(addMultipleToWatchList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+  const [addMultipleToWatched] = useMutation(addMultipleToWatchedList, {
+    onSuccess: () => {
+      refetchQueries();
+    },
+  });
+
+  const debouncedValue = useDebounce(selectedShowsInputs[focused], 400);
 
   useEffect(() => {
     if (debouncedValue) {
@@ -73,21 +91,49 @@ function SearchSubmitForm({ textvariation }) {
   }, [debouncedValue]);
 
   async function handleSelect(searchResult, name) {
+    setSelectedShowsInputs({
+      ...selectedShowsInputs,
+      [name]: [`${searchResult.title} (${searchResult.airYear})`],
+    });
     setSelectedShows({
       ...selectedShows,
-      [name]: searchResult.title,
+      [name]: searchResult.id,
     });
-    setSelectedInputs([name, ...selectedInputs]);
+    setSelectedInputs([...selectedInputs, name]);
     setSearchResults([]);
   }
 
   function handleChange(event) {
     const value = event.target.value;
-    setSelectedShows({
-      ...selectedShows,
+    setFocused(event.target.name);
+    if (value === '') {
+      setSelectedShowsInputs({
+        ...selectedShowsInputs,
+        [event.target.name]: null,
+      });
+      setSelectedShows({
+        ...selectedShows,
+        [event.target.name]: null,
+      });
+      const index = selectedInputs.indexOf(event.target.name);
+      if (index > -1) {
+        selectedInputs.splice(index, 1);
+        setSelectedInputs(selectedInputs);
+      }
+    }
+    setSelectedShowsInputs({
+      ...selectedShowsInputs,
       [event.target.name]: value,
     });
-    setFocused(event.target.name);
+  }
+
+  async function handleSubmit() {
+    const selection = Object.values(selectedShows);
+    if (tab === 'towatch') {
+      await addMultipleToWatch({ userId, selection });
+    } else if (tab === 'watched') {
+      await addMultipleToWatched({ userId, selection });
+    }
   }
 
   const searchInputs = ['show1', 'show2', 'show3', 'show4'];
@@ -101,7 +147,7 @@ function SearchSubmitForm({ textvariation }) {
       <InputContainer>
         {searchInputs.map((searchInput) => (
           <SearchInput
-            value={selectedShows[searchInput]}
+            value={selectedShowsInputs[searchInput]}
             key={searchInput}
             focused={focused}
             name={searchInput}
@@ -115,7 +161,7 @@ function SearchSubmitForm({ textvariation }) {
         ))}
       </InputContainer>
       <ButtonContainer>
-        <SubmitButton>Submit</SubmitButton>
+        <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
       </ButtonContainer>
     </Container>
   );
@@ -123,6 +169,7 @@ function SearchSubmitForm({ textvariation }) {
 
 SearchSubmitForm.propTypes = {
   textvariation: PropTypes.string,
+  tab: PropTypes.string,
 };
 
 export default SearchSubmitForm;
