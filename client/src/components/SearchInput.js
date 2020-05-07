@@ -38,14 +38,23 @@ const ResultsContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  border: 1px solid #d0588865;
+  border: 2px solid #d0588865;
   background-color: #1e194f;
+  padding: 10px;
 `;
 
 const ResultItem = styled.div`
   text-align: left;
-  font: 300 0.7rem 'Roboto', sans-serif;
+  width: 100%;
+  border: 1px solid #d0588865;
+  border-style: hidden hidden solid hidden;
+  font: 300 0.8rem 'Roboto', sans-serif;
   color: #aeb2f5;
+  padding: 0px 5px;
+  margin: 8px 0px;
+  font-style: ${(props) => (props.hover ? 'bold' : null)};
+  background-color: ${(props) =>
+    props.hover ? 'lighten(#1e194f, 50%)' : null};
 `;
 
 const Searching = styled.span`
@@ -87,10 +96,10 @@ function SearchInput({
           placeholder="Search for a tv show..."
         />
       </Container>
-      {isSearching && !selectedInputs.includes(name) && (
+      {focused === name && isSearching && !selectedInputs.includes(name) && (
         <Searching>Searching ...</Searching>
       )}
-      {error && !selectedInputs.includes(name) && (
+      {focused === name && error && !selectedInputs.includes(name) && (
         <Error>{error.message}</Error>
       )}
       {focused === name &&
@@ -100,6 +109,7 @@ function SearchInput({
             {searchResults.map((searchResult) => (
               <ResultItem
                 key={searchResult.id}
+                value={searchResult.id}
                 onClick={() => onSelect(searchResult, name)}
               >
                 {searchResult.title} ({searchResult.airYear})
