@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from 'react-query';
@@ -8,6 +8,8 @@ import { getShowDetails } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import useAuth from '../contexts/auth/useAuth';
+import Loading from '../utils/Loading';
+import { toast } from 'react-toastify';
 import SelectShowsForm from '../components/SelectShowsForm';
 import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
 import SearchInput from './SearchInput';
@@ -25,14 +27,16 @@ function WatchLists({ tab }) {
   const { authenticatedUser } = useAuth();
   const { searchActive, toggleSearchActive } = useSideNavInformation();
   const userId = authenticatedUser.userId;
-  const { status: toWatchStatus, data: toWatchList } = useQuery(
-    ['toWatchList', userId],
-    getToWatchList
-  );
-  const { status: watchedStatus, data: watchedList } = useQuery(
-    ['watchedList', userId],
-    getWatchedList
-  );
+  const {
+    status: toWatchStatus,
+    data: toWatchList,
+    error: toWatchShowsError,
+  } = useQuery(['toWatchList', userId], getToWatchList, { retry: 2 });
+  const {
+    status: watchedStatus,
+    data: watchedList,
+    error: watchedShowsError,
+  } = useQuery(['watchedList', userId], getWatchedList, { retry: 2 });
   const [loadShowDetails] = useMutation(getShowDetails);
 
   async function handleItemClick(showId) {
@@ -48,13 +52,23 @@ function WatchLists({ tab }) {
     toggleModal();
   }
 
-  if ((toWatchStatus || watchedStatus) === 'loading') {
-    return <span>Loading...</span>;
-  }
+  useEffect(() => {
+    if (tab === 'towatch' && toWatchShowsError) {
+      toast.error(toWatchShowsError.message, {
+        closeOnClick: true,
+        closeButton: true,
+        autoClose: '5000',
+      });
+    }
 
-  if ((toWatchStatus || watchedStatus) === 'error') {
-    return <span>Error</span>;
-  }
+    if (tab === 'watched' && watchedShowsError) {
+      toast.error(watchedShowsError.message, {
+        closeOnClick: true,
+        closeButton: true,
+        autoClose: '5000',
+      });
+    }
+  }, [tab, toWatchShowsError, watchedShowsError]);
 
   return (
     <>
@@ -63,6 +77,7 @@ function WatchLists({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
+      {tab === 'towatch' && toWatchStatus === 'loading' && <Loading />}
       <SearchInput
         isOpen={searchActive}
         onSelect={(searchResult) => handleSearchSelect(searchResult.id)}
@@ -93,6 +108,7 @@ function WatchLists({ tab }) {
         </ListContainer>
       )}
 
+      {tab === 'watched' && watchedStatus === 'loading' && <Loading />}
       {tab === 'watched' && (
         <ListContainer>
           {watchedList?.map((show) => (

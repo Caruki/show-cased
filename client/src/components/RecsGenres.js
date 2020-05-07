@@ -8,6 +8,8 @@ import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import { getPaginatedRecsByGenres } from '../api/recs';
 import { GoBack, GoForward } from '../assets/RecsNavigation';
+import Loading from '../utils/Loading';
+import ErrorMessageRecs from './ErrorMessageRecs';
 
 const Button = styled.button`
   display: flex;
@@ -21,8 +23,7 @@ const Button = styled.button`
 
 const Heading = styled.div`
   text-align: center;
-  font: 100 italic 1.2rem 'Roboto', sans-serif;
-  text-decoration: underline;
+  font: 300 italic 1.3rem 'Roboto', sans-serif;
   text-shadow: 0px 0px 4px #d05888;
   color: #d05888;
   margin: 20px;
@@ -39,15 +40,12 @@ function RecsGenres({ userId }) {
   const [selectedItem, setSelectedItem] = useState({});
   const [page, setPage] = useState(1);
   const { isShowing, toggleModal } = useModal();
-  const {
-    status: recsGenresStatus,
-    resolvedData,
-    latestData,
-  } = usePaginatedQuery(
+  const { status, error, resolvedData, latestData } = usePaginatedQuery(
     ['recsGenres', userId, page],
     getPaginatedRecsByGenres,
     {
       staleTime: 3600000,
+      retry: false,
     }
   );
 
@@ -66,14 +64,6 @@ function RecsGenres({ userId }) {
     const showDetails = await loadShowDetails(showId);
     setSelectedItem(showDetails);
     toggleModal();
-  }
-
-  if (recsGenresStatus === 'loading') {
-    return <span>Loading...</span>;
-  }
-
-  if (recsGenresStatus === 'error') {
-    return <span>Error</span>;
   }
 
   return (
@@ -97,12 +87,16 @@ function RecsGenres({ userId }) {
             !latestData || latestData.maxPageReached ? old : old + 1
           )
         }
-        disabled={latestData.maxPageReached}
+        disabled={latestData?.maxPageReached}
       >
-        <GoForward disabled={latestData.maxPageReached} />
+        <GoForward disabled={latestData?.maxPageReached} />
       </Button>
+      {status === 'error' && error.message === 'Not Found' && (
+        <ErrorMessageRecs />
+      )}
+      {status === 'loading' && <Loading />}
       <ListContainer>
-        {resolvedData.recs.map((show) => (
+        {resolvedData?.recs.map((show) => (
           <ListItem
             poster={show.poster}
             title={show.title}
@@ -120,7 +114,7 @@ function RecsGenres({ userId }) {
 }
 
 RecsGenres.propTypes = {
-  userId: PropTypes.number,
+  userId: PropTypes.string,
 };
 
 export default RecsGenres;

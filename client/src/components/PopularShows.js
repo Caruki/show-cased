@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from 'react-query';
@@ -6,6 +6,8 @@ import ListItem from './ListItem';
 import { getNewestShows, getShowDetails, getTrendingShows } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
+import Loading from '../utils/Loading';
+import { toast } from 'react-toastify';
 import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
 import SearchInput from './SearchInput';
 
@@ -20,15 +22,16 @@ function PopularShows({ tab }) {
   const [selectedItem, setSelectedItem] = useState({});
   const { isShowing, toggleModal } = useModal();
   const { searchActive, toggleSearchActive } = useSideNavInformation();
-
-  const { status: newestStatus, data: newestShowsList } = useQuery(
-    'newestShows',
-    getNewestShows
-  );
-  const { status: trendingStatus, data: trendingShowsList } = useQuery(
-    'trendingShows',
-    getTrendingShows
-  );
+  const {
+    status: newestStatus,
+    data: newestShowsList,
+    error: newestShowsError,
+  } = useQuery('newestShows', getNewestShows, { retry: 1 });
+  const {
+    status: trendingStatus,
+    data: trendingShowsList,
+    error: trendingShowsError,
+  } = useQuery('trendingShows', getTrendingShows, { retry: 1 });
   const [loadShowDetails] = useMutation(getShowDetails);
 
   async function handleItemClick(showId) {
@@ -44,13 +47,23 @@ function PopularShows({ tab }) {
     toggleModal();
   }
 
-  if ((trendingStatus || newestStatus) === 'loading') {
-    return <span>Loading...</span>;
-  }
+  useEffect(() => {
+    if (tab === 'trending' && trendingShowsError) {
+      toast.error(trendingShowsError.message, {
+        closeOnClick: true,
+        closeButton: true,
+        autoClose: '5000',
+      });
+    }
 
-  if ((trendingStatus || newestStatus) === 'error') {
-    return <span>Error</span>;
-  }
+    if (tab === 'newest' && newestShowsError) {
+      toast.error(newestShowsError.message, {
+        closeOnClick: true,
+        closeButton: true,
+        autoClose: '5000',
+      });
+    }
+  }, [tab, trendingShowsError, newestShowsError]);
 
   return (
     <>
@@ -59,6 +72,8 @@ function PopularShows({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
+
+      {tab === 'newest' && newestStatus === 'loading' && <Loading />}
       <SearchInput
         isOpen={searchActive}
         onSelect={(searchResult) => handleSearchSelect(searchResult.id)}
@@ -81,6 +96,8 @@ function PopularShows({ tab }) {
           ))}
         </ListContainer>
       )}
+
+      {tab === 'trending' && trendingStatus === 'loading' && <Loading />}
       {tab === 'trending' && (
         <ListContainer>
           {trendingShowsList?.map((show) => (

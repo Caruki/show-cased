@@ -72,7 +72,7 @@ const ResultItem = styled.div`
 const Searching = styled.span`
   display: block;
   color: #aeb2f5;
-  font: 300 0.7rem 'Roboto', sans-serif;
+  font: 300 0.9rem 'Roboto', sans-serif;
   background-color: #1e194f;
   border: 1px solid #d0588865;
 `;

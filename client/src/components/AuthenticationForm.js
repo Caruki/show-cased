@@ -7,6 +7,9 @@ import SignInUpInput from '../components/SignInUpInput';
 import SubmitButton from '../components/SubmitButton';
 import { registerUser } from '../api/users';
 import useAuth from '../contexts/auth/useAuth';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../utils/Loading';
 
 const FormContainer = styled.form`
   display: flex;
@@ -86,11 +89,6 @@ const UserInformation = styled.div`
   margin-top: 40px;
 `;
 
-const Loading = styled.div`
-  color: #d05888;
-  font: 300 1.8rem 'Roboto', sans-serif;
-`;
-
 const authForm = {
   login: {
     buttonText: 'Login',
@@ -116,25 +114,22 @@ function AuthenticationForm({ authType }) {
   const [password, setPassword] = useState('');
   const [
     createUser,
-    { status: registerStatus, data: registeredUserId, error: registerError },
-  ] = useMutation(registerUser);
-
-  const [
-    loginUser,
-    { status: loginStatus, data: loggedinUser, error: loginError },
-  ] = useMutation(login);
-
-  React.useEffect(() => {
-    if (authType === 'register' && registeredUserId) {
-      alert('Account created 🎉 Please log in now!');
+    { status: registerStatus, error: registerError },
+  ] = useMutation(registerUser, {
+    onSuccess: () => {
+      toast.success('Account created 🎉 Please log in now!');
       history.push('/login');
-    }
+    },
+  });
 
-    if (authType === 'login' && loggedinUser) {
-      alert('Logged in 🎉 ');
-      history.push('/lists');
+  const [loginUser, { status: loginStatus, error: loginError }] = useMutation(
+    login,
+    {
+      onSuccess: () => {
+        history.push('/lists');
+      },
     }
-  }, [registeredUserId, loggedinUser, authType, history]);
+  );
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -154,6 +149,8 @@ function AuthenticationForm({ authType }) {
     }
   }
 
+  /* const notify = () => toast('Account created 🎉 Please log in now!'); */
+
   return (
     <>
       {authenticatedUser && (
@@ -165,7 +162,7 @@ function AuthenticationForm({ authType }) {
         </UserInformation>
       )}
       {(registerStatus || loginStatus) === 'loading' ? (
-        <Loading>Loading...</Loading>
+        <Loading />
       ) : (
         <FormContainer onSubmit={handleSubmit}>
           <InputContainer>
