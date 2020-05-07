@@ -54,12 +54,11 @@ function WatchLists({ tab }) {
 
   useEffect(() => {
     if (tab === 'towatch' && toWatchShowsError) {
-      toWatchShowsError &&
-        toast.error(toWatchShowsError.message, {
-          closeOnClick: true,
-          closeButton: true,
-          autoClose: '5000',
-        });
+      toast.error(toWatchShowsError.message, {
+        closeOnClick: true,
+        closeButton: true,
+        autoClose: '5000',
+      });
     }
 
     if (tab === 'watched' && watchedShowsError) {
