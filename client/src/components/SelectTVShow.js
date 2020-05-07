@@ -54,6 +54,7 @@ const ItemLabel = styled.label`
   width: 100%;
   :hover {
     background-color: rgb(80, 68, 180, 0.3);
+    font-style: bold;
   }
 `;
 
@@ -64,11 +65,8 @@ const ResultItem = styled.div`
   border-style: hidden hidden solid hidden;
   font: 300 0.8rem 'Roboto', sans-serif;
   color: #aeb2f5;
-  padding: 0px 5px;
   margin: 8px 0px;
-  font-style: ${(props) => (props.hover ? 'bold' : null)};
-  background-color: ${(props) =>
-    props.hover ? 'lighten(#1e194f, 50%)' : null};
+  padding: 10px;
 `;
 
 const Searching = styled.span`
@@ -114,7 +112,7 @@ function SelectTVShow({ onSelect, value }) {
     <>
       <Container>
         <Input
-          autoComplete={false}
+          autoComplete="off"
           value={inputValue}
           type="search"
           onChange={(event) => setInputValue(event.target.value)}
