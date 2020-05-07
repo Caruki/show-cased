@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from 'react-query';
@@ -52,6 +52,25 @@ function WatchLists({ tab }) {
     toggleModal();
   }
 
+  useEffect(() => {
+    if (tab === 'towatch' && toWatchShowsError) {
+      toWatchShowsError &&
+        toast.error(toWatchShowsError.message, {
+          closeOnClick: true,
+          closeButton: true,
+          autoClose: '5000',
+        });
+    }
+
+    if (tab === 'watched' && watchedShowsError) {
+      toast.error(watchedShowsError.message, {
+        closeOnClick: true,
+        closeButton: true,
+        autoClose: '5000',
+      });
+    }
+  }, [tab, toWatchShowsError, watchedShowsError]);
+
   return (
     <>
       <ShowDetailViewModal
@@ -59,13 +78,6 @@ function WatchLists({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
-      {tab === 'towatch' &&
-        toWatchShowsError &&
-        toast.error(toWatchShowsError.message, {
-          closeOnClick: true,
-          closeButton: true,
-          autoClose: '5000',
-        })}
       {tab === 'towatch' && toWatchStatus === 'loading' && <Loading />}
       <SearchInput
         isOpen={searchActive}
@@ -96,13 +108,7 @@ function WatchLists({ tab }) {
           ))}
         </ListContainer>
       )}
-      {tab === 'watched' &&
-        watchedShowsError &&
-        toast.error(watchedShowsError.message, {
-          closeOnClick: true,
-          closeButton: true,
-          autoClose: '5000',
-        })}
+
       {tab === 'watched' && watchedStatus === 'loading' && <Loading />}
       {tab === 'watched' && (
         <ListContainer>
