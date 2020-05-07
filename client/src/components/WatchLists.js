@@ -76,7 +76,7 @@ function WatchLists({ tab }) {
         <SelectShowsForm tab={tab} textvariation="have watched" />
       )}
 
-      {tab === 'towatch' && toWatchList && (
+      {tab === 'towatch' && (
         <ListContainer>
           {toWatchList?.map((show) => (
             <WatchListItem
@@ -93,7 +93,7 @@ function WatchLists({ tab }) {
         </ListContainer>
       )}
 
-      {tab === 'watched' && watchedList && (
+      {tab === 'watched' && (
         <ListContainer>
           {watchedList?.map((show) => (
             <WatchListItem
