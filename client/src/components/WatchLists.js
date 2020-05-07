@@ -8,7 +8,9 @@ import { getShowDetails } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import useAuth from '../contexts/auth/useAuth';
-import SearchSubmitForm from '../components/SearchSubmitForm';
+import SelectShowsForm from '../components/SelectShowsForm';
+import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
+import SearchInput from './SearchInput';
 
 const ListContainer = styled.div`
   width: 100%;
@@ -21,6 +23,7 @@ function WatchLists({ tab }) {
   const [selectedItem, setSelectedItem] = useState({});
   const { isShowing, toggleModal } = useModal();
   const { authenticatedUser } = useAuth();
+  const { searchActive, toggleSearchActive } = useSideNavInformation();
   const userId = authenticatedUser.userId;
   const { status: toWatchStatus, data: toWatchList } = useQuery(
     ['toWatchList', userId],
@@ -35,6 +38,13 @@ function WatchLists({ tab }) {
   async function handleItemClick(showId) {
     const showDetails = await loadShowDetails(showId);
     setSelectedItem(showDetails);
+    toggleModal();
+  }
+
+  async function handleSearchSelect(showId) {
+    const showDetails = await loadShowDetails(showId);
+    setSelectedItem(showDetails);
+    toggleSearchActive();
     toggleModal();
   }
 
@@ -53,11 +63,17 @@ function WatchLists({ tab }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
+      <SearchInput
+        isOpen={searchActive}
+        onSelect={(searchResult) => handleSearchSelect(searchResult.id)}
+        toggleSearchActive={toggleSearchActive}
+      />
+
       {tab === 'towatch' && (!toWatchList || !toWatchList.length) && (
-        <SearchSubmitForm tab={tab} textvariation="want to watch" />
+        <SelectShowsForm tab={tab} textvariation="want to watch" />
       )}
       {tab === 'watched' && (!watchedList || !watchedList.length) && (
-        <SearchSubmitForm tab={tab} textvariation="have watched" />
+        <SelectShowsForm tab={tab} textvariation="have watched" />
       )}
 
       {tab === 'towatch' && toWatchList && (

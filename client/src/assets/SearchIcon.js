@@ -11,7 +11,7 @@ const SVG = styled.svg`
     props.active ? 'translateX(10px)' : 'transform: translateX(0px);'};
 `;
 
-export const SearchIcon = ({ active, onClick }) => {
+const SearchIcon = ({ active, onClick }) => {
   return (
     <SVG
       active={active}
@@ -46,3 +46,5 @@ SearchIcon.propTypes = {
   active: PropTypes.bool,
   onClick: PropTypes.func,
 };
+
+export default SearchIcon;

@@ -50,7 +50,8 @@ const ButtonContainer = styled.div`
 `;
 
 const searchInputNames = ['show1', 'show2', 'show3', 'show4'];
-function SearchSubmitForm({ tab, textvariation }) {
+
+function SelectShowsForm({ tab, textvariation }) {
   const [selectedShows, setSelectedShows] = useState({});
   const { authenticatedUser } = useAuth();
   const userId = authenticatedUser.userId;
@@ -89,7 +90,7 @@ function SearchSubmitForm({ tab, textvariation }) {
     <Container>
       <IntroductionText>
         To see recommendations based on your personal viewing profile please
-        choose up to four shows you ${textvariation}
+        choose up to four shows you {textvariation}
       </IntroductionText>
       <InputContainer>
         {searchInputNames.map((searchInputName) => (
@@ -109,9 +110,9 @@ function SearchSubmitForm({ tab, textvariation }) {
   );
 }
 
-SearchSubmitForm.propTypes = {
+SelectShowsForm.propTypes = {
   textvariation: PropTypes.string,
   tab: PropTypes.string,
 };
 
-export default SearchSubmitForm;
+export default SelectShowsForm;
