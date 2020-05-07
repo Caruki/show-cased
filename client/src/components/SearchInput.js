@@ -53,7 +53,7 @@ function SearchInput({
   searchResults,
   onSelect,
   onChange,
-  isSelected,
+  selectedInputs,
   name,
   focused,
 }) {
@@ -69,18 +69,20 @@ function SearchInput({
           placeholder="Search for a tv show..."
         />
       </Container>
-      {focused === name && searchResults.length !== 0 && !isSelected && (
-        <ResultsContainer>
-          {searchResults.map((searchResult) => (
-            <ResultItem
-              key={searchResult.id}
-              onClick={() => onSelect(searchResult, name)}
-            >
-              {searchResult.title} ({searchResult.airYear})
-            </ResultItem>
-          ))}
-        </ResultsContainer>
-      )}
+      {focused === name &&
+        searchResults.length !== 0 &&
+        !selectedInputs.includes(name) && (
+          <ResultsContainer>
+            {searchResults.map((searchResult) => (
+              <ResultItem
+                key={searchResult.id}
+                onClick={() => onSelect(searchResult, name)}
+              >
+                {searchResult.title} ({searchResult.airYear})
+              </ResultItem>
+            ))}
+          </ResultsContainer>
+        )}
     </>
   );
 }
@@ -92,7 +94,7 @@ SearchInput.propTypes = {
   isSearching: PropTypes.bool,
   onSelect: PropTypes.func,
   onChange: PropTypes.func,
-  isSelected: PropTypes.bool,
+  selectedInputs: PropTypes.array,
   name: PropTypes.string,
   focused: PropTypes.string,
 };

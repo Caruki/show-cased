@@ -51,11 +51,11 @@ function SearchSubmitForm({ textvariation }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState('');
-  const [isSelected, setIsSelected] = useState(false);
-  const [state, setState] = useState({});
+  const [selectedInputs, setSelectedInputs] = useState([]);
+  const [selectedShows, setSelectedShows] = useState({});
   const [focused, setFocused] = useState('');
 
-  const debouncedValue = useDebounce(state[focused], 400);
+  const debouncedValue = useDebounce(selectedShows[focused], 400);
 
   useEffect(() => {
     if (debouncedValue) {
@@ -73,22 +73,21 @@ function SearchSubmitForm({ textvariation }) {
   }, [debouncedValue]);
 
   async function handleSelect(searchResult, name) {
-    setState({
-      ...state,
+    setSelectedShows({
+      ...selectedShows,
       [name]: searchResult.title,
     });
+    setSelectedInputs([name, ...selectedInputs]);
     setSearchResults([]);
-    setIsSelected(true);
   }
 
   function handleChange(event) {
     const value = event.target.value;
-    setState({
-      ...state,
+    setSelectedShows({
+      ...selectedShows,
       [event.target.name]: value,
     });
     setFocused(event.target.name);
-    console.log(focused);
   }
 
   const searchInputs = ['show1', 'show2', 'show3', 'show4'];
@@ -102,6 +101,7 @@ function SearchSubmitForm({ textvariation }) {
       <InputContainer>
         {searchInputs.map((searchInput) => (
           <SearchInput
+            value={selectedShows[searchInput]}
             key={searchInput}
             focused={focused}
             name={searchInput}
@@ -110,7 +110,7 @@ function SearchSubmitForm({ textvariation }) {
             isSearching={isSearching}
             onSelect={handleSelect}
             onChange={handleChange}
-            isSelected={isSelected}
+            selectedInputs={selectedInputs}
           />
         ))}
       </InputContainer>
