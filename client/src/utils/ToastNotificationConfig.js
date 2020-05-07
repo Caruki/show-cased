@@ -36,7 +36,7 @@ const WrappedToastContainer = styled(ToastContainer)`
   }
 `;
 
-function ToastNotificationContainer() {
+function ToastNotificationConfig() {
   return (
     <WrappedToastContainer
       transition={Zoom}
@@ -51,4 +51,4 @@ function ToastNotificationContainer() {
   );
 }
 
-export default ToastNotificationContainer;
+export default ToastNotificationConfig;

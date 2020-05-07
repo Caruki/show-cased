@@ -47,14 +47,6 @@ function PopularShows({ tab }) {
     toggleModal();
   }
 
-  if ((trendingStatus || newestStatus) === 'loading') {
-    return <span>Loading...</span>;
-  }
-
-  if ((trendingStatus || newestStatus) === 'error') {
-    return <span>Error</span>;
-  }
-
   return (
     <>
       <ShowDetailViewModal
