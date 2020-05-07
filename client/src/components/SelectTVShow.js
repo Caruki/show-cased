@@ -5,27 +5,15 @@ import InputField from './InputField';
 import useThrottle from '../hooks/useThrottle';
 import { searchShows } from '../api/shows';
 
-const Background = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(14, 5, 46, 0.2);
-  backdrop-filter: blur(4px);
-  z-index: 10;
-`;
-
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30% 10% 0 20%;
-  width: 70%;
+  margin: 12px 10px;
   padding: 22px 15px 15px 15px;
-  border: 2px solid rgba(150, 31, 86, 1);
+  border: 2px solid rgba(150, 31, 86, 0.7);
   border-radius: 11px;
-  background-color: rgba(30, 25, 79, 1);
+  background-color: rgba(30, 25, 79, 0.8);
 
   & :focus-within {
     outline-width: 0px;
@@ -56,9 +44,9 @@ const ResultsContainer = styled.div`
   background-color: #1e194f;
   padding: 10px;
   overflow: auto;
-  max-height: 350px;
-  margin: 5% 0% 0% 15%;
-  width: 80%;
+  max-height: 200px;
+  margin: -5px 0px 10px 0px;
+  width: auto;
 `;
 
 const ItemLabel = styled.label`
@@ -97,7 +85,7 @@ const Error = styled.span`
   border: 1px solid #d0588865;
 `;
 
-function SearchInput({ isOpen, onSelect, toggleSearchActive }) {
+function SelectTVShow({ onSelect, value }) {
   const [inputValue, setInputValue] = useState('');
   const throttledValue = useThrottle(inputValue, 400);
   const [isSearching, setIsSearching] = useState(false);
@@ -122,49 +110,47 @@ function SearchInput({ isOpen, onSelect, toggleSearchActive }) {
 
   return (
     <>
-      {isOpen ? (
-        <Background>
-          <Container>
-            <Input
-              autoComplete="off"
-              value={inputValue}
-              type="search"
-              onChange={(event) => setInputValue(event.target.value)}
-              placeholder={'Search for a tv show...'}
-              onFocus={() => setShowResults(true)}
-              onBlur={() => toggleSearchActive()}
-            />
-          </Container>
-          {showResults && isSearching && <Searching>Searching ...</Searching>}
-          {showResults && error && <Error>{error.message}</Error>}
-          {showResults && searchResults.length !== 0 && (
-            <ResultsContainer>
-              {searchResults.map((searchResult) => (
-                <ItemLabel
-                  key={searchResult.id}
-                  onClick={() => {
-                    setInputValue('');
-                    onSelect(searchResult);
-                    setShowResults(false);
-                  }}
-                >
-                  <ResultItem value={searchResult.id}>
-                    {searchResult.title} ({searchResult.airYear})
-                  </ResultItem>
-                </ItemLabel>
-              ))}
-            </ResultsContainer>
-          )}
-        </Background>
-      ) : null}
+      <Container>
+        <Input
+          autoComplete="off"
+          value={inputValue}
+          type="search"
+          onChange={(event) => setInputValue(event.target.value)}
+          placeholder={
+            value
+              ? `${value.title} (${value.airYear})`
+              : 'Search for a tv show...'
+          }
+          onFocus={() => setShowResults(true)}
+        />
+      </Container>
+      {showResults && isSearching && <Searching>Searching ...</Searching>}
+      {showResults && error && <Error>{error.message}</Error>}
+      {showResults && searchResults.length !== 0 && (
+        <ResultsContainer>
+          {searchResults.map((searchResult) => (
+            <ItemLabel
+              key={searchResult.id}
+              onClick={() => {
+                setInputValue('');
+                onSelect(searchResult);
+                setShowResults(false);
+              }}
+            >
+              <ResultItem value={searchResult.id}>
+                {searchResult.title} ({searchResult.airYear})
+              </ResultItem>
+            </ItemLabel>
+          ))}
+        </ResultsContainer>
+      )}
     </>
   );
 }
 
-SearchInput.propTypes = {
-  isOpen: PropTypes.bool,
+SelectTVShow.propTypes = {
+  value: PropTypes.object,
   onSelect: PropTypes.func,
-  toggleSearchActive: PropTypes.func,
 };
 
-export default SearchInput;
+export default SelectTVShow;

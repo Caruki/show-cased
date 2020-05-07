@@ -8,6 +8,8 @@ import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import Loading from '../utils/Loading';
 import { toast } from 'react-toastify';
+import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
+import SearchInput from './SearchInput';
 
 const ListContainer = styled.div`
   width: 100%;
@@ -19,6 +21,7 @@ const ListContainer = styled.div`
 function PopularShows({ tab }) {
   const [selectedItem, setSelectedItem] = useState({});
   const { isShowing, toggleModal } = useModal();
+  const { searchActive, toggleSearchActive } = useSideNavInformation();
   const {
     status: newestStatus,
     data: newestShowsList,
@@ -37,6 +40,21 @@ function PopularShows({ tab }) {
     toggleModal();
   }
 
+  async function handleSearchSelect(showId) {
+    const showDetails = await loadShowDetails(showId);
+    setSelectedItem(showDetails);
+    toggleSearchActive();
+    toggleModal();
+  }
+
+  if ((trendingStatus || newestStatus) === 'loading') {
+    return <span>Loading...</span>;
+  }
+
+  if ((trendingStatus || newestStatus) === 'error') {
+    return <span>Error</span>;
+  }
+
   return (
     <>
       <ShowDetailViewModal
@@ -52,6 +70,12 @@ function PopularShows({ tab }) {
           autoClose: '5000',
         })}
       {tab === 'newest' && newestStatus === 'loading' && <Loading />}
+      <SearchInput
+        isOpen={searchActive}
+        onSelect={(searchResult) => handleSearchSelect(searchResult.id)}
+        toggleSearchActive={toggleSearchActive}
+      />
+
       {tab === 'newest' && (
         <ListContainer>
           {newestShowsList?.map((show) => (

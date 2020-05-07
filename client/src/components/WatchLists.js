@@ -10,6 +10,9 @@ import useModal from '../hooks/useModal';
 import useAuth from '../contexts/auth/useAuth';
 import Loading from '../utils/Loading';
 import { toast } from 'react-toastify';
+import SelectShowsForm from '../components/SelectShowsForm';
+import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
+import SearchInput from './SearchInput';
 
 const ListContainer = styled.div`
   width: 100%;
@@ -22,6 +25,7 @@ function WatchLists({ tab }) {
   const [selectedItem, setSelectedItem] = useState({});
   const { isShowing, toggleModal } = useModal();
   const { authenticatedUser } = useAuth();
+  const { searchActive, toggleSearchActive } = useSideNavInformation();
   const userId = authenticatedUser.userId;
   const {
     status: toWatchStatus,
@@ -41,6 +45,13 @@ function WatchLists({ tab }) {
     toggleModal();
   }
 
+  async function handleSearchSelect(showId) {
+    const showDetails = await loadShowDetails(showId);
+    setSelectedItem(showDetails);
+    toggleSearchActive();
+    toggleModal();
+  }
+
   return (
     <>
       <ShowDetailViewModal
@@ -56,6 +67,19 @@ function WatchLists({ tab }) {
           autoClose: '5000',
         })}
       {tab === 'towatch' && toWatchStatus === 'loading' && <Loading />}
+      <SearchInput
+        isOpen={searchActive}
+        onSelect={(searchResult) => handleSearchSelect(searchResult.id)}
+        toggleSearchActive={toggleSearchActive}
+      />
+
+      {tab === 'towatch' && (!toWatchList || !toWatchList.length) && (
+        <SelectShowsForm tab={tab} textvariation="want to watch" />
+      )}
+      {tab === 'watched' && (!watchedList || !watchedList.length) && (
+        <SelectShowsForm tab={tab} textvariation="have watched" />
+      )}
+
       {tab === 'towatch' && (
         <ListContainer>
           {toWatchList?.map((show) => (
