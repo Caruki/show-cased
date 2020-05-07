@@ -48,6 +48,22 @@ const ResultItem = styled.div`
   color: #aeb2f5;
 `;
 
+const Searching = styled.span`
+  display: block;
+  color: #aeb2f5;
+  font: 300 0.7rem 'Roboto', sans-serif;
+  background-color: #1e194f;
+  border: 1px solid #d0588865;
+`;
+
+const Error = styled.span`
+  display: block;
+  color: #d05888;
+  font: 300 0.7rem 'Roboto', sans-serif;
+  background-color: #1e194f;
+  border: 1px solid #d0588865;
+`;
+
 function SearchInput({
   value,
   searchResults,
@@ -56,6 +72,8 @@ function SearchInput({
   selectedInputs,
   name,
   focused,
+  error,
+  isSearching,
 }) {
   return (
     <>
@@ -69,6 +87,12 @@ function SearchInput({
           placeholder="Search for a tv show..."
         />
       </Container>
+      {isSearching && !selectedInputs.includes(name) && (
+        <Searching>Searching ...</Searching>
+      )}
+      {error && !selectedInputs.includes(name) && (
+        <Error>{error.message}</Error>
+      )}
       {focused === name &&
         searchResults.length !== 0 &&
         !selectedInputs.includes(name) && (
