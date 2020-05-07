@@ -40,7 +40,7 @@ function RecsGenres({ userId }) {
   const [selectedItem, setSelectedItem] = useState({});
   const [page, setPage] = useState(1);
   const { isShowing, toggleModal } = useModal();
-  const { status, resolvedData, latestData } = usePaginatedQuery(
+  const { status, resolvedData, latestData, error } = usePaginatedQuery(
     ['recsGenres', userId, page],
     getPaginatedRecsByGenres,
     {
@@ -91,7 +91,7 @@ function RecsGenres({ userId }) {
       >
         <GoForward disabled={latestData?.maxPageReached} />
       </Button>
-      {status === 'error' && <ErrorMessageRecs />}
+      {error.status === 404 && <ErrorMessageRecs />}
       {status === 'loading' && <Loading />}
       <ListContainer>
         {resolvedData?.recs.map((show) => (

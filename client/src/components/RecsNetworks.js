@@ -40,7 +40,7 @@ function RecsNetworks({ userId }) {
   const [selectedItem, setSelectedItem] = useState({});
   const [page, setPage] = useState(1);
   const { isShowing, toggleModal } = useModal();
-  const { status, resolvedData, latestData } = usePaginatedQuery(
+  const { status, resolvedData, latestData, error } = usePaginatedQuery(
     ['recsNetworks', userId, page],
     getPaginatedRecsByNetworks,
     {
@@ -90,7 +90,7 @@ function RecsNetworks({ userId }) {
       >
         <GoForward disabled={latestData?.maxPageReached} />
       </Button>
-      {status === 'error' && <ErrorMessageRecs />}
+      {error.status === 404 && <ErrorMessageRecs />}
       {status === 'loading' && <Loading />}
       <ListContainer>
         {resolvedData?.recs.map((show) => (
