@@ -18,7 +18,7 @@ const MainContainer = styled.div`
 `;
 
 const HeaderBottomNavLayoutRoute = ({ component: Component, ...rest }) => {
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   return (
     <BasicLayoutRoute
@@ -43,7 +43,7 @@ const HeaderBottomNavLayoutRoute = ({ component: Component, ...rest }) => {
               },
               { label: 'Lists', icon: Lists, navLink: '/lists' },
             ]}
-            activeNavItem={location.pathname}
+            activeNavItem={pathname}
           />
         </>
       )}

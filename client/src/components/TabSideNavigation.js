@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Tab from './Tab';
@@ -32,6 +32,10 @@ function TabSideNavigation({ children }) {
     searchActive,
   } = useSideNavInformation();
   const [activeTab, setActiveTab] = useState(children[0].props.label);
+
+  useEffect(() => {
+    setTabContent('default');
+  }, []);
 
   function handleClickSearch() {
     toggleSearchActive();
