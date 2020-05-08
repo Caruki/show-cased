@@ -25,7 +25,7 @@ const InputIconContainer = styled.div`
   input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 100px rgba(2, 0, 36, 1) inset;
     box-shadow: 0 0 0 1000px rgba(2, 0, 36, 1) inset;
-    color: #e7eaff;
+    color: steelblue;
     font: 100 1.2rem 'Roboto', sans-serif;
   }
 
