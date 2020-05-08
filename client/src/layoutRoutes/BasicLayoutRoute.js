@@ -3,9 +3,19 @@ import { Route } from 'react-router-dom';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
-const AppContainer = styled.div`
+const BackgroundContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: rgba(2, 0, 36, 1);
   height: 100vh;
   width: 100vw;
+`;
+const AppContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  max-height: 1024px;
+  max-width: 768px;
 `;
 
 const LayoutContainer = styled.div`
@@ -22,11 +32,13 @@ const BasicLayoutRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(matchProps) => (
-        <AppContainer>
-          <LayoutContainer>
-            <Component {...matchProps} />
-          </LayoutContainer>
-        </AppContainer>
+        <BackgroundContainer>
+          <AppContainer>
+            <LayoutContainer>
+              <Component {...matchProps} />
+            </LayoutContainer>
+          </AppContainer>
+        </BackgroundContainer>
       )}
     />
   );

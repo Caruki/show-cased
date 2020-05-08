@@ -7,6 +7,7 @@ const Container = styled.nav`
   display: flex;
   justify-content: center;
   width: 100%;
+  max-width: 768px;
   flex: 0 0 10%;
   margin: 0;
   padding: 0;
@@ -49,11 +50,7 @@ const BottomNav = ({ links, activeNavItem }) => {
     <Container>
       <NavItemContainer>
         {links.map((link) => (
-          <NavItem
-            active={activeNavItem === link.navLink}
-            key={link.label}
-            to={link.navLink}
-          >
+          <NavItem key={link.label} to={link.navLink}>
             <link.icon active={activeNavItem === link.navLink} />
             <Label active={activeNavItem === link.navLink}>{link.label}</Label>
           </NavItem>

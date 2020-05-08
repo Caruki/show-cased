@@ -16,8 +16,14 @@ const FormContainer = styled.form`
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-around;
-  width: 50%;
+  width: 60%;
+  @media (min-width: 700px) {
+    width: 45%;
+    margin-top: 15%;
+  }
   height: 80%;
+  margin-top: 6%;
+  margin-right: 20px;
 
   & > * {
     & :focus {
@@ -56,12 +62,16 @@ const AccountQuestion = styled.div`
     margin: 10px;
   }
 
-  & > a:link {
+  a {
     font: inherit;
     font-style: italic;
     color: #d05888;
 
-    & :hover,
+    :visited {
+      color: rgb(147, 49, 102, 0.1);
+    }
+
+    :hover,
     :active,
     :focus {
       filter: brightness(150%);
@@ -149,8 +159,6 @@ function AuthenticationForm({ authType }) {
     }
   }
 
-  /* const notify = () => toast('Account created 🎉 Please log in now!'); */
-
   return (
     <>
       {authenticatedUser && (
@@ -164,7 +172,11 @@ function AuthenticationForm({ authType }) {
       {(registerStatus || loginStatus) === 'loading' ? (
         <Loading />
       ) : (
-        <FormContainer onSubmit={handleSubmit}>
+        <FormContainer
+          onSubmit={handleSubmit}
+          autoFill="off"
+          autoComplete="off"
+        >
           <InputContainer>
             {authType === 'register' && (
               <SignInUpInput

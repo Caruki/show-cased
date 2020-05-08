@@ -48,12 +48,24 @@ const Rating = styled.div`
   margin: 5px 0px 10px 0px;
 `;
 
+const MissingPoster = styled.div`
+  padding-top: 50px;
+  text-align: center;
+  font: 300 0.8rem 'Roboto', sans-serif;
+  width: 100%;
+  color: #aeb2f5;
+`;
+
 function ListItem({ poster, title, rating, id, onClick }) {
   return (
     <Container>
       <ItemContainer id={id} onClick={onClick}>
         <PosterContainer>
-          <img src={poster} alt={title} />
+          {poster === 'https://image.tmdb.org/t/p/w154null' ? (
+            <MissingPoster>no image! ¯\_(ツ)_/¯</MissingPoster>
+          ) : (
+            <img src={poster} alt={title} />
+          )}
         </PosterContainer>
       </ItemContainer>
       <Title>{title}</Title>

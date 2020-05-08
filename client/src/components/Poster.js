@@ -22,10 +22,23 @@ const PosterContainer = styled.div`
   }
 `;
 
+const MissingPoster = styled.div`
+  padding-top: 50px;
+  text-align: center;
+  font: 300 0.8rem 'Roboto', sans-serif;
+  width: 100%;
+  height: 100%;
+  color: #aeb2f5;
+`;
+
 function Poster({ showPoster }) {
   return (
     <PosterContainer>
-      <img src={showPoster} alt="poster of the selected tv show" />
+      {showPoster === 'https://image.tmdb.org/t/p/w780null' ? (
+        <MissingPoster>no image available! ¯\_(ツ)_/¯</MissingPoster>
+      ) : (
+        <img src={showPoster} alt="poster of the selected tv show" />
+      )}
     </PosterContainer>
   );
 }
