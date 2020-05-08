@@ -84,10 +84,10 @@ function WatchLists({ tab }) {
         toggleSearchActive={toggleSearchActive}
       />
 
-      {tab === 'towatch' && (!toWatchList || !toWatchList.length) && (
+      {tab === 'towatch' && toWatchList?.length <= 0 && (
         <SelectShowsForm tab={tab} textvariation="want to watch" />
       )}
-      {tab === 'watched' && (!watchedList || !watchedList.length) && (
+      {tab === 'watched' && watchedList?.length <= 0 && (
         <SelectShowsForm tab={tab} textvariation="have watched" />
       )}
 
