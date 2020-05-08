@@ -32,7 +32,6 @@ const Container = styled.div`
   max-width: 350px;
   min-height: 550px;
   max-height: 90%;
-  padding: 20px;
   @media (min-width: 700px) {
     max-width: 650px;
   }
