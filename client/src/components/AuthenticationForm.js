@@ -62,12 +62,16 @@ const AccountQuestion = styled.div`
     margin: 10px;
   }
 
-  & > a:link {
+  a {
     font: inherit;
     font-style: italic;
     color: #d05888;
 
-    & :hover,
+    :visited {
+      color: rgb(147, 49, 102, 0.1);
+    }
+
+    :hover,
     :active,
     :focus {
       filter: brightness(150%);
