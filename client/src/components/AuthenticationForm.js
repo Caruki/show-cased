@@ -149,8 +149,6 @@ function AuthenticationForm({ authType }) {
     }
   }
 
-  /* const notify = () => toast('Account created 🎉 Please log in now!'); */
-
   return (
     <>
       {authenticatedUser && (
@@ -164,7 +162,11 @@ function AuthenticationForm({ authType }) {
       {(registerStatus || loginStatus) === 'loading' ? (
         <Loading />
       ) : (
-        <FormContainer onSubmit={handleSubmit}>
+        <FormContainer
+          onSubmit={handleSubmit}
+          autoFill="off"
+          autoComplete="off"
+        >
           <InputContainer>
             {authType === 'register' && (
               <SignInUpInput

@@ -19,6 +19,16 @@ const Container = styled.div`
 const InputIconContainer = styled.div`
   margin: 0px 10px 0px 13px;
   padding-top: ${(props) => (props.variation === 'email' ? '25px' : '20px')};
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 100px rgba(2, 0, 36, 1) inset;
+    box-shadow: 0 0 0 1000px rgba(2, 0, 36, 1) inset;
+    color: #e7eaff;
+    font: 100 1.2rem 'Roboto', sans-serif;
+  }
+
   & :focus {
     outline-width: 0;
     ::placeholder {
@@ -46,7 +56,13 @@ function SignInUpInput({ variation, type, placeholder, onChange }) {
         </InputIconContainer>
       )}
 
-      <InputField placeholder={placeholder} type={type} onChange={onChange} />
+      <InputField
+        autoFill="off"
+        autoComplete="off"
+        placeholder={placeholder}
+        type={type}
+        onChange={onChange}
+      />
     </Container>
   );
 }

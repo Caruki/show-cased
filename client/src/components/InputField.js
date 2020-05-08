@@ -9,6 +9,15 @@ const InputField = styled.input`
   color: #e7eaff;
   font: 100 1.2rem 'Roboto', sans-serif;
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    font: 100 1.2rem 'Roboto', sans-serif;
+    background-color: transparent !important;
+    color: steelblue;
+  }
+
   & :focus {
     outline-width: 0;
     ::placeholder {
