@@ -8,6 +8,10 @@ const SVG = styled.svg`
   .offset1 {
     stop-color: ${(props) => (props.active ? '#d05888' : '#aeb2f5')};
   }
+
+  & feFlood {
+    flood-color: ${(props) => (props.active ? '#d05888' : '#aeb2f5')};
+  }
 `;
 
 export const WatchedButton = ({ active, size, id }) => {
@@ -35,7 +39,7 @@ export const WatchedButton = ({ active, size, id }) => {
         >
           <feOffset input="SourceAlpha" />
           <feGaussianBlur stdDeviation="1.5" result="blur" />
-          <feFlood floodColor="#d05888" />
+          <feFlood />
           <feComposite operator="in" in2="blur" />
           <feComposite in="SourceGraphic" />
         </filter>
@@ -78,7 +82,7 @@ export const ToWatchButton = ({ active, size, id }) => {
         >
           <feOffset input="SourceAlpha" />
           <feGaussianBlur stdDeviation="1.5" result="blur" />
-          <feFlood floodColor="#d05888" />
+          <feFlood />
           <feComposite operator="in" in2="blur" />
           <feComposite in="SourceGraphic" />
         </filter>
