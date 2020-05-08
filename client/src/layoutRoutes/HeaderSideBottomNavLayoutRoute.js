@@ -13,6 +13,9 @@ const MainContainer = styled.div`
   flex-flow: column nowrap;
   align-items: center;
   flex-basis: 85%;
+  @media (min-width: 700px) {
+    flex-basis: 92%;
+  }
   margin-left: 5px;
   overflow: auto;
   height: 100%;
