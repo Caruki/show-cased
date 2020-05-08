@@ -80,23 +80,39 @@ const AccountQuestion = styled.div`
 `;
 
 const ErrorMessage = styled.div`
-  padding: 20px;
+  padding: 5px;
   color: #d05888;
   font: 300 1rem 'Roboto', sans-serif;
   border: 1px solid #d05888;
   border-radius: 15px;
 `;
 const UserInformation = styled.div`
-  padding: 20px;
+  padding: 10px 5px;
   color: #d05888;
-  font: 300 1.2rem 'Roboto', sans-serif;
+  font: 300 1rem 'Roboto', sans-serif;
   border: 1px solid #d05888;
   border-radius: 15px;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   line-height: 25px;
-  margin-top: 40px;
+  margin-top: 10px;
+
+  a {
+    font: inherit;
+    font-style: italic;
+    color: #d05888;
+
+    :visited {
+      color: rgb(147, 49, 102, 0.1);
+    }
+
+    :hover,
+    :active,
+    :focus {
+      filter: brightness(150%);
+    }
+  }
 `;
 
 const authForm = {
@@ -161,14 +177,6 @@ function AuthenticationForm({ authType }) {
 
   return (
     <>
-      {authenticatedUser && (
-        <UserInformation>
-          <span>You are already logged in! 🥳</span>{' '}
-          <span>
-            Please click <a href="/popular">here</a>
-          </span>
-        </UserInformation>
-      )}
       {(registerStatus || loginStatus) === 'loading' ? (
         <Loading />
       ) : (
@@ -207,7 +215,19 @@ function AuthenticationForm({ authType }) {
             <ErrorMessage>{registerError.message}</ErrorMessage>
           )}
           {loginError && <ErrorMessage>{loginError.message}</ErrorMessage>}
-
+          {authenticatedUser && (
+            <UserInformation>
+              <span>
+                You are already logged in!{' '}
+                <span role="img" aria-label="celebrating">
+                  🥳
+                </span>
+              </span>{' '}
+              <span>
+                Please click <a href="/popular">here</a>
+              </span>
+            </UserInformation>
+          )}
           <ButtonContainer>
             <SubmitButton>{authForm[authType].buttonText}</SubmitButton>
           </ButtonContainer>

@@ -32,7 +32,7 @@ export async function loginUser(userInformation) {
 
 export async function logoutUser() {
   const response = await fetch('/api/auth/logout', {
-    method: 'GET',
+    method: 'POST',
   });
   if (!response.ok) {
     const errorMessage = await response.text();

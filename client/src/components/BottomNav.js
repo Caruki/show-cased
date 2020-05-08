@@ -16,6 +16,10 @@ const Container = styled.nav`
   border-radius: 50px 50px 0px 0px;
   position: fixed;
   bottom: 0;
+  @media (min-width: 700px) {
+    position: relative;
+    align-self: flex-end;
+  }
 `;
 
 const NavItemContainer = styled.div`
