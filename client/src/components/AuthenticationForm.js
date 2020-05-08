@@ -16,8 +16,14 @@ const FormContainer = styled.form`
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-around;
-  width: 50%;
+  width: 60%;
+  @media (min-width: 700px) {
+    width: 45%;
+    margin-top: 15%;
+  }
   height: 80%;
+  margin-top: 6%;
+  margin-right: 20px;
 
   & > * {
     & :focus {
