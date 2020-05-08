@@ -46,8 +46,8 @@ const HeaderSideBottomNavLayoutRoute = ({
           <Header />
           <Container>
             <TabSideNavigation>
-              <div label={site === 'popular' ? 'Trending' : 'Watched'}></div>
-              <div label={site === 'popular' ? 'Newest' : 'ToWatch'}></div>
+              <div label={site === 'popular' ? 'Trending' : 'ToWatch'}></div>
+              <div label={site === 'popular' ? 'Newest' : 'Watched'}></div>
             </TabSideNavigation>
             <MainContainer>
               <Component {...matchProps} />
