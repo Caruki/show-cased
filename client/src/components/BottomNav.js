@@ -50,11 +50,7 @@ const BottomNav = ({ links, activeNavItem }) => {
     <Container>
       <NavItemContainer>
         {links.map((link) => (
-          <NavItem
-            active={activeNavItem === link.navLink}
-            key={link.label}
-            to={link.navLink}
-          >
+          <NavItem key={link.label} to={link.navLink}>
             <link.icon active={activeNavItem === link.navLink} />
             <Label active={activeNavItem === link.navLink}>{link.label}</Label>
           </NavItem>
