@@ -41,7 +41,7 @@ function UserRoutes() {
             <Redirect to="/register" />
           </Route>
           <Route path="/">
-            <Redirect to="/login" />
+            <Redirect to="/register" />
           </Route>
         </Switch>
       )}
