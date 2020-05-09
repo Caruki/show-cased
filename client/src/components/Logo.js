@@ -26,6 +26,10 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 30%;
+  @media (min-width: 700px) {
+    margin-top: 5%;
+    height: 10%;
+  }
   margin-top: 30px;
 `;
 
