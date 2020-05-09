@@ -76,4 +76,8 @@ npm start
 
 The logo was created after a vector by <a href="https://www.freepik.com/studiogstock">studiogstock</a>.
 
+Login Background by <a href="https://unsplash.com/@thibaultpenin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Thibault Pinin</a> on <a href="https://unsplash.com/">Unsplash</a>
+
+Register Background by <a href="https://unsplash.com/@adrienolichon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Adrien Olichon</a> on <a href="https://unsplash.com/">Unsplash</a>
+
 Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> and <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">iconixar</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
