@@ -9,7 +9,6 @@ const BackgroundContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: space-around;
   align-items: center;
-  margin-top: -5px;
   width: 100%;
   height: 100%;
   background-image: ${(props) =>
@@ -17,8 +16,15 @@ const BackgroundContainer = styled.div`
       ? "url('/bg-signup.png')"
       : "url('/bg-login.png')"};
   background-size: cover;
-  background-position: top;
-  background: cover;
+  background-position: center;
+  background: contain;
+  overflow: auto;
+  @media (m: 700px) {
+    width: 45%;
+    height: 50%;
+    justify-content: space-evenly;
+    margin: 0;
+  }
 `;
 
 function Authentication() {

@@ -17,13 +17,15 @@ const FormContainer = styled.form`
   align-items: center;
   justify-content: space-around;
   width: 60%;
-  @media (min-width: 700px) {
-    width: 45%;
-    margin-top: 15%;
-  }
   height: 80%;
   margin-top: 6%;
   margin-right: 20px;
+  @media (min-width: 700px) {
+    width: 45%;
+    height: 60%;
+    justify-content: space-evenly;
+    margin-top: 0px;
+  }
 
   & > * {
     & :focus {
@@ -47,6 +49,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-basis: 100%;
+  margin: 10px;
 `;
 
 const AccountQuestion = styled.div`

@@ -7,9 +7,9 @@ function Lists() {
 
   return (
     <>
-      {tabContent === 'default' && <WatchLists tab="watched" />}
-      {tabContent === 'Watched' && <WatchLists tab="watched" />}
+      {tabContent === 'default' && <WatchLists tab="towatch" />}
       {tabContent === 'ToWatch' && <WatchLists tab="towatch" />}
+      {tabContent === 'Watched' && <WatchLists tab="watched" />}
     </>
   );
 }
