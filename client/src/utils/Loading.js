@@ -35,59 +35,59 @@ const Animation = styled.div`
     background: #fff;
     margin: -4px 0 0 -4px;
   }
-  div:nth-child(1) {
+  div:nth-of-type(1) {
     animation-delay: -0.036s;
   }
-  div:nth-child(1):after {
+  div:nth-of-type(1):after {
     top: 63px;
     left: 63px;
   }
-  div:nth-child(2) {
+  div:nth-of-type(2) {
     animation-delay: -0.072s;
   }
-  div:nth-child(2):after {
+  div:nth-of-type(2):after {
     top: 68px;
     left: 56px;
   }
-  div:nth-child(3) {
+  div:nth-of-type(3) {
     animation-delay: -0.108s;
   }
-  div:nth-child(3):after {
+  div:nth-of-type(3):after {
     top: 71px;
     left: 48px;
   }
-  div:nth-child(4) {
+  div:nth-of-type(4) {
     animation-delay: -0.144s;
   }
-  div:nth-child(4):after {
+  div:nth-of-type(4):after {
     top: 72px;
     left: 40px;
   }
-  div:nth-child(5) {
+  div:nth-of-type(5) {
     animation-delay: -0.18s;
   }
-  div:nth-child(5):after {
+  div:nth-of-type(5):after {
     top: 71px;
     left: 32px;
   }
-  div:nth-child(6) {
+  div:nth-of-type(6) {
     animation-delay: -0.216s;
   }
-  div:nth-child(6):after {
+  div:nth-of-type(6):after {
     top: 68px;
     left: 24px;
   }
-  div:nth-child(7) {
+  div:nth-of-type(7) {
     animation-delay: -0.252s;
   }
-  div:nth-child(7):after {
+  div:nth-of-type(7):after {
     top: 63px;
     left: 17px;
   }
-  div:nth-child(8) {
+  div:nth-of-type(8) {
     animation-delay: -0.288s;
   }
-  div:nth-child(8):after {
+  div:nth-of-type(8):after {
     top: 56px;
     left: 12px;
   }
