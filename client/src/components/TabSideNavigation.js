@@ -35,7 +35,7 @@ function TabSideNavigation({ children }) {
 
   useEffect(() => {
     setTabContent('default');
-  }, []);
+  }, [setTabContent]);
 
   function handleClickSearch() {
     toggleSearchActive();
