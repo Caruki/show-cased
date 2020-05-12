@@ -40,12 +40,11 @@ function RecsNetworks({ userId }) {
   const [selectedItem, setSelectedItem] = useState({});
   const [page, setPage] = useState(1);
   const { isShowing, toggleModal } = useModal();
-  const { status, resolvedData, latestData, error } = usePaginatedQuery(
+  const { status, resolvedData, latestData } = usePaginatedQuery(
     ['recsNetworks', userId, page],
     getPaginatedRecsByNetworks,
     {
       staleTime: 3600000,
-      retry: false,
     }
   );
 
@@ -55,7 +54,10 @@ function RecsNetworks({ userId }) {
     if (!latestData?.maxPageReached) {
       queryCache.prefetchQuery(
         ['recsNetworks', userId, page + 1],
-        getPaginatedRecsByNetworks
+        getPaginatedRecsByNetworks,
+        {
+          staleTime: 3600000,
+        }
       );
     }
   }, [latestData, userId, page]);
@@ -90,25 +92,25 @@ function RecsNetworks({ userId }) {
       >
         <GoForward disabled={latestData?.maxPageReached} />
       </Button>
-      {status === 'error' && error.message === 'Not Found' && (
-        <ErrorMessageRecs />
-      )}
       {status === 'loading' && <Loading />}
-      <ListContainer>
-        {resolvedData?.recs.map((show) => (
-          <ListItem
-            poster={show.poster}
-            title={show.title}
-            rating={show.rating}
-            key={show.id}
-            id={show.id}
-            onClick={() => {
-              handleItemClick(show.id);
-            }}
-          />
-        ))}
-      </ListContainer>
-      )
+      {resolvedData?.recs.length === 0 ? (
+        <ErrorMessageRecs />
+      ) : (
+        <ListContainer>
+          {resolvedData?.recs.map((show) => (
+            <ListItem
+              poster={show.poster}
+              title={show.title}
+              rating={show.rating}
+              key={show.id}
+              id={show.id}
+              onClick={() => {
+                handleItemClick(show.id);
+              }}
+            />
+          ))}
+        </ListContainer>
+      )}
     </>
   );
 }
