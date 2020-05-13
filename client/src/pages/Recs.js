@@ -1,6 +1,6 @@
 import React from 'react';
-import RecsGenres from '../components/RecsGenres';
-import RecsNetworks from '../components/RecsNetworks';
+import RecsGenres from '../components/PageMainContent/RecsGenres';
+import RecsNetworks from '../components/PageMainContent/RecsNetworks';
 import useAuth from '../contexts/auth/useAuth';
 import styled from '@emotion/styled';
 

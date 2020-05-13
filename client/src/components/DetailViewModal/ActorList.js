@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import ArrowIcon from '../assets/icons/arrow-icon.svg';
+import ArrowIcon from '../../assets/icons/arrow-icon.svg';
 
 const AllActorsContainer = styled.div`
   display: flex;

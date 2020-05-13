@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import BasicLayoutRoute from './BasicLayoutRoute';
-import Header from '../components/Header';
-import BottomNav from '../components/BottomNav';
+import Header from '../components/Layout/Header';
+import BottomNav from '../components/Layout/BottomNav';
 import { Lists, Popular, Recs } from '../assets/icons/BottomIcons';
 import { useLocation } from 'react-router-dom';
 

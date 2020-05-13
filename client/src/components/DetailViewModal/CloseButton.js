@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import CloseIcon from '../assets/icons/CloseIcon';
+import CloseIcon from '../../assets/icons/CloseIcon';
 
 const Button = styled.button`
   right: 0px;
