@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from 'react-query';
-import { WatchedButton, ToWatchButton } from '../assets/WatchListIcons';
+import { WatchedButton, ToWatchButton } from '../assets/icons/WatchListIcons';
 import {
   addToWatchList,
   addToWatchedList,

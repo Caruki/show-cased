@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import BasicLayoutRoute from './BasicLayoutRoute';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
-import { Lists, Popular, Recs } from '../assets/BottomIcons';
+import { Lists, Popular, Recs } from '../assets/icons/BottomIcons';
 import { useLocation } from 'react-router-dom';
 
 const MainContainer = styled.div`

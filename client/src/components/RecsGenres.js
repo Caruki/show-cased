@@ -7,7 +7,7 @@ import { getShowDetails } from '../api/shows';
 import ShowDetailViewModal from './ShowDetailViewModal';
 import useModal from '../hooks/useModal';
 import { getPaginatedRecsByGenres } from '../api/recs';
-import { GoBack, GoForward } from '../assets/RecsNavigation';
+import { GoBack, GoForward } from '../assets/icons/RecsNavigation';
 import Loading from '../utils/Loading';
 import ErrorMessageRecs from './ErrorMessageRecs';
 

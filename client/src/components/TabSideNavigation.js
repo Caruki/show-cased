@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Tab from './Tab';
 import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
-import SearchIcon from '../assets/SearchIcon';
+import SearchIcon from '../assets/icons/SearchIcon';
 
 const Container = styled.div`
   display: flex;
