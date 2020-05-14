@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthenticationForm from '../components/AuthenticationForm';
+import AuthenticationForm from '../components/PageMainContent/AuthenticationForm';
 
 export default {
   title: 'Authentication Form',

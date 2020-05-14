@@ -1,6 +1,5 @@
 import React from 'react';
-import BottomNav from '../components/BottomNav';
-// import { MainEnvironmentDecorator } from '../../.storybook/environmentDecorator';
+import BottomNav from '../components/Layout/BottomNav';
 
 export default {
   title: 'BottomNav',
