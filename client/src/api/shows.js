@@ -1,4 +1,4 @@
-import DefaultPicture from '../assets/default.png';
+import DefaultPicture from '../assets/default_profile.png';
 
 export async function searchShows(value) {
   const response = await fetch(`/api/shows/search?q=${value}`, {

@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../components/Logo';
-import AuthenticationForm from '../components/AuthenticationForm';
+import AuthenticationForm from '../components/PageMainContent/AuthenticationForm';
 import { useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
 

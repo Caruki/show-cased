@@ -1,6 +1,6 @@
 import React from 'react';
 import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
-import WatchLists from '../components/WatchLists';
+import WatchLists from '../components/PageMainContent/WatchLists';
 
 function Lists() {
   const { tabContent } = useSideNavInformation();

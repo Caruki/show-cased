@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useMutation, usePaginatedQuery, queryCache } from 'react-query';
-import ListItem from './ListItem';
-import { getShowDetails } from '../api/shows';
-import ShowDetailViewModal from './ShowDetailViewModal';
-import useModal from '../hooks/useModal';
-import { getPaginatedRecsByNetworks } from '../api/recs';
-import { GoBack, GoForward } from '../assets/RecsNavigation';
-import Loading from '../utils/Loading';
-import ErrorMessageRecs from './ErrorMessageRecs';
+import ListItem from '../ListItem';
+import { getShowDetails } from '../../api/shows';
+import ShowDetailViewModal from '../DetailViewModal/ShowDetailViewModal';
+import useModal from '../../hooks/useModal';
+import { getPaginatedRecsByGenres } from '../../api/recs';
+import { GoBack, GoForward } from '../../assets/icons/RecsNavigation';
+import Loading from '../../utils/Loading';
+import ErrorMessageRecs from '../ErrorMessageRecs';
 
 const Button = styled.button`
   display: flex;
@@ -36,13 +36,13 @@ const ListContainer = styled.div`
   grid-gap: 1rem;
 `;
 
-function RecsNetworks({ userId }) {
+function RecsGenres({ userId }) {
   const [selectedItem, setSelectedItem] = useState({});
   const [page, setPage] = useState(1);
   const { isShowing, toggleModal } = useModal();
   const { status, resolvedData, latestData } = usePaginatedQuery(
-    ['recsNetworks', userId, page],
-    getPaginatedRecsByNetworks,
+    ['recsGenres', userId, page],
+    getPaginatedRecsByGenres,
     {
       staleTime: 3600000,
     }
@@ -53,8 +53,8 @@ function RecsNetworks({ userId }) {
   React.useEffect(() => {
     if (!latestData?.maxPageReached) {
       queryCache.prefetchQuery(
-        ['recsNetworks', userId, page + 1],
-        getPaginatedRecsByNetworks,
+        ['recsGenres', userId, page + 1],
+        getPaginatedRecsByGenres,
         {
           staleTime: 3600000,
         }
@@ -75,13 +75,14 @@ function RecsNetworks({ userId }) {
         toggleModal={toggleModal}
         showDetails={selectedItem}
       />
+
       <Button
         onClick={() => setPage((old) => Math.max(old - 2, 1))}
         disabled={page === 1}
       >
         <GoBack disabled={page === 1} />
       </Button>
-      <Heading>Networks</Heading>
+      <Heading>Genres</Heading>
       <Button
         onClick={() =>
           setPage((old) =>
@@ -115,8 +116,8 @@ function RecsNetworks({ userId }) {
   );
 }
 
-RecsNetworks.propTypes = {
+RecsGenres.propTypes = {
   userId: PropTypes.string,
 };
 
-export default RecsNetworks;
+export default RecsGenres;

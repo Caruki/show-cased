@@ -1,5 +1,5 @@
 import React from 'react';
-import TabSideNavigation from '../components/TabSideNavigation';
+import TabSideNavigation from '../components/Layout/TabSideNavigation';
 
 export default {
   title: 'Side Navigation',

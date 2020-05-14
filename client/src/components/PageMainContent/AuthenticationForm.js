@@ -3,13 +3,13 @@ import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import SignInUpInput from '../components/SignInUpInput';
-import SubmitButton from '../components/SubmitButton';
-import { registerUser } from '../api/users';
-import useAuth from '../contexts/auth/useAuth';
+import SignInUpInput from '../SignInUpInput';
+import SubmitButton from '../SubmitButton';
+import { registerUser } from '../../api/users';
+import useAuth from '../../contexts/auth/useAuth';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loading from '../utils/Loading';
+import Loading from '../../utils/Loading';
 
 const FormContainer = styled.form`
   display: flex;

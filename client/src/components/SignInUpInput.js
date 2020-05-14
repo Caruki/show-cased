@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
-import EmailIcon from '../assets/email.svg';
-import PasswordIcon from '../assets/password.svg';
-import UsernameIcon from '../assets/username.svg';
+import EmailIcon from '../assets/icons/input_icons/email.svg';
+import PasswordIcon from '../assets/icons/input_icons/password.svg';
+import UsernameIcon from '../assets/icons/input_icons/username.svg';
 import InputField from './InputField';
 
 const Container = styled.div`

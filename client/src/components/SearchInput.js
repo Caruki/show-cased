@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import InputField from './InputField';
 import useThrottle from '../hooks/useThrottle';
 import { searchShows } from '../api/shows';
-import CloseIcon from '../assets/CloseIcon';
+import CloseIcon from '../assets/icons/CloseIcon';
 
 const Background = styled.div`
   position: absolute;

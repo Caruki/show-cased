@@ -1,6 +1,6 @@
 import React from 'react';
 import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
-import PopularShows from '../components/PopularShows';
+import PopularShows from '../components/PageMainContent/PopularShows';
 
 function Popular() {
   const { tabContent } = useSideNavInformation();
