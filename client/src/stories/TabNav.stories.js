@@ -8,25 +8,17 @@ export default {
 export const SideNavPopular = () => {
   return (
     <TabSideNavigation>
-      <div label="Trending">
-        <div></div>
-      </div>
-      <div label="Newest">
-        <div></div>
-      </div>
+      <div label="Trending"></div>
+      <div label="Newest"></div>
     </TabSideNavigation>
   );
 };
 
-export const SideNavRecs = () => {
+export const SideNavLists = () => {
   return (
     <TabSideNavigation>
-      <div label="Watched">
-        <div></div>
-      </div>
-      <div label="ToWatch">
-        <div></div>
-      </div>
+      <div label="ToWatch"></div>
+      <div label="Watched"></div>
     </TabSideNavigation>
   );
 };

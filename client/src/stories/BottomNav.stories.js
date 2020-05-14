@@ -1,18 +1,70 @@
 import React from 'react';
 import BottomNav from '../components/Layout/BottomNav';
+import { Lists, Popular, Recs } from '../assets/icons/BottomIcons';
 
 export default {
   title: 'BottomNav',
 };
 
 export const BottomNavPopular = () => {
-  return <BottomNav site="popular" />;
+  return (
+    <BottomNav
+      links={[
+        {
+          label: 'Popular',
+          icon: Popular,
+          navLink: '/popular',
+        },
+        {
+          label: 'Recs',
+          icon: Recs,
+          navLink: '/recs',
+        },
+        { label: 'Lists', icon: Lists, navLink: '/lists' },
+      ]}
+      activeNavItem="/popular"
+    />
+  );
 };
 
 export const BottomNavRecs = () => {
-  return <BottomNav site="recs" />;
+  return (
+    <BottomNav
+      links={[
+        {
+          label: 'Popular',
+          icon: Popular,
+          navLink: '/popular',
+        },
+        {
+          label: 'Recs',
+          icon: Recs,
+          navLink: '/recs',
+        },
+        { label: 'Lists', icon: Lists, navLink: '/lists' },
+      ]}
+      activeNavItem="/recs"
+    />
+  );
 };
 
 export const BottomNavLists = () => {
-  return <BottomNav site="lists" />;
+  return (
+    <BottomNav
+      links={[
+        {
+          label: 'Popular',
+          icon: Popular,
+          navLink: '/popular',
+        },
+        {
+          label: 'Recs',
+          icon: Recs,
+          navLink: '/recs',
+        },
+        { label: 'Lists', icon: Lists, navLink: '/lists' },
+      ]}
+      activeNavItem="/lists"
+    />
+  );
 };
