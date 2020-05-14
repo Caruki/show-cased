@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Logo from './Logo';
-import useAuth from '../contexts/auth/useAuth';
+import Logo from '../Logo';
+import useAuth from '../../contexts/auth/useAuth';
 
 const Container = styled.div`
   display: flex;

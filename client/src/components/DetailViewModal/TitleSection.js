@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import TrailerIcon from '../assets/trailer-icon.svg';
-import RatingIcon from '../assets/rating-icon.svg';
+import TrailerIcon from '../../assets/icons/trailer-icon.svg';
+import RatingIcon from '../../assets/icons/rating-icon.svg';
 
 const TitleContainer = styled.div`
   display: flex;

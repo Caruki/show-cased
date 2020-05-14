@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from 'react-query';
-import WatchListItem from './WatchListItem';
-import { getToWatchList, getWatchedList } from '../api/lists';
-import { getShowDetails } from '../api/shows';
-import ShowDetailViewModal from './ShowDetailViewModal';
-import useModal from '../hooks/useModal';
-import useAuth from '../contexts/auth/useAuth';
-import Loading from '../utils/Loading';
+import WatchListItem from '../WatchListItem';
+import { getToWatchList, getWatchedList } from '../../api/lists';
+import { getShowDetails } from '../../api/shows';
+import ShowDetailViewModal from '../DetailViewModal/ShowDetailViewModal';
+import useModal from '../../hooks/useModal';
+import useAuth from '../../contexts/auth/useAuth';
+import Loading from '../../utils/Loading';
 import { toast } from 'react-toastify';
-import SelectShowsForm from '../components/SelectShowsForm';
-import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
-import SearchInput from './SearchInput';
+import SelectShowsForm from '../SelectShowsForm';
+import useSideNavInformation from '../../contexts/sideNav/useSideNavInformation';
+import SearchInput from '../SearchInput';
 
 const ListContainer = styled.div`
   width: 100%;

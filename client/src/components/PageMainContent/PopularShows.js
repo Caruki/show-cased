@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation } from 'react-query';
-import ListItem from './ListItem';
-import { getNewestShows, getShowDetails, getTrendingShows } from '../api/shows';
-import ShowDetailViewModal from './ShowDetailViewModal';
-import useModal from '../hooks/useModal';
-import Loading from '../utils/Loading';
+import ListItem from '../ListItem';
+import {
+  getNewestShows,
+  getShowDetails,
+  getTrendingShows,
+} from '../../api/shows';
+import ShowDetailViewModal from '../DetailViewModal/ShowDetailViewModal';
+import useModal from '../../hooks/useModal';
+import Loading from '../../utils/Loading';
 import { toast } from 'react-toastify';
-import useSideNavInformation from '../contexts/sideNav/useSideNavInformation';
-import SearchInput from './SearchInput';
+import useSideNavInformation from '../../contexts/sideNav/useSideNavInformation';
+import SearchInput from '../SearchInput';
 
 const ListContainer = styled.div`
   width: 100%;

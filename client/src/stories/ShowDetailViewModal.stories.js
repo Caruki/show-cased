@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ShowDetailViewModal from '../components/ShowDetailViewModal';
+import ShowDetailViewModal from '../components/DetailViewModal/ShowDetailViewModal';
 
 export default {
   title: 'Detail View of a Show',

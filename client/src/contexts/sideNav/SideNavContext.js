@@ -1,5 +1,12 @@
 import { createContext } from 'react';
 
-export const UserContext = createContext(null);
+function noop() {}
+
+export const UserContext = createContext({
+  tabContent: 'default',
+  setTabContent: noop,
+  searchActive: false,
+  toggleSearchActive: noop,
+});
 
 export default UserContext;
