@@ -6,5 +6,5 @@ export default {
 };
 
 export const HeaderEverySite = () => {
-  return <Header username={'Everyone'} />;
+  return <Header />;
 };

@@ -26,4 +26,4 @@ export const Username = () => {
   );
 };
 
-export const Search = () => <SearchInput />;
+export const Search = () => <SearchInput isOpen={true} />;

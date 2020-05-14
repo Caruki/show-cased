@@ -5,10 +5,14 @@ export default {
   title: 'Buttons',
 };
 
-export const SignUpButton = () => {
+export const SignUp = () => {
   return <SubmitButton>Sign Up</SubmitButton>;
 };
 
-export const LogInButton = () => {
+export const LogIn = () => {
   return <SubmitButton>Log In</SubmitButton>;
+};
+
+export const Submit = () => {
+  return <SubmitButton>Submit</SubmitButton>;
 };

@@ -5,26 +5,10 @@ export default {
   title: 'Authentication Form',
 };
 
-export const SignInForm = () => {
-  return (
-    <AuthenticationForm
-      buttonText="Log in"
-      accountQuestion="Don't have an account?"
-      anchor="/signup"
-      linkTo="Sign Up"
-      accountAnswer="Sign Up"
-    />
-  );
+export const SignIn = () => {
+  return <AuthenticationForm authType="login" />;
 };
 
-export const SignUpForm = () => {
-  return (
-    <AuthenticationForm
-      buttonText="Sign Up"
-      accountQuestion="Already have an account?"
-      anchor="/login"
-      linkTo="Log In"
-      accountAnswer="Log In"
-    />
-  );
+export const SignUp = () => {
+  return <AuthenticationForm authType="register" />;
 };
