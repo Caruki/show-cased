@@ -24,15 +24,14 @@
   },
   "homepage": "https://github.com/Caruki/show-cased#readme",
   "devDependencies": {
-    "concurrently": "^5.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.19.0",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.1.2",
-    "nodemon": "^2.0.2",
-    "prettier": "^2.0.4"
+    "concurrently": "^5.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.5",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
   },
   "husky": {
     "hooks": {
@@ -53,10 +52,11 @@
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.5.5",
-    "mongoose": "^5.9.7",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.9.27",
     "node-fetch": "^2.6.0"
   }
 }
