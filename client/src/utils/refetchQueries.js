@@ -1,21 +1,11 @@
 import { queryCache } from 'react-query';
 
 function refetchQueries() {
-  queryCache.refetchQueries('user', {
-    force: true,
-  });
-  queryCache.refetchQueries('toWatchList', {
-    force: true,
-  });
-  queryCache.refetchQueries('watchedList', {
-    force: true,
-  });
-  queryCache.refetchQueries('recsGenres', {
-    force: true,
-  });
-  queryCache.refetchQueries('recsNetworks', {
-    force: true,
-  });
+  queryCache.invalidateQueries('user');
+  queryCache.invalidateQueries('toWatchList');
+  queryCache.invalidateQueries('watchedList');
+  queryCache.invalidateQueries('recsGenres');
+  queryCache.invalidateQueries('recsNetworks');
 }
 
 export default refetchQueries;
